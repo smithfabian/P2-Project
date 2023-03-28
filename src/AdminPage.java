@@ -57,27 +57,14 @@ public class AdminPage {
         root.setRight(diagramPane);
 
         // button Actions
-        setButtonAction(salesButton, () -> createSalesScene(stage));
-        setButtonAction(logsButton, () -> createLogsScene(stage));
-        setButtonAction(usersButton, () -> createUsersScene(stage));
-        setButtonAction(passwordButton, () -> createPasswordScene(stage));
+        setButtonAction(salesButton, () -> SalesPage.createSalesScene(stage));
+        setButtonAction(logsButton, () -> LogsPage.createLogsScene(stage));
+        setButtonAction(usersButton, () -> UsersPage.createUsersScene(stage));
+        setButtonAction(passwordButton, () -> PasswordPage.createPasswordScene(stage));
 
         // set new scene
         Scene AdminScene = new Scene(root, 1000, 500);
         stage.setScene(AdminScene);
-    }
-
-    private static void createSalesScene(Stage stage) {
-        // TODO implement sales scene
-    }
-    private static void createLogsScene(Stage stage) {
-        // TODO implement logs scene
-    }
-    private static void createUsersScene(Stage stage) {
-        // TODO implement user scene
-    }
-    private static void createPasswordScene(Stage stage) {
-        // TODO implement password scene
     }
 
 }
