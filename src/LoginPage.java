@@ -8,6 +8,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.application.*;
@@ -17,7 +19,9 @@ public class LoginPage extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        VBox loginFields = new VBox();
+        VBox loginFields = new VBox(5);
+        Label title = new Label("Sales Data Management System");
+        title.setFont(Font.font("verdana", FontWeight.BOLD,20));
         TextField usernameInput = new TextField();
         PasswordField passwordInput = new PasswordField();
         usernameInput.setMaxWidth(200);
@@ -38,7 +42,7 @@ public class LoginPage extends Application {
             }
         });
         loginButton.setMaxSize(100,100);
-        loginFields.getChildren().addAll(usernameInput,passwordInput,loginButton,loginAttempt);
+        loginFields.getChildren().addAll(title,usernameInput,passwordInput,loginButton,loginAttempt);
         loginFields.setAlignment(Pos.CENTER);
         Scene scene = new Scene(loginFields,1000,500);
         stage.setTitle("Login");
