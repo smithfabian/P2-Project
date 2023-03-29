@@ -16,6 +16,15 @@ public class LoginPage extends Application {
 
     @Override
     public void start(Stage stage) {
+        createLoginPage(stage);
+        stage.setTitle("Sales Data Management System");
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
+    public static void createLoginPage(Stage stage) {
         VBox loginFields = new VBox(5);
         Label title = new Label("Sales Data Management System");
         title.setFont(Font.font("verdana", FontWeight.BOLD,20));
@@ -31,6 +40,9 @@ public class LoginPage extends Application {
                 loginAttempt.setTextFill(Color.GREEN);
                 AdminPage.createAdminScene(stage);
             }
+            else if (usernameInput.getText().equals("user") && passwordInput.getText().equals("password")) {
+                UsersPage.createUsersScene(stage);
+            }
             else {
                 loginAttempt.setText("Log in unsuccessful");
                 loginAttempt.setTextFill(Color.RED);
@@ -41,13 +53,7 @@ public class LoginPage extends Application {
         loginFields.getChildren().addAll(title,usernameInput,passwordInput,loginButton,loginAttempt);
         loginFields.setAlignment(Pos.CENTER);
         Scene scene = new Scene(loginFields,1000,500);
-        stage.setTitle("Sales Data Management System");
         stage.setScene(scene);
-        stage.show();
-    }
-
-    public static void main(String[] args) {
-        Application.launch(args);
     }
 
 }
