@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -18,7 +17,7 @@ import java.io.IOException;
 
 public class ChangeUser extends Application  {
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         // label for username and password
         Label username =  new Label("Username");
         Label password = new Label("password");
