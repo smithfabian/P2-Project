@@ -41,7 +41,7 @@ public class LoginPage extends Application {
                 AdminPage.createAdminScene(stage);
             }
             else if (usernameInput.getText().equals("user") && passwordInput.getText().equals("password")) {
-                UsersPage.createUsersScene(stage);
+                EmployeePage.createEmployeesScene(stage);
             }
             else {
                 loginAttempt.setText("Log in unsuccessful");

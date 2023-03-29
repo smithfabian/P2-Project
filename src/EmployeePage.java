@@ -9,9 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class AdminPage {
-
-    /* utility method that creates a bar chart */
+public class EmployeePage {
     private static BarChart<String, Number> createBarChart(){
         CategoryAxis xAxis1 = new CategoryAxis();
         NumberAxis yAxis1 = new NumberAxis();
@@ -28,19 +26,17 @@ public class AdminPage {
         button.setOnAction(actionEvent -> action.run());
     }
 
-    public static void createAdminScene(Stage stage) {
+    public static void createEmployeesScene(Stage stage) {
         BorderPane root = new BorderPane();
 
         // left pane
         VBox buttonPane = new VBox(10);
         Button salesButton = new Button("Sales");
-        Button logsButton = new Button("Logs");
-        Button usersButton = new Button("Users");
         Button passwordButton = new Button("Change password");
         Button logoutButton = new Button("Logout");
-        buttonPane.getChildren().addAll(salesButton,logsButton,usersButton,passwordButton, logoutButton);
+        buttonPane.getChildren().addAll(salesButton,passwordButton, logoutButton);
         buttonPane.setAlignment(Pos.CENTER);
-        root.setLeft(buttonPane);
+        root.setCenter(buttonPane);
 
         // right pane
         VBox diagramPane = new VBox(10);
@@ -51,13 +47,11 @@ public class AdminPage {
 
         // button Actions
         setButtonAction(salesButton, () -> SalesPage.createSalesScene(stage));
-        setButtonAction(logsButton, () -> LogsPage.createLogsScene(stage));
-        setButtonAction(usersButton, () -> UsersPage.createUsersPage(stage));
         setButtonAction(passwordButton, () -> PasswordPage.createPasswordScene(stage));
+        setButtonAction(logoutButton, () -> LoginPage.createLoginPage(stage));
 
         // set new scene
         Scene AdminScene = new Scene(root, 1000, 500);
         stage.setScene(AdminScene);
     }
-
 }
