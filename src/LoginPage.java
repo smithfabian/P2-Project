@@ -22,7 +22,7 @@ import javafx.scene.control.Button;
 public class LoginPage extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         VBox loginFields = new VBox(5);
         Label title = new Label("Sales Data Management System");
         title.setFont(Font.font("verdana", FontWeight.BOLD,20));
