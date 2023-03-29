@@ -52,7 +52,7 @@ public class LoginPage extends Application {
         loginFields.getChildren().addAll(title,usernameInput,passwordInput,loginButton,loginAttempt);
         loginFields.setAlignment(Pos.CENTER);
         Scene scene = new Scene(loginFields,1000,500);
-        stage.setTitle("Login");
+        stage.setTitle("Sales Data Management System");
         stage.setScene(scene);
         stage.show();
     }
