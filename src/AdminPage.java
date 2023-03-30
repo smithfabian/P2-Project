@@ -54,6 +54,7 @@ public class AdminPage {
         setButtonAction(logsButton, () -> LogsPage.createLogsScene(stage));
         setButtonAction(usersButton, () -> UsersPage.createUsersPage(stage));
         setButtonAction(passwordButton, () -> PasswordPage.createPasswordScene(stage));
+        setButtonAction(logoutButton, () -> LoginPage.createLoginPage(stage));
 
         // set new scene
         Scene AdminScene = new Scene(root, 1000, 500);
