@@ -30,6 +30,8 @@ public class LoginPage extends Application {
         title.setFont(Font.font("verdana", FontWeight.BOLD,20));
         TextField usernameInput = new TextField();
         PasswordField passwordInput = new PasswordField();
+        usernameInput.setPromptText("Enter your username");
+        passwordInput.setPromptText("Enter your password");
         usernameInput.setMaxWidth(200);
         passwordInput.setMaxWidth(200);
         Label loginAttempt = new Label("");
