@@ -90,7 +90,11 @@ public class AdminPage {
         setButtonAction(b1, () -> SalesPage.createSalesScene(stage));
         setButtonAction(b2, () -> LogsPage.createLogsScene(stage));
         setButtonAction(b3, () -> UsersPage.createUsersScene(stage));
-        setButtonAction(b4, () -> PasswordPage.createPasswordScene(stage));
+        setButtonAction(b4, () -> {
+            Stage passwordStage = new Stage();
+            PasswordPage.createPasswordScene(passwordStage);
+            passwordStage.show();
+        });
 
         // set new scene
         Scene AdminScene = new Scene(root, 1000, 500);
