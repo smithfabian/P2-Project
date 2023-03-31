@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import org.w3c.dom.Text;
 
@@ -33,26 +34,20 @@ public class ChangeUser extends Application  {
         Button save_button = new Button("Save");
         Button back_button = new Button("Back");
 
-        // label for when button save is clicked
-
-        Label l = new Label("Save changes");
-
+        Label save  = new Label("");
+        Label back = new Label("");
         // if save or back button is clicked
-        EventHandler<ActionEvent> event = new
-                EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        l.setText(" The changes has been saved ");
-                    }
-                };
+        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>(){
+            public void handle(ActionEvent event)
+            {
+              save.setText("The changes has been saved");
+
+            }
+        };
 
 
         // when button is pressed
         save_button.setOnAction(event);
-
-
-
-
 
         // grid pane
         GridPane user_password_grid = new GridPane();
@@ -77,6 +72,7 @@ public class ChangeUser extends Application  {
         user_password_grid.add(Password_field, 1, 1);
         user_password_grid.add(save_button, 0, 2);
         user_password_grid.add(back_button, 1, 2);
+        user_password_grid.add(save, 1, 4);
 
         // scene object
         Scene scene = new Scene(user_password_grid);
