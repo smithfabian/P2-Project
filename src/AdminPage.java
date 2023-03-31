@@ -53,16 +53,16 @@ public class AdminPage {
         buttonPane.setAlignment(Pos.CENTER);
 
         Button b1 = new Button("Sales Data");
-        b1.setPrefSize(500, 50);
+        b1.setPrefSize(400, 50);
 
         Button b2 = new Button("See log");
-        b2.setPrefSize(500, 50);
+        b2.setPrefSize(400, 50);
 
         Button b3 = new Button("Add/del user");
-        b3.setPrefSize(500, 50);
+        b3.setPrefSize(400, 50);
 
         Button b4 = new Button("Chance password");
-        b4.setPrefSize(500, 50);
+        b4.setPrefSize(400, 50);
 
         Button logOut = new Button("Log out");
         logOut.setPrefSize(100, 50);
@@ -93,7 +93,7 @@ public class AdminPage {
         setButtonAction(b4, () -> PasswordPage.createPasswordScene(stage));
 
         // set new scene
-        Scene AdminScene = new Scene(root, 1200, 800);
+        Scene AdminScene = new Scene(root, 1000, 500);
         stage.setScene(AdminScene);
     }
 
