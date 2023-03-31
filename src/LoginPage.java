@@ -26,6 +26,7 @@ public class LoginPage extends Application {
     }
     public static void createLoginPage(Stage stage) {
         VBox loginFields = new VBox(5);
+        //LOL
         Label title = new Label("Sales Data Management System");
         title.setFont(Font.font("verdana", FontWeight.BOLD,20));
         TextField usernameInput = new TextField();
