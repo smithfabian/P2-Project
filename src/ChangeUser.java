@@ -1,19 +1,21 @@
 import javafx.event.ActionEvent;
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import java.io.IOException;
+import org.w3c.dom.Text;
 
 // skal kunne gå tilbage til sidste scene hvis klikket på "back"
 // skal kunne gemme ændringer af user og password
-// skal kunne tages til en ny scene som beskræfter "change in user"
+// skal kunne bekræfte "change in user"
 
 public class ChangeUser extends Application  {
     @Override
@@ -31,10 +33,25 @@ public class ChangeUser extends Application  {
         Button save_button = new Button("Save");
         Button back_button = new Button("Back");
 
-        // if save or back button is clicked
-       // save_button.setOnAction(actionEvent -> save_button.getScene());
+        // label for when button save is clicked
 
-        // back_button.setOnAction(actionEvent1 -> back_button.getScene());
+        Label l = new Label("Save changes");
+
+        // if save or back button is clicked
+        EventHandler<ActionEvent> event = new
+                EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        l.setText(" The changes has been saved ");
+                    }
+                };
+
+
+        // when button is pressed
+        save_button.setOnAction(event);
+
+
+
 
 
         // grid pane
@@ -61,9 +78,9 @@ public class ChangeUser extends Application  {
         user_password_grid.add(save_button, 0, 2);
         user_password_grid.add(back_button, 1, 2);
 
-
         // scene object
         Scene scene = new Scene(user_password_grid);
+
         // title of the stage
         stage.setTitle("Change user: User ID");
 
