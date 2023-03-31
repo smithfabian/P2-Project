@@ -41,6 +41,7 @@ public class ChangeUser extends Application  {
             public void handle(ActionEvent event)
             {
               save.setText("The changes has been saved");
+              back.getScene();
 
             }
         };
