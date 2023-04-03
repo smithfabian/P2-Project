@@ -1,9 +1,9 @@
-package p2.add_del_user;
+package p2.AddDelUser;
 
 
 import javafx.scene.control.CheckBox;
 
-public class Table_model {
+public class TableModel {
 
     int ID;
     String User;
@@ -36,7 +36,7 @@ public class Table_model {
 
 
     // Constructor for id, user and select.
-    public Table_model(String User, int ID, CheckBox Select) {
+    public TableModel(String User, int ID, CheckBox Select) {
         this.ID = ID;
         this.User = User;
         this.Select = Select;

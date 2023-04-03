@@ -1,4 +1,4 @@
-package p2.add_del_user;
+package p2.AddDelUser;
 
 
 import javafx.application.Platform;
@@ -30,34 +30,34 @@ public class AddDelController implements Initializable {
 
     // the columns of the table
     @FXML
-    private TableColumn<Table_model, String> User;
+    private TableColumn<TableModel, String> User;
 
     @FXML
-    private TableColumn<Table_model, Integer> ID;
+    private TableColumn<TableModel, Integer> ID;
 
     @FXML
-    private TableColumn<Table_model, CheckBox> Select;
+    private TableColumn<TableModel, CheckBox> Select;
 
     @FXML
-    private TableView<Table_model> tableView;
+    private TableView<TableModel> tableView;
 
-    ObservableList<Table_model> list = FXCollections.observableArrayList();
+    ObservableList<TableModel> list = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         for(int i = 0; i < 10; i++){
             CheckBox ch = new CheckBox("" + i);
-            list.add(new Table_model("Peter", i, ch));
+            list.add(new TableModel("Peter", i, ch));
         }
 
         tableView.setItems(list);
-        ID.setCellValueFactory(new PropertyValueFactory<Table_model, Integer>("Id"));
-        User.setCellValueFactory(new PropertyValueFactory<Table_model, String>("user"));
-        Select.setCellValueFactory(new PropertyValueFactory<Table_model, CheckBox>("select"));
+        ID.setCellValueFactory(new PropertyValueFactory<TableModel, Integer>("Id"));
+        User.setCellValueFactory(new PropertyValueFactory<TableModel, String>("user"));
+        Select.setCellValueFactory(new PropertyValueFactory<TableModel, CheckBox>("select"));
     }
     @FXML
     private void deleteSelectedRow(ActionEvent event1) {
-        for (Table_model row : tableView.getItems())
+        for (TableModel row : tableView.getItems())
         {
             if(row.getSelect().isSelected()) {
                 Platform.runLater(()-> {

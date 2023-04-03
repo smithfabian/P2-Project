@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="p2.add_del_user.Add_del_Controller ">
+            fx:controller="p2.AddDelUser.AddDelController">
     <children>
         <Button layoutX="527.0" layoutY="237.0" mnemonicParsing="false" onAction="#changeUserScene" prefHeight="35.0" prefWidth="89.0" text="Add user" />
         <Button layoutX="118.0" layoutY="359.0" mnemonicParsing="false" onAction="#previousScene" prefHeight="35.0" prefWidth="89.0" text="Back" />

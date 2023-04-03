@@ -1,4 +1,4 @@
-package p2.add_del_user;
+package p2.AddDelUser;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,12 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Add_del_user_Application extends Application {
+public class AddDelApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Add_del_user_Application.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AddDelApplication.class.getResource("AdDel-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 500);
-        stage.setTitle("Add or delete user ");
+        stage.setTitle("Change user");
         stage.setScene(scene);
         stage.show();
     }
