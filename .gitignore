@@ -27,3 +27,4 @@ hs_err_pid*
 .idea
 P2-Project.iml
 out/
+secrets.properties
