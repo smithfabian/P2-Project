@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Add_del_Controller implements Initializable {
+public class AddDelController implements Initializable {
 
 
     // define stage scene and root
