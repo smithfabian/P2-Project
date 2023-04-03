@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="606.0" prefHeight="500.0" prefWidth="400.0">
+         <children>
+            <BarChart maxHeight="240.0" maxWidth="400.0" prefHeight="240.0" prefWidth="400.0" title="Sales">
+              <xAxis>
+                <CategoryAxis label="Months" prefHeight="14.0" prefWidth="343.0" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="-1.0" layoutY="34.0" prefHeight="458.0" prefWidth="589.0">
+         <children>
+            <Label prefHeight="73.0" prefWidth="160.0" text="Customer ID" />
+            <TableView prefHeight="409.0" prefWidth="588.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Order ID" />
+                <TableColumn prefWidth="75.0" text="Date" />
+                  <TableColumn prefWidth="75.0" text="Quantity" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
+   </children>
+</AnchorPane>

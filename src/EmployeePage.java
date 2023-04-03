@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import p2.SalesPage.SalesPage;
 
 public class EmployeePage {
     private static BarChart<String, Number> createBarChart(){

@@ -1,3 +1,5 @@
+package p2.SalesPage;
+
 import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
