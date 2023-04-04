@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="p2.SalesPage.SalesPageController">
    <children>
       <HBox prefHeight="100.0" prefWidth="341.0">
          <children>
-            <ToggleButton maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" text="Customers">
+            <ToggleButton fx:id="customersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" text="Customers">
                <toggleGroup>
                   <ToggleGroup fx:id="toggleGroup" />
                </toggleGroup>
             </ToggleButton>
-            <ToggleButton maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" text="Orders" toggleGroup="$toggleGroup" />
-            <ToggleButton maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" text="Items" toggleGroup="$toggleGroup" />
+            <ToggleButton fx:id="ordersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" text="Orders" toggleGroup="$toggleGroup" />
+            <ToggleButton fx:id="itemsButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" text="Items" toggleGroup="$toggleGroup" />
          </children>
       </HBox>
       <StackPane layoutX="152.0" layoutY="60.0" prefHeight="381.0" prefWidth="683.0">
          <children>
-            <TableView prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="itemTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
                   <TableColumn prefWidth="75.0" text="Item ID" />
                   <TableColumn prefWidth="75.0" text="Main group" />
@@ -26,14 +32,14 @@
                   <TableColumn prefWidth="75.0" text="Price" />
               </columns>
             </TableView>
-            <TableView prefHeight="200.0" prefWidth="492.0">
+            <TableView fx:id="orderTable" prefHeight="200.0" prefWidth="492.0">
               <columns>
                   <TableColumn prefWidth="75.0" text="Order ID" />
                   <TableColumn prefWidth="75.0" text="Date" />
                   <TableColumn prefWidth="75.0" text="Quantity" />
               </columns>
             </TableView>
-            <TableView prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="customerTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
                   <TableColumn prefWidth="75.0" text="Customer ID" />
                   <TableColumn prefWidth="75.0" text="Main sector" />
@@ -45,7 +51,7 @@
             </TableView>
          </children>
       </StackPane>
-      <Button layoutX="797.0" layoutY="25.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="addButton" layoutX="797.0" layoutY="25.0" mnemonicParsing="false" text="Add" />
       <Button layoutX="14.0" layoutY="446.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="65.0" text="Back" />
    </children>
 </AnchorPane>
