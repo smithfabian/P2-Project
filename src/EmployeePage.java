@@ -49,7 +49,7 @@ public class EmployeePage {
         // button Actions
         setButtonAction(salesButton, () -> SalesPage.createSalesScene(stage));
         setButtonAction(passwordButton, () -> PasswordPage.createPasswordScene(stage));
-        setButtonAction(logoutButton, () -> LoginPage.createLoginPage(stage));
+        setButtonAction(logoutButton, () -> AdminPage.LoginPage.createLoginPage(stage));
 
         // set new scene
         Scene AdminScene = new Scene(root, 1000, 500);
