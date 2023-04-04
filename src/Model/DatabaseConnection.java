@@ -11,7 +11,8 @@ import java.util.Properties;
 
 public class DatabaseConnection {
     private String url = null;
-    private String username = null;
+    private String dbName = null;
+    private String userName = null;
     private String password = null;
 
     public DatabaseConnection() throws IOException {
@@ -20,8 +21,9 @@ public class DatabaseConnection {
         InputStream input = new FileInputStream("secrets.properties");
         secrets.load(input);
 
-        this.url = secrets.getProperty("database.admin.url");
-        this.username = secrets.getProperty("database.admin.username");
+        this.url = secrets.getProperty("database.url");
+        this.dbName = secrets.getProperty("database.name");
+        this.userName = secrets.getProperty("database.admin.username");
         this.password = secrets.getProperty("database.admin.password");
     }
 
@@ -29,7 +31,8 @@ public class DatabaseConnection {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setURL(this.url);
         dataSource.setPassword(this.password);
-        dataSource.setUser(this.username);
+        dataSource.setUser(this.userName);
+        dataSource.setDatabaseName(this.dbName);
         return dataSource;
     }
 
