@@ -9,7 +9,6 @@ public class TableModel {
     String User;
     CheckBox Select;
 
-
     // Getter and Setter methods for id, user and select.
     public int getId() {
         return ID;
