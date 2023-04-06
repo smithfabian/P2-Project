@@ -1,5 +1,8 @@
 package p2.AdminPage;
 
+import javafx.stage.Stage;
+import p2.PasswordPage.PasswordView;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -35,7 +38,7 @@ public class AdminController {
     public AdminController(){
         this.model = new AdminModel();
     }
-    
+
     public void salesButtonClicked(javafx.event.ActionEvent actionEvent) {
     }
 
@@ -46,6 +49,12 @@ public class AdminController {
     }
 
     public void passwordButtonClicked(ActionEvent actionEvent) {
+        PasswordView passwordView = new PasswordView();
+        try {
+            passwordView.start(new Stage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void logoutButtonClicked(ActionEvent actionEvent) {
