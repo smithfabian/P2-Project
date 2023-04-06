@@ -34,8 +34,5 @@ public class ChangeUserController {
 
     //method to save newly created username and password to the database table:
 
-    //method to search for user ID in textfield:
-
-    // method to create random generated Id to the newly created username and password
 
 }

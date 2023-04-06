@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseConnection {
+    public static Connection getConnection;
     private String url = null;
     private String dbName = null;
     private String userName = null;
