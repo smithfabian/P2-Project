@@ -1,6 +1,6 @@
-package p2.AddDelUser;
+package main.app.controllers;
 
-import Model.DatabaseConnection;
+import main.app.models.DatabaseConnection;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import main.app.models.UserTableModel;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -26,7 +28,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 
-public class AddDelController implements Initializable {
+public class UserController implements Initializable {
 
 
     // define stage scene and root
@@ -36,16 +38,16 @@ public class AddDelController implements Initializable {
 
     // the columns of the table
     @FXML
-    private TableColumn<TableModel, String> User;
+    private TableColumn<UserTableModel, String> User;
 
     @FXML
-    private TableColumn<TableModel, Integer> ID;
+    private TableColumn<UserTableModel, Integer> ID;
 
     @FXML
-    private TableColumn<TableModel, CheckBox> Select;
+    private TableColumn<UserTableModel, CheckBox> Select;
 
     @FXML
-    private TableView<TableModel> tableView;
+    private TableView<UserTableModel> tableView;
 
     private Connection connect;
     private Statement statement;
@@ -55,8 +57,8 @@ public class AddDelController implements Initializable {
 
 
     // Connect to a database that has the table of users
-    public ObservableList<TableModel> addUserListData(){
-        ObservableList<TableModel> list = FXCollections.observableArrayList();
+    public ObservableList<UserTableModel> addUserListData(){
+        ObservableList<UserTableModel> list = FXCollections.observableArrayList();
 
         String sql = "SELECT * FROM users";
 
@@ -65,10 +67,10 @@ public class AddDelController implements Initializable {
         try {
             prepare = connect.prepareStatement(sql);
             result = prepare.executeQuery();
-            TableModel userTable;
+            UserTableModel userTable;
 
             while(result.next()) {
-                userTable = new TableModel(result.getInt("Id"), result.getString("User"));
+                userTable = new UserTableModel(result.getInt("Id"), result.getString("User"));
                 list.add(userTable);
             }
         }catch(Exception e){e.printStackTrace();}
@@ -76,15 +78,15 @@ public class AddDelController implements Initializable {
     }
 
     // Set name for each column
-    private ObservableList<TableModel> addUserList;
+    private ObservableList<UserTableModel> addUserList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addUserList =  addUserListData();
 
-        ID.setCellValueFactory(new PropertyValueFactory<TableModel, Integer>("Id"));
-        User.setCellValueFactory(new PropertyValueFactory<TableModel, String>("user"));
-        Select.setCellValueFactory(new PropertyValueFactory<TableModel, CheckBox>("select"));
+        ID.setCellValueFactory(new PropertyValueFactory<UserTableModel, Integer>("Id"));
+        User.setCellValueFactory(new PropertyValueFactory<UserTableModel, String>("user"));
+        Select.setCellValueFactory(new PropertyValueFactory<UserTableModel, CheckBox>("select"));
         tableView.setItems(addUserList);
     }
 
@@ -93,12 +95,12 @@ public class AddDelController implements Initializable {
     // TO DO
     @FXML
     private void deleteSelectedRow(ActionEvent event1) {
-        for (TableModel row : tableView.getItems())
+        for (UserTableModel row : tableView.getItems())
         {
             if(row.getSelect().isSelected()) {
                 Platform.runLater(()-> tableView.getItems().remove(row));
 
-                TableModel userTable = tableView.getSelectionModel().getSelectedItem();
+                UserTableModel userTable = tableView.getSelectionModel().getSelectedItem();
 
                 }
 
@@ -127,7 +129,7 @@ public class AddDelController implements Initializable {
 
     @FXML
     private void changeUserScene(ActionEvent event3) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/p2/ChangeUser/ChangeUser-view.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/main/resources/ChangeUser-view.fxml")));
         stage =(Stage)((Node)event3.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

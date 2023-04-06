@@ -1,4 +1,4 @@
-package p2.SalesPage;
+package main.app.models;
 
 public class SalesModel {
 

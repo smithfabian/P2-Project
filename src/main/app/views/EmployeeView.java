@@ -1,32 +1,31 @@
-package p2.PasswordPage;
+package main.app.views;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import p2.AdminPage.AdminController;
-import p2.AdminPage.AdminView;
+import main.app.controllers.AdminController;
+import main.app.controllers.EmployeeController;
 
 import java.io.IOException;
 
-public class PasswordView extends Application {
-
+public class EmployeeView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(AdminView.class.getResource("/p2/PasswordPage/passwordPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(AdminView.class.getResource("/main/resources/Employeepage-view.fxml"));
         Parent root = loader.load();
-        PasswordController controller = loader.getController();
+
+        EmployeeController controller = loader.getController();
         controller.setStage(stage);
-        controller.setModel(new PasswordModel());
 
         Scene scene = new Scene(root);
-        stage.setTitle("Change Password");
+        stage.setTitle("Sales data management system");
+        stage.setMinWidth(1000);
+        stage.setMinHeight(500);
         stage.setScene(scene);
-        stage.setResizable(false);
         stage.show();
     }
-
 
     public static void main(String[] args) {
         launch();

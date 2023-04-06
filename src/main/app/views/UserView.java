@@ -1,20 +1,22 @@
-package p2.LoginPage;
+package main.app.views;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LoginApplication extends Application {
+// be changed to only a scene opens from admin or coworker scene.
+
+public class UserView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        LoginController loginController = new LoginController(stage);
-        stage.setTitle("Sales data management system");
+        FXMLLoader loader = new FXMLLoader(UserView.class.getResource("/main/resources/user.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
         stage.show();
     }
 

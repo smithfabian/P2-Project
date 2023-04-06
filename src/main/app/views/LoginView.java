@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class LoginView {
 
-    public void show(Stage stage) {
+    public void start (Stage stage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/resources/Login-view.fxml"));
             Parent root = loader.load();

@@ -1,4 +1,4 @@
-package p2.ChangeUser;
+package main.app.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +25,7 @@ public class ChangeUserController {
 
 
     public void sceneToAddDel(ActionEvent event1) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/p2/AddDellUser/AddDel-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/p2/AddDellUser/user.fxml"));
         Stage stage = (Stage) ((Node) event1.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

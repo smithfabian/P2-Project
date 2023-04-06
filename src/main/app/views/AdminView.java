@@ -15,11 +15,15 @@ public class AdminView extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(AdminView.class.getResource("/main/resources/adminPage.fxml"));
         Parent root = loader.load();
+
         AdminController controller = loader.getController();
+        controller.setStage(stage);
         controller.updateBarCharts();
 
         Scene scene = new Scene(root);
         stage.setTitle("Sales data management system");
+        stage.setMinWidth(1000);
+        stage.setMinHeight(500);
         stage.setScene(scene);
         stage.show();
     }

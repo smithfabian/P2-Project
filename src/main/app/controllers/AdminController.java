@@ -1,7 +1,9 @@
 package main.app.controllers;
 
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.app.models.AdminModel;
+import main.app.views.LoginView;
 import main.app.views.PasswordView;
 
 import javafx.event.ActionEvent;
@@ -10,16 +12,18 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import main.app.views.UserView;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class AdminController {
-    AdminModel model;
+    private AdminModel model;
+    private Stage stage;
 
     @FXML
-    private AnchorPane anchorPane;
+    private AnchorPane AnchorPane;
     @FXML
     private Button salesButton;
     @FXML
@@ -40,6 +44,10 @@ public class AdminController {
         this.model = new AdminModel();
     }
 
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
+
     public void salesButtonClicked(javafx.event.ActionEvent actionEvent) {
     }
 
@@ -47,18 +55,26 @@ public class AdminController {
     }
 
     public void userButtonClicked(ActionEvent actionEvent) {
+        UserView view = new UserView();
+        try {
+            view.start(stage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void passwordButtonClicked(ActionEvent actionEvent) {
-        PasswordView passwordView = new PasswordView();
+        PasswordView view = new PasswordView();
         try {
-            passwordView.start(new Stage());
+            view.start(new Stage());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void logoutButtonClicked(ActionEvent actionEvent) {
+        LoginView view = new LoginView();
+        view.start(stage);
     }
 
     public void updateBarCharts() {

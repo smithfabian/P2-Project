@@ -1,4 +1,4 @@
-package p2.EmployeePage;
+package main.app.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,11 +8,14 @@ import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import p2.LoginPage.LoginController;
+import main.app.models.EmployeeModel;
+import main.app.views.LoginView;
 
 import java.io.IOException;
 
 public class EmployeeController {
+    private Stage stage;
+
     private EmployeeModel employeeModel = new EmployeeModel();
     @FXML
     AnchorPane anchorPane;
@@ -27,13 +30,13 @@ public class EmployeeController {
     @FXML
     LineChart<NumberAxis,NumberAxis> chartLower;
 
-    public EmployeeController(Stage stage) throws IOException {
-
-        stage.setScene(new Scene(getView().load(),1000,500));
-
-    }
     public EmployeeController() {
     }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     @FXML
     public void initialize() {
         createLineCharts();
@@ -55,19 +58,16 @@ public class EmployeeController {
 
     }
 
-    public FXMLLoader getView() {
-        return new FXMLLoader(EmployeeController.class.getResource("/p2/EmployeePage/EmployeePage-view.fxml"));
-    }
-
     public void switchToSalesScene(ActionEvent actionEvent) {
-        // TO DO
+        // TODO
     }
 
     public void switchToChangePassWordScene(ActionEvent actionEvent) {
-        //TO DO
+        //TODO
     }
 
     public void SwitchToLoginPageScene(ActionEvent actionEvent) throws IOException {
-        new p2.LoginPage.LoginController((Stage) anchorPane.getScene().getWindow());
+        LoginView view = new LoginView();
+        view.start(stage);
     }
 }

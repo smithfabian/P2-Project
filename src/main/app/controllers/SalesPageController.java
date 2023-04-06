@@ -1,11 +1,10 @@
-package p2.SalesPage;
+package main.app.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
-import p2.LoginPage.LoginController;
 
 public class SalesPageController {
 
@@ -35,7 +34,7 @@ public class SalesPageController {
 
 
     public FXMLLoader getView() {
-        return new FXMLLoader(SalesPageController.class.getResource("/p2/EmployeePage/EmployeePage-view.fxml"));
+        return new FXMLLoader(SalesPageController.class.getResource("/main/resources/Employeepage-view.fxml"));
     }
 
 

@@ -1,4 +1,4 @@
-package p2.SalesPage;
+package main.app.views;
 
 import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
@@ -7,7 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class SalesPage {
+public class SalesView {
     public static void createSalesScene(Stage stage) {
         BorderPane rootPane = new BorderPane();
         ToggleGroup toggleGroup = new ToggleGroup();

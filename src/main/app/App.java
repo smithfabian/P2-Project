@@ -7,9 +7,9 @@ import main.app.views.LoginView;
 public class App extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) {
         LoginView view = new LoginView();
-        view.show(primaryStage);
+        view.start(stage);
     }
 
     public static void main(String[] args) {

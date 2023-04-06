@@ -1,4 +1,4 @@
-package p2.LoginPage;
+package main.app.models;
 
 public class LoginModel {
 
