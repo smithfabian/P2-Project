@@ -17,7 +17,7 @@ import java.io.IOException;
 public class SalesView extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(SalesView.class.getResource("/main/resources/salesPage-view.fxml"));
         Parent root = loader.load();
 

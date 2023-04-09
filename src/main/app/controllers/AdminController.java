@@ -12,6 +12,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import main.app.views.SalesView;
 import main.app.views.UserView;
 
 import java.io.IOException;
@@ -49,6 +50,12 @@ public class AdminController {
     }
 
     public void salesButtonClicked(javafx.event.ActionEvent actionEvent) {
+        SalesView view = new SalesView();
+        try {
+            view.start(stage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void logButtonClicked(ActionEvent actionEvent) {

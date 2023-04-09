@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.app.models.EmployeeModel;
 import main.app.views.LoginView;
+import main.app.views.SalesView;
 
 import java.io.IOException;
 
@@ -59,7 +60,12 @@ public class EmployeeController {
     }
 
     public void switchToSalesScene(ActionEvent actionEvent) {
-        // TODO
+        SalesView view = new SalesView();
+        try {
+            view.start(stage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void switchToChangePassWordScene(ActionEvent actionEvent) {
