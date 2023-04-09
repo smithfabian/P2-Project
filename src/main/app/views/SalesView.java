@@ -1,29 +1,37 @@
 package main.app.views;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import main.app.controllers.EmployeeController;
+import main.app.controllers.SalesPageController;
 
-public class SalesView {
-    public static void createSalesScene(Stage stage) {
-        BorderPane rootPane = new BorderPane();
-        ToggleGroup toggleGroup = new ToggleGroup();
-        ToggleButton customersButton = new ToggleButton("Customers");
-        ToggleButton ordersButton = new ToggleButton("Orders");
-        ToggleButton itemsButton = new ToggleButton("Items");
-        itemsButton.setToggleGroup(toggleGroup);
-        customersButton.setToggleGroup(toggleGroup);
-        ordersButton.setToggleGroup(toggleGroup);
-        itemsButton.setMaxSize(150,40);
-        ordersButton.setMaxSize(150,40);
-        customersButton.setMaxSize(150,40);
-        HBox buttonPane = new HBox(3);
-        buttonPane.getChildren().addAll(customersButton,ordersButton,itemsButton);
-        rootPane.setLeft(buttonPane);
-        Scene salesScene = new Scene(rootPane,1000,500);
-        stage.setScene(salesScene);
+import java.io.IOException;
+
+public class SalesView extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(SalesView.class.getResource("/main/resources/salesPage-view.fxml"));
+        Parent root = loader.load();
+
+        SalesPageController controller = loader.getController();
+        controller.setStage(stage);
+
+        Scene scene = new Scene(root);
+        stage.setTitle("Sales data management system");
+        stage.setMinWidth(1000);
+        stage.setMinHeight(500);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public static void main(String[] args) {
+        launch();
     }
 }
