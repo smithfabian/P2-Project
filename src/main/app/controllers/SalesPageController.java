@@ -2,19 +2,14 @@ package main.app.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import main.app.models.SalesModel;
 import main.app.views.AddNewCustomerView;
 import main.app.views.AddNewItemView;
 import main.app.views.AddNewOrderView;
-import main.app.views.UserView;
 
 import java.io.IOException;
 
@@ -40,6 +35,18 @@ public class SalesPageController {
     private TableView orderTable;
     @FXML
     private TableView itemTable;
+    @FXML
+    private TableColumn<SalesModel.CustomerRow,String> IDColumn;
+    @FXML
+    private TableColumn<SalesModel.CustomerRow,String> mSectorColumn;
+    @FXML
+    private TableColumn<SalesModel.CustomerRow,String> sSectorColumn;
+    @FXML
+    private TableColumn<SalesModel.CustomerRow,String> postalColumn;
+    @FXML
+    private TableColumn<SalesModel.CustomerRow,Integer> boughtColumn;
+    @FXML
+    private TableColumn<SalesModel.CustomerRow,Integer> returnColumn;
 
     public SalesPageController() {
         this.salesModel = new SalesModel();
@@ -47,6 +54,13 @@ public class SalesPageController {
     @FXML
     public void initialize() {
         customersButton.fire();
+        IDColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        mSectorColumn.setCellValueFactory(new PropertyValueFactory<>("MainSector"));
+        sSectorColumn.setCellValueFactory(new PropertyValueFactory<>("SubSector"));
+        postalColumn.setCellValueFactory(new PropertyValueFactory<>("PostalCode"));
+        boughtColumn.setCellValueFactory(new PropertyValueFactory<>("TotalBought"));
+        returnColumn.setCellValueFactory(new PropertyValueFactory<>("TotalReturned"));
+        customerTable.setItems(salesModel.getCustomerTable());
     }
 
     public void setStage(Stage stage) {

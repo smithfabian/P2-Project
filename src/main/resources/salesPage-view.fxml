@@ -6,11 +6,8 @@
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.SalesPageController">
    <children>
       <HBox prefHeight="100.0" prefWidth="341.0">
-          <fx:define>
-              <ToggleGroup fx:id="toggleGroup" />
-          </fx:define>
          <children>
-            <ToggleButton fx:id="customersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#customerTableFront" text="Customers" toggleGroup="$toggleGroup"/>
+            <ToggleButton fx:id="customersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#customerTableFront" text="Customers"/>
             <ToggleButton fx:id="ordersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#orderTableFront" text="Orders" toggleGroup="$toggleGroup" />
             <ToggleButton fx:id="itemsButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#itemTableFront" text="Items" toggleGroup="$toggleGroup" />
          </children>
@@ -34,12 +31,12 @@
             </TableView>
             <TableView fx:id="customerTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                  <TableColumn prefWidth="75.0" text="Customer ID" />
-                  <TableColumn prefWidth="75.0" text="Main sector" />
-                  <TableColumn prefWidth="75.0" text="Sub sector" />
-                  <TableColumn prefWidth="75.0" text="Postal code" />
-                  <TableColumn prefWidth="120.0" text="Total items bought" />
-                  <TableColumn prefWidth="78.0" text="Total returns" />
+                  <TableColumn fx:id="IDColumn" prefWidth="75.0" text="Customer ID" />
+                  <TableColumn fx:id="mSectorColumn" prefWidth="75.0" text="Main sector" />
+                  <TableColumn fx:id="sSectorColumn" prefWidth="75.0" text="Sub sector" />
+                  <TableColumn fx:id="postalColumn" prefWidth="75.0" text="Postal code" />
+                  <TableColumn fx:id="boughtColumn" prefWidth="120.0" text="Total items bought" />
+                  <TableColumn fx:id="returnColumn" prefWidth="78.0" text="Total returns" />
               </columns>
             </TableView>
          </children>
