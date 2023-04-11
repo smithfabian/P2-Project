@@ -4,6 +4,8 @@ import Model.DatabaseConnection;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -36,6 +39,8 @@ public class AddDelController implements Initializable {
 
     // the columns of the table
     @FXML
+    private TextField searchUser;
+    @FXML
     private TableColumn<TableModel, String> User;
 
     @FXML
@@ -51,13 +56,12 @@ public class AddDelController implements Initializable {
     private Statement statement;
     private PreparedStatement prepare;
     private ResultSet result;
-    private ActionEvent event1;
 
 
-    // Connect to a database that has the table of users
+    // Connects to a database that has the table of users
     public ObservableList<TableModel> addUserListData(){
-        ObservableList<TableModel> list = FXCollections.observableArrayList();
 
+        ObservableList<TableModel> list = FXCollections.observableArrayList();
         String sql = "SELECT * FROM users";
 
         connect = DatabaseConnection.getConnection;
@@ -67,7 +71,7 @@ public class AddDelController implements Initializable {
             result = prepare.executeQuery();
             TableModel userTable;
 
-            while(result.next()) {
+            while (result.next()) {
                 userTable = new TableModel(result.getInt("Id"), result.getString("User"));
                 list.add(userTable);
             }
@@ -75,30 +79,68 @@ public class AddDelController implements Initializable {
         return list;
     }
 
-    // Set name for each column
+    // Sets name for each column
     private ObservableList<TableModel> addUserList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addUserList =  addUserListData();
 
+        for(int i = 0; i < addUserList.size(); i++) {
+            CheckBox Select = new CheckBox(" " + i);
+
+            addUserList.add(new TableModel(User, ID, Select));
+        }
+
         ID.setCellValueFactory(new PropertyValueFactory<TableModel, Integer>("Id"));
-        User.setCellValueFactory(new PropertyValueFactory<TableModel, String>("user"));
-        Select.setCellValueFactory(new PropertyValueFactory<TableModel, CheckBox>("select"));
+        User.setCellValueFactory(new PropertyValueFactory<TableModel, String>("User"));
+        Select.setCellValueFactory(new PropertyValueFactory<TableModel, CheckBox>("Select"));
         tableView.setItems(addUserList);
     }
 
-    // delete button usage  - also delete from the table in the database method
-    //select user through the checkbox and delete the selected users by pressing the delete button.
-    // TO DO
+    //search for a user in the table (name based) method
     @FXML
-    private void deleteSelectedRow(ActionEvent event1) {
-        for (TableModel row : tableView.getItems())
-        {
-            if(row.getSelect().isSelected()) {
-                Platform.runLater(()-> tableView.getItems().remove(row));
+    public void UserListSearch() {
 
-                TableModel userTable = tableView.getSelectionModel().getSelectedItem();
+        FilteredList<TableModel> filter = new FilteredList<>(addUserList, e -> true);
+        searchUser.textProperty().addListener((Observable, oldValue, newValue) -> {
+            filter.setPredicate(predicateTableModel -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String searchKey = newValue.toLowerCase();
+
+                if (predicateTableModel.getUser().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+
+        SortedList<TableModel> sortedData = new SortedList<>(filter);
+
+        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+
+        tableView.setItems(filter);
+
+}
+
+
+    // delete button usage
+    //select user through the checkbox and delete the selected users by pressing the delete button.
+    // TODO
+    @FXML
+    private void deleteSelectedRow() {
+        for (TableModel addUserList : tableView.getItems())
+        {
+            if(addUserList.getSelect().isSelected()) {
+                Platform.runLater(()-> tableView.getItems().remove(addUserList));
+
+                // Also delete in database table
+                //TODO
 
                 }
 
@@ -107,17 +149,12 @@ public class AddDelController implements Initializable {
         }
 
 
-
-    //search for a user in the table (name based) method
-    // TO DO
-
-
-
     // back button or add user button usage:
-    //DOESNT WORK
+    //goes back to admin page
+    //TODO
     @FXML
     private void previousScene(ActionEvent event2) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(""));
+        root = FXMLLoader.load(getClass().getResource("/p2/AdminPage/adminPage.fxml"));
         stage =(Stage)((Node)event2.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -134,5 +171,4 @@ public class AddDelController implements Initializable {
         stage.show();
 
     }
-
 }

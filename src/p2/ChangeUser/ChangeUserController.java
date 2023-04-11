@@ -1,19 +1,15 @@
 package p2.ChangeUser;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import p2.AddDelUser.TableModel;
 
-import java.io.IOException;
-import java.util.Objects;
+import java.util.Optional;
 
 public class ChangeUserController {
-
     @FXML
     public TextField Username_textfield;
 
@@ -22,17 +18,49 @@ public class ChangeUserController {
 
     @FXML
     public TextField UserID_textfield;
+    @FXML
+    public Button save;
+
+    //save button clicked
+    public void saveButtonClicked() {
+        try {
+            Alert alert;
+
+            if (Username_textfield.getText().isEmpty() || Password_textfield.getText().isEmpty()) {
+
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please enter a new username and password");
+                alert.showAndWait();
+            } else {
+                alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Conformation Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Are you sure you want to change/add user: " + Username_textfield.getText() + "?");
+                Optional<ButtonType> option = alert.showAndWait();
+                if (option.get().equals(ButtonType.OK)) {
+                    // CONNECT TO DATABASE TO WRITE TO IT
+                    //TODO
+                }
 
 
-    public void sceneToAddDel(ActionEvent event1) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/p2/AddDellUser/AddDel-view.fxml"));
-        Stage stage = (Stage) ((Node) event1.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("User successfully added/changed!");
+                alert.showAndWait();
+
+                //update the tableview with new username and id- call method addUserListData
+                //TODO
+
+
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-    //method to save newly created username and password to the database table:
-
-
 }

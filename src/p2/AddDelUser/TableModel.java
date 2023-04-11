@@ -2,12 +2,16 @@ package p2.AddDelUser;
 
 
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableColumn;
 
 public class TableModel {
-
     int Id;
     String User;
+    TableColumn id;
+    TableColumn user;
+
     CheckBox Select;
+
 
     // Getter and Setter methods for id, user and select.
     public int getId() {
@@ -21,16 +25,25 @@ public class TableModel {
         return Select;
     }
 
-    public void setSelect(CheckBox select) {
-        this.Select = select;
+    public void setSelect(CheckBox Select) {
+        this.Select = Select;
     }
 
     public String getUser() {
         return User;
     }
 
-    public void setUser(String user) {
-        User = user;
+    public void setUser(String User) {
+        User = User;
+    }
+
+
+    public void setUser(TableColumn user) {
+        this.user = user;
+    }
+
+    public void setId(TableColumn id) {
+        this.id = id;
     }
 
     // constructor for id and user
@@ -39,22 +52,14 @@ public class TableModel {
         this.User = User;
     }
 
-   // constructor for checkbox
-    public TableModel (int Id, String User, CheckBox Select) {
+
+    // constructor for checkbox, id and user
+    public TableModel(TableColumn<TableModel, String> user, TableColumn<TableModel, Integer> id, CheckBox Select) {
         this.Select = Select;
-        this.Id = Id;
-        this.User = User;
+        this.id = id;
+        this.user = user;
+
     }
-
-
-
-    // Constructor for id, user and select.
-    //public TableModel(String User, int ID, CheckBox Select) {
-    //    this.ID = ID;
-     //   this.User = User;
-      //  this.Select = Select;
-
-   // }
 
 
 }

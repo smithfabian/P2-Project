@@ -1,5 +1,9 @@
 package p2.AdminPage;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import p2.PasswordPage.PasswordView;
 
@@ -13,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 public class AdminController {
     AdminModel model;
@@ -45,7 +50,14 @@ public class AdminController {
     public void logButtonClicked(ActionEvent actionEvent) {
     }
 
-    public void userButtonClicked(ActionEvent actionEvent) {
+
+    public void userButtonClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/p2/AddDelUser/AddDel-view.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Add or delete users");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void passwordButtonClicked(ActionEvent actionEvent) {
@@ -89,4 +101,5 @@ public class AdminController {
         barChart1.getData().add(series1);
         barChart2.getData().add(series2);
     }
+
 }
