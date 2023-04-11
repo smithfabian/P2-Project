@@ -1,8 +1,8 @@
 package main.app.controllers;
 
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.app.models.AdminModel;
+import main.app.views.AddDelUsersView;
 import main.app.views.LoginView;
 import main.app.views.PasswordView;
 
@@ -13,7 +13,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import main.app.views.SalesView;
-import main.app.views.UserView;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -62,7 +61,7 @@ public class AdminController {
     }
 
     public void userButtonClicked(ActionEvent actionEvent) {
-        UserView view = new UserView();
+        AddDelUsersView view = new AddDelUsersView();
         try {
             view.start(stage);
         } catch (IOException e) {

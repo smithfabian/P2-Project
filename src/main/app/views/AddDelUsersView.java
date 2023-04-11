@@ -5,22 +5,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.app.controllers.AddDelController;
+import main.app.controllers.NewCustomerController;
 
 import java.io.IOException;
 
-// be changed to only a scene opens from admin or coworker scene.
+public class AddDelUsersView extends Application {
 
-public class UserView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(UserView.class.getResource("/main/resources/user.fxml"));
+        FXMLLoader loader = new FXMLLoader(AddDelUsersView.class.getResource("/main/resources/AddDel-view.fxml"));
         Parent root = loader.load();
+        AddDelController controller = loader.getController();
+        controller.setStage(stage);
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 }

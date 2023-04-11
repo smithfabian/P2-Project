@@ -6,13 +6,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="main.app.controllers.UserController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.AddDelController">
     <children>
         <Button layoutX="527.0" layoutY="237.0" mnemonicParsing="false" onAction="#changeUserScene" prefHeight="35.0" prefWidth="89.0" text="Add user" />
         <Button layoutX="118.0" layoutY="359.0" mnemonicParsing="false" onAction="#previousScene" prefHeight="35.0" prefWidth="89.0" text="Back" />
         <Button layoutX="303.0" layoutY="359.0" mnemonicParsing="false" onAction="#deleteSelectedRow" prefHeight="35.0" prefWidth="89.0" text="Delete user" />
-        <TextField layoutX="504.0" layoutY="98.0" promptText="search user" />
+        <TextField fx:id="searchUser" layoutX="504.0" layoutY="98.0" onAction="#UserListSearch" promptText="search user" />
         <TableView fx:id="tableView" layoutX="79.0" layoutY="66.0" prefHeight="249.0" prefWidth="353.0">
             <columns>
                 <TableColumn fx:id="User" prefWidth="75.0" text="User" />
