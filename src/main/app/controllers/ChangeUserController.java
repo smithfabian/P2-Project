@@ -1,14 +1,17 @@
 package main.app.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.util.Optional;
 
 public class ChangeUserController {
+    Stage stage;
     @FXML
     public TextField Username_textfield;
 
@@ -61,5 +64,9 @@ public class ChangeUserController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

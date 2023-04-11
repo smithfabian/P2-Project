@@ -21,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import main.app.models.DatabaseConnection;
 import main.app.models.TableModel;
+import main.app.views.ChangeUserView;
 
 import javax.xml.crypto.Data;
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class AddDelController implements Initializable {
     private TableColumn<TableModel, String> User;
 
     @FXML
-    private TableColumn<TableModel, Integer> ID;
+    private TableColumn<TableModel, String> ID;
 
     @FXML
     private TableColumn<TableModel, CheckBox> Select;
@@ -68,7 +69,9 @@ public class AddDelController implements Initializable {
                 TableModel userTable;
 
                 while (result.next()) {
-                    userTable = new TableModel(result.getInt("Id"), result.getString("User"));
+                    userTable = new TableModel(result.getString("Id"), result.getString("User"));
+
+
                     list.add(userTable);
                 }
             } catch (Exception e) {
@@ -90,14 +93,15 @@ public class AddDelController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addUserList =  addUserListData();
+        ObservableList<TableModel> list = FXCollections.observableArrayList();
 
         for(int i = 0; i < addUserList.size(); i++) {
             CheckBox Select = new CheckBox(" " + i);
 
-            addUserList.add(new TableModel(User, ID, Select));
+            list.add(new TableModel(addUserList.get(i).getUser(), addUserList.get(i).getId(), Select));
         }
 
-        ID.setCellValueFactory(new PropertyValueFactory<TableModel, Integer>("Id"));
+        ID.setCellValueFactory(new PropertyValueFactory<TableModel, String>("Id"));
         User.setCellValueFactory(new PropertyValueFactory<TableModel, String>("User"));
         Select.setCellValueFactory(new PropertyValueFactory<TableModel, CheckBox>("Select"));
         tableView.setItems(addUserList);
@@ -132,8 +136,6 @@ public class AddDelController implements Initializable {
         tableView.setItems(filter);
 
 }
-
-
     // delete button usage
     //select user through the checkbox and delete the selected users by pressing the delete button.
     // TODO
@@ -168,12 +170,14 @@ public class AddDelController implements Initializable {
     }
 
     @FXML
-    private void changeUserScene(ActionEvent event3) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/p2/ChangeUser/ChangeUser-view.fxml")));
-        stage =(Stage)((Node)event3.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    private void changeUserScene(ActionEvent event3) {
+        ChangeUserView view = new ChangeUserView();
+        try {
+            view.start(new Stage());
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
