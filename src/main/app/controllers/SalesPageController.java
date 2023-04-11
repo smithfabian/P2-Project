@@ -53,6 +53,10 @@ public class SalesPageController {
     }
     @FXML
     public void initialize() {
+        toggleGroup = new ToggleGroup();
+        customersButton.setToggleGroup(toggleGroup);
+        ordersButton.setToggleGroup(toggleGroup);
+        itemsButton.setToggleGroup(toggleGroup);
         customersButton.fire();
         IDColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
         mSectorColumn.setCellValueFactory(new PropertyValueFactory<>("MainSector"));

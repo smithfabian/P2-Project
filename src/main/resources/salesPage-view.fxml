@@ -8,8 +8,8 @@
       <HBox prefHeight="100.0" prefWidth="341.0">
          <children>
             <ToggleButton fx:id="customersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#customerTableFront" text="Customers"/>
-            <ToggleButton fx:id="ordersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#orderTableFront" text="Orders" toggleGroup="$toggleGroup" />
-            <ToggleButton fx:id="itemsButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#itemTableFront" text="Items" toggleGroup="$toggleGroup" />
+            <ToggleButton fx:id="ordersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#orderTableFront" text="Orders"/>
+            <ToggleButton fx:id="itemsButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#itemTableFront" text="Items"/>
          </children>
       </HBox>
       <StackPane fx:id="stackPane" layoutX="152.0" layoutY="60.0" prefHeight="381.0" prefWidth="683.0">
