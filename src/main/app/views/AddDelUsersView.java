@@ -21,7 +21,8 @@ public class AddDelUsersView extends Application {
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setMinWidth(1000);
+        stage.setMinHeight(500);
         stage.show();
     }
 }

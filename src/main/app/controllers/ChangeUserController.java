@@ -28,35 +28,41 @@ public class ChangeUserController {
         try {
             Alert alert;
 
-            if (Username_textfield.getText().isEmpty() || Password_textfield.getText().isEmpty()) {
+            if (Username_textfield.getText().isEmpty() || Password_textfield.getText().isEmpty())  {
 
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
                 alert.setContentText("Please enter a new username and password");
                 alert.showAndWait();
+                Optional<ButtonType> option = alert.showAndWait();
+
             } else {
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Conformation Message");
                 alert.setHeaderText(null);
                 alert.setContentText("Are you sure you want to change/add user: " + Username_textfield.getText() + "?");
                 Optional<ButtonType> option = alert.showAndWait();
-                if (option.get().equals(ButtonType.OK)) {
+                    if (option.get().equals(ButtonType.CANCEL)){
+                        alert.showAndWait();
+
+                }
+                    if (option.get().equals(ButtonType.OK)) {
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("User successfully added/changed!");
+                    alert.showAndWait();
+                        stage.close();
+
                     // CONNECT TO DATABASE TO WRITE TO IT
                     //TODO
                 }
 
 
-                alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information Message");
-                alert.setHeaderText(null);
-                alert.setContentText("User successfully added/changed!");
-                alert.showAndWait();
 
                 //update the tableview with new username and id- call method addUserListData
                 //TODO
-
-
 
             }
 

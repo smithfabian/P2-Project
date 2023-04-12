@@ -16,11 +16,13 @@ public class ChangeUserView extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(ChangeUserView.class.getResource("/main/resources/ChangeUser-view.fxml"));
         Parent root = loader.load();
+
         ChangeUserController controller = loader.getController();
         controller.setStage(stage);
+
         Scene scene = new Scene(root);
-        stage.setMinWidth(1000);
-        stage.setMinHeight(500);
+        stage.setMinWidth(350);
+        stage.setMinHeight(150);
         stage.setTitle("Change user");
         stage.setScene(scene);
         stage.show();

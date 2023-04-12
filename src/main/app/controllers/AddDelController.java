@@ -21,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import main.app.models.DatabaseConnection;
 import main.app.models.TableModel;
+import main.app.views.AdminView;
 import main.app.views.ChangeUserView;
 
 import javax.xml.crypto.Data;
@@ -84,11 +85,8 @@ public class AddDelController implements Initializable {
         return list;
     }
 
-
-
-
     // Sets name for each column
-    private ObservableList<TableModel> addUserList;
+    static ObservableList<TableModel> addUserList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -160,17 +158,19 @@ public class AddDelController implements Initializable {
     //goes back to admin page
     //TODO
     @FXML
-    private void previousScene(ActionEvent event2) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/p2/AdminPage/adminPage.fxml"));
-        stage =(Stage)((Node)event2.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    private void previousScene() {
+        AdminView view = new AdminView();
+        try {
+            view.start(stage);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @FXML
-    private void changeUserScene(ActionEvent event3) {
+    private void changeUserScene() {
         ChangeUserView view = new ChangeUserView();
         try {
             view.start(new Stage());

@@ -7,7 +7,6 @@ import javafx.scene.control.TableColumn;
 public class TableModel {
     String Id;
     String User;
-
     CheckBox Select;
 
 
