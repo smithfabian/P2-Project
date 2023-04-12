@@ -12,6 +12,7 @@ import main.app.views.AddNewItemView;
 import main.app.views.AddNewOrderView;
 
 import java.io.IOException;
+import java.sql.Date;
 
 public class SalesPageController {
 
@@ -28,42 +29,68 @@ public class SalesPageController {
     @FXML
     private ToggleButton itemsButton;
     @FXML
-    private Button addButton;
-    @FXML
     private TableView customerTable;
     @FXML
     private TableView orderTable;
     @FXML
     private TableView itemTable;
     @FXML
-    private TableColumn<SalesModel.CustomerRow,String> IDColumn;
+    private TableColumn<SalesModel.CustomerRow,String> cIDColumn;
     @FXML
-    private TableColumn<SalesModel.CustomerRow,String> mSectorColumn;
+    private TableColumn<SalesModel.CustomerRow,String> cMainSectorColumn;
     @FXML
-    private TableColumn<SalesModel.CustomerRow,String> sSectorColumn;
+    private TableColumn<SalesModel.CustomerRow,String> cSubSectorColumn;
     @FXML
-    private TableColumn<SalesModel.CustomerRow,String> postalColumn;
+    private TableColumn<SalesModel.CustomerRow,Integer> cBoughtColumn;
     @FXML
-    private TableColumn<SalesModel.CustomerRow,Integer> boughtColumn;
+    private TableColumn<SalesModel.CustomerRow,Integer> cReturnColumn;
     @FXML
-    private TableColumn<SalesModel.CustomerRow,Integer> returnColumn;
+    private TableColumn<SalesModel.OrderRow,String>  oOrderID;
+    @FXML
+    private TableColumn<SalesModel.OrderRow, Date> oDate;
+    @FXML
+    private TableColumn<SalesModel.OrderRow, Integer> oQuantity;
+    @FXML
+    private TableColumn<SalesModel.OrderRow, String> oCustomerID;
+    @FXML
+    private TableColumn<SalesModel.OrderRow, String> oPostalCode;
+    @FXML
+    private TableColumn<SalesModel.OrderRow, String> oCity;
 
     public SalesPageController() {
         this.salesModel = new SalesModel();
     }
     @FXML
     public void initialize() {
+        setCustomerTable();
+        setOrderTable();
+        setupButtons();
+    }
+
+    private void setOrderTable() {
+        oOrderID.setCellValueFactory(new PropertyValueFactory<>("OrderID"));
+        oDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        oQuantity.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
+        oCustomerID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        oPostalCode.setCellValueFactory(new PropertyValueFactory<>("PostalCode"));
+        oCity.setCellValueFactory(new PropertyValueFactory<>("City"));
+        orderTable.setItems(salesModel.getOrderTable());
+    }
+
+    private void setupButtons() {
         toggleGroup = new ToggleGroup();
         customersButton.setToggleGroup(toggleGroup);
         ordersButton.setToggleGroup(toggleGroup);
         itemsButton.setToggleGroup(toggleGroup);
         customersButton.fire();
-        IDColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        mSectorColumn.setCellValueFactory(new PropertyValueFactory<>("MainSector"));
-        sSectorColumn.setCellValueFactory(new PropertyValueFactory<>("SubSector"));
-        postalColumn.setCellValueFactory(new PropertyValueFactory<>("PostalCode"));
-        boughtColumn.setCellValueFactory(new PropertyValueFactory<>("TotalBought"));
-        returnColumn.setCellValueFactory(new PropertyValueFactory<>("TotalReturned"));
+    }
+
+    private void setCustomerTable() {
+        cIDColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        cMainSectorColumn.setCellValueFactory(new PropertyValueFactory<>("MainSector"));
+        cSubSectorColumn.setCellValueFactory(new PropertyValueFactory<>("SubSector"));
+        cBoughtColumn.setCellValueFactory(new PropertyValueFactory<>("TotalBought"));
+        cReturnColumn.setCellValueFactory(new PropertyValueFactory<>("TotalReturned"));
         customerTable.setItems(salesModel.getCustomerTable());
     }
 

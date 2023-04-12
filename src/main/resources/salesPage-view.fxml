@@ -7,36 +7,39 @@
    <children>
       <HBox prefHeight="100.0" prefWidth="341.0">
          <children>
-            <ToggleButton fx:id="customersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#customerTableFront" text="Customers"/>
-            <ToggleButton fx:id="ordersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#orderTableFront" text="Orders"/>
-            <ToggleButton fx:id="itemsButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#itemTableFront" text="Items"/>
+            <ToggleButton fx:id="customersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#customerTableFront" text="Customers" />
+            <ToggleButton fx:id="ordersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#orderTableFront" text="Orders" />
+            <ToggleButton fx:id="itemsButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#itemTableFront" text="Items" />
          </children>
       </HBox>
       <StackPane fx:id="stackPane" layoutX="152.0" layoutY="60.0" prefHeight="381.0" prefWidth="683.0">
          <children>
             <TableView fx:id="itemTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                  <TableColumn prefWidth="75.0" text="Item ID" />
-                  <TableColumn prefWidth="75.0" text="Main group" />
-                  <TableColumn prefWidth="75.0" text="Sub group" />
-                  <TableColumn prefWidth="75.0" text="Price" />
+                  <TableColumn fx:id="iItemID" prefWidth="75.0" text="Item ID" />
+                  <TableColumn fx:id="iMainGroup" prefWidth="75.0" text="Main group" />
+                  <TableColumn fx:id="iSubGroup" prefWidth="75.0" text="Sub group" />
+                  <TableColumn fx:id="iTotalBought" prefWidth="75.0" text="Total bought" />
+                  <TableColumn fx:id="iTotalReturned" prefWidth="75.0" text="Total returned" />
               </columns>
             </TableView>
             <TableView fx:id="orderTable" prefHeight="200.0" prefWidth="492.0">
               <columns>
-                  <TableColumn prefWidth="75.0" text="Order ID" />
-                  <TableColumn prefWidth="75.0" text="Date" />
-                  <TableColumn prefWidth="75.0" text="Quantity" />
+                  <TableColumn fx:id="oOrderID" prefWidth="75.0" text="Order ID" />
+                  <TableColumn fx:id="oDate" prefWidth="75.0" text="Date" />
+                  <TableColumn fx:id="oQuantity" prefWidth="75.0" text="Quantity" />
+                  <TableColumn fx:id="oCustomerID" prefWidth="75.0" text="Customer ID" />
+                  <TableColumn fx:id="oPostalCode" prefWidth="75.0" text="Postal code" />
+                  <TableColumn fx:id="oCity" prefWidth="75.0" text="City" />
               </columns>
             </TableView>
             <TableView fx:id="customerTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                  <TableColumn fx:id="IDColumn" prefWidth="75.0" text="Customer ID" />
-                  <TableColumn fx:id="mSectorColumn" prefWidth="75.0" text="Main sector" />
-                  <TableColumn fx:id="sSectorColumn" prefWidth="75.0" text="Sub sector" />
-                  <TableColumn fx:id="postalColumn" prefWidth="75.0" text="Postal code" />
-                  <TableColumn fx:id="boughtColumn" prefWidth="120.0" text="Total items bought" />
-                  <TableColumn fx:id="returnColumn" prefWidth="78.0" text="Total returns" />
+                  <TableColumn fx:id="cIDColumn" prefWidth="75.0" text="Customer ID" />
+                  <TableColumn fx:id="cMainSectorColumn" prefWidth="75.0" text="Main sector" />
+                  <TableColumn fx:id="cSubSectorColumn" prefWidth="75.0" text="Sub sector" />
+                  <TableColumn fx:id="cBoughtColumn" prefWidth="120.0" text="Total items bought" />
+                  <TableColumn fx:id="cReturnColumn" prefWidth="78.0" text="Total returns" />
               </columns>
             </TableView>
          </children>
