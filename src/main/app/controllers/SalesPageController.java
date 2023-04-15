@@ -56,6 +56,16 @@ public class SalesPageController {
     private TableColumn<SalesModel.OrderRow, String> oPostalCode;
     @FXML
     private TableColumn<SalesModel.OrderRow, String> oCity;
+    @FXML
+    private TableColumn<SalesModel.ItemRow,String> iItemID;
+    @FXML
+    private TableColumn<SalesModel.ItemRow,String> iMainGroup;
+    @FXML
+    private TableColumn<SalesModel.ItemRow,String> iSubGroup;
+    @FXML
+    private TableColumn<SalesModel.ItemRow,Integer> iTotalBought;
+    @FXML
+    private TableColumn<SalesModel.ItemRow, Integer> iTotalReturned;
 
     public SalesPageController() {
         this.salesModel = new SalesModel();
@@ -64,7 +74,17 @@ public class SalesPageController {
     public void initialize() {
         setCustomerTable();
         setOrderTable();
+        setItemTable();
         setupButtons();
+    }
+
+    private void setItemTable() {
+        iItemID.setCellValueFactory(new PropertyValueFactory<>("ItemID"));
+        iMainGroup.setCellValueFactory(new PropertyValueFactory<>("MainGroup"));
+        iSubGroup.setCellValueFactory(new PropertyValueFactory<>("SubGroup"));
+        iTotalBought.setCellValueFactory(new PropertyValueFactory<>("TotalBought"));
+        iTotalReturned.setCellValueFactory(new PropertyValueFactory<>("TotalReturned"));
+        itemTable.setItems(salesModel.getItemTable());
     }
 
     private void setOrderTable() {
@@ -102,15 +122,15 @@ public class SalesPageController {
         itemTable.toFront();
     }
 
-    public void orderTableFront(ActionEvent actionEvent) {
+    public void orderTableFront() {
         orderTable.toFront();
     }
 
-    public void customerTableFront(ActionEvent actionEvent) {
+    public void customerTableFront() {
         customerTable.toFront();
     }
 
-    public void addButtonClicked(ActionEvent actionEvent) {
+    public void addButtonClicked() {
         ToggleButton buttonToggled = (ToggleButton) toggleGroup.getSelectedToggle();
         if (buttonToggled.equals(customersButton)) {
             AddNewCustomerView view = new AddNewCustomerView();
