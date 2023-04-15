@@ -5,12 +5,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.app.controllers.AdminController;
 import main.app.controllers.PasswordController;
 import main.app.models.PasswordModel;
 
 import java.io.IOException;
 
 public class PasswordView extends Application {
+    private AdminController adminController;
+
+    public PasswordView(AdminController adminController){
+        this.adminController = adminController;
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -18,6 +24,7 @@ public class PasswordView extends Application {
         Parent root = loader.load();
         PasswordController controller = loader.getController();
         controller.setStage(stage);
+        controller.setAdminController(adminController);
         controller.setModel(new PasswordModel());
 
         Scene scene = new Scene(root);
