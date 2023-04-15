@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.NewCustomerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.NewCustomerController">
    <children>
-      <VBox layoutX="123.0" layoutY="67.0" prefHeight="124.0" prefWidth="255.0" spacing="5.0">
+      <VBox layoutX="123.0" layoutY="67.0" prefHeight="100.0" prefWidth="255.0" spacing="5.0">
          <children>
             <TextField fx:id="IDField" promptText="Customer ID          REQUIRED" />
             <TextField fx:id="mainSectorField" layoutX="10.0" layoutY="10.0" promptText="Main Sector" />
             <TextField fx:id="subSectorField" layoutX="10.0" layoutY="10.0" promptText="Sub sector" />
-            <TextField fx:id="postalField" layoutX="10.0" layoutY="35.0" promptText="Postal code" />
          </children>
       </VBox>
-      <Label layoutX="281.0" layoutY="84.0" />
       <Label layoutX="171.0" layoutY="14.0" text="Add new customer">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -26,5 +28,6 @@
             <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
          </children>
       </HBox>
+      <Label fx:id="addedLabel" layoutX="236.0" layoutY="167.0" prefHeight="17.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
