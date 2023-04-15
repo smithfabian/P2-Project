@@ -40,8 +40,7 @@ public class AdminModel {
             query = "SELECT 5 as 'Category 1', 4 as 'Category 2', 3 as 'Category 3', 2 as 'Category 4', 1 as 'Category 5';";
         }
 
-        DatabaseConnection db = new DatabaseConnection();
-        Connection conn = db.getConnection();
+        Connection conn = DatabaseConnection.getConnection();
         try (Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();

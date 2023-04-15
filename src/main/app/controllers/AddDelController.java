@@ -62,8 +62,7 @@ public class AddDelController implements Initializable {
         ObservableList<TableModel> list = FXCollections.observableArrayList();
         try {
             String sql = "SELECT * FROM p2.users";
-            DatabaseConnection db = new DatabaseConnection();
-            Connection connect = db.getConnection();
+             Connection connect = DatabaseConnection.getConnection();
 
             try (Statement stmt = connect.createStatement()) {
                 ResultSet result = stmt.executeQuery(sql);
@@ -79,7 +78,7 @@ public class AddDelController implements Initializable {
                 e.printStackTrace();
             }
         }
-        catch (IOException | SQLException e) {
+        catch (SQLException e) {
             e.printStackTrace();
         }
         return list;

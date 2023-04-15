@@ -104,8 +104,7 @@ public class SalesModel {
                     " p2.orders.City," +
                     " sum(p2.orderitems.InvoiceQty) as InvoiceQty" +
                     " from p2.orders join p2.orderitems on p2.orderitems.OrderId=p2.orders.OrderId group by OrderId, InvoiceDate, AccountNum, PostalCode, City";
-            DatabaseConnection db = new DatabaseConnection();
-            Connection conn = db.getConnection();
+            Connection conn = DatabaseConnection.getConnection();
             try (Statement stmt = conn.createStatement()) {
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
@@ -115,7 +114,7 @@ public class SalesModel {
                 conn.close();
             }
         }
-        catch(IOException | SQLException e) {
+        catch(SQLException e) {
             e.printStackTrace();
         }
     }
@@ -128,8 +127,7 @@ public class SalesModel {
                     "p2.accounts.MarketSubSector, " +
                     "sum(p2.orderitems.InvoiceQty) as TotalItemsBought from p2.accounts" +
                     " join p2.orderitems on p2.orderitems.AccountNum = p2.accounts.AccountNum AND InvoiceQty >= 0 group by AccountNum";
-            DatabaseConnection db = new DatabaseConnection();
-            Connection conn = db.getConnection();
+            Connection conn = DatabaseConnection.getConnection();
             try (Statement stmt = conn.createStatement()) {
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
@@ -139,7 +137,7 @@ public class SalesModel {
                 conn.close();
             }
         }
-                catch(IOException | SQLException e) {
+                catch(SQLException e) {
             e.printStackTrace();
         }
     }

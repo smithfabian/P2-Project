@@ -14,8 +14,7 @@ import java.sql.Statement;
 * */
 public class logRecord {
     public static void main(String[] args) throws IOException, SQLException {
-        DatabaseConnection db = new DatabaseConnection();
-        Connection conn = db.getConnection();
+        Connection conn = DatabaseConnection.getConnection();
         String query = "SELECT NOW() as now";
         try (Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
