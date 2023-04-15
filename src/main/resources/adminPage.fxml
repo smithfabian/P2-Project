@@ -24,8 +24,8 @@
                      <children>
                         <Button fx:id="salesButton" onAction="#salesButtonClicked" prefHeight="50" prefWidth="400" text="Sales Data" />
                         <Button fx:id="logButton" onAction="#logButtonClicked" prefHeight="50" prefWidth="400" text="See log" />
-                        <Button fx:id="userButton" onAction="#userButtonClicked" prefHeight="50" prefWidth="400" text="Add/delete user" />
-                        <Button fx:id="passwordButton" onAction="#passwordButtonClicked" prefHeight="50" prefWidth="400" text="Chance password" />
+                        <Button fx:id="userButton" onAction="#userButtonClicked" prefHeight="50" prefWidth="400" text="Users" />
+                        <Button fx:id="passwordButton" onAction="#passwordButtonClicked" prefHeight="50" prefWidth="400" text="Change password" />
                      </children>
                   </VBox>
                </children>
