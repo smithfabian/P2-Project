@@ -3,9 +3,12 @@ package main.app.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.app.models.NewItemModel;
+
+import java.sql.Date;
 
 public class NewItemController {
     @FXML
@@ -19,7 +22,7 @@ public class NewItemController {
     @FXML
     TextField subGroupField;
     @FXML
-    TextField priceField;
+    Label addedLabel;
     Stage stage;
     NewItemModel newItemModel;
 
@@ -29,11 +32,24 @@ public class NewItemController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    public void cancelButtonClicked(ActionEvent actionEvent) {
+    public void cancelButtonClicked() {
         stage.close();
     }
 
-    public void addButtonClicked(ActionEvent actionEvent) {
-        newItemModel.addToDatabase();
+    public void addButtonClicked() {
+        if (!IDField.getText().isEmpty()) {
+            newItemModel.setID(IDField.getText());
+            newItemModel.setMainGroup(mainGroupField.getText());
+            newItemModel.setSubGroup(subGroupField.getText());
+            newItemModel.setID(IDField.getText());
+            newItemModel.addToDatabase();
+            addedLabel.setText(newItemModel.getAddedLabel());
+            IDField.clear();
+            mainGroupField.clear();
+            subGroupField.clear();
+        }
+        else {
+            addedLabel.setText("Please put information into required fields");
+        }
     }
 }

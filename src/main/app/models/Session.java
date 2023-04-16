@@ -1,13 +1,27 @@
 package main.app.models;
 
 public class Session {
-    private Integer loggedInUser;
+    private static Integer loggedInUser;
+    private static boolean isAdmin = false;
 
-    public void setLoggedInUser(Integer userId){
-        this.loggedInUser = userId;
+    public static void setLoggedInUser(Integer userId){
+        loggedInUser = userId;
     }
 
-    public Integer getLoggedInUser(){
-        return this.loggedInUser;
+    public static Integer getLoggedInUser(){
+        return loggedInUser;
+    }
+
+    public static void setIsAdmin(boolean value){
+        isAdmin = value;
+    }
+
+    public static boolean getIsAdmin(){
+        return isAdmin;
+    }
+
+    public static void reset(){
+        loggedInUser = null;
+        isAdmin = false;
     }
 }

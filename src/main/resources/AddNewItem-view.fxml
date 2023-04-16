@@ -6,12 +6,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.NewItemController">
    <children>
-      <VBox layoutX="123.0" layoutY="67.0" prefHeight="130.0" prefWidth="255.0" spacing="5.0">
+      <VBox layoutX="123.0" layoutY="67.0" prefHeight="100.0" prefWidth="255.0" spacing="5.0">
          <children>
             <TextField fx:id="IDField" promptText="Item ID                     REQUIRED" />
             <TextField fx:id="mainGroupField" layoutX="10.0" layoutY="10.0" promptText="Main group" />
             <TextField fx:id="subGroupField" layoutX="10.0" layoutY="10.0" promptText="Sub group" />
-            <TextField fx:id="priceField" layoutX="10.0" layoutY="35.0" promptText="Price                         REQUIRED" />
          </children>
       </VBox>
       <Label layoutX="281.0" layoutY="84.0" />
@@ -26,5 +25,6 @@
             <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
          </children>
       </HBox>
+      <Label fx:id="addedLabel" alignment="CENTER" layoutX="114.0" layoutY="180.0" prefHeight="17.0" prefWidth="279.0" textAlignment="CENTER" />
    </children>
 </AnchorPane>

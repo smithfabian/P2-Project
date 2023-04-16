@@ -6,8 +6,13 @@ import java.io.IOException;
 import java.sql.*;
 
 public class SalesModel {
-    ObservableList<CustomerRow> customerTable;
-    ObservableList<OrderRow> orderTable;
+    private ObservableList<CustomerRow> customerTable;
+    private ObservableList<OrderRow> orderTable;
+
+    private ObservableList<ItemRow> itemTable;
+
+
+
 
     public class CustomerRow {
         private String ID;
@@ -88,13 +93,72 @@ public class SalesModel {
             return city;
         }
     }
+    public class ItemRow {
+        private String itemID;
+        private String mainGroup;
+        private String subGroup;
+        private int totalBought;
+        private int totalReturned;
+
+        private ItemRow(String itemID, String mainGroup, String subGroup, int totalBought, int totalReturned) {
+            this.itemID = itemID;
+            this.mainGroup = mainGroup;
+            this.subGroup = subGroup;
+            this.totalBought = totalBought;
+            this.totalReturned = totalReturned;
+        }
+
+        public String getItemID() {
+            return itemID;
+        }
+
+        public String getMainGroup() {
+            return mainGroup;
+        }
+
+        public String getSubGroup() {
+            return subGroup;
+        }
+
+        public int getTotalBought() {
+            return totalBought;
+        }
+
+        public int getTotalReturned() {
+            return totalReturned;
+        }
+    }
     public SalesModel() {
         customerTable = FXCollections.observableArrayList();
         orderTable = FXCollections.observableArrayList();
+        itemTable = FXCollections.observableArrayList();
         createCustomerTable();
         createOrderTable();
+        createItemTable();
     }
-
+    private void createItemTable() {
+        try {
+            String query = "SELECT i.ItemID," +
+                    " i.ItemMainGroup," +
+                    " i.ItemSubGroup," +
+                    " sum(if(o.InvoiceQty >= 0, o.InvoiceQty, 0)) as TotalBought," +
+                    " sum(if(o.InvoiceQty < 0, o.InvoiceQty, 0)) AS TotalReturned" +
+                    " from p2.items i join p2.orderitems o on o.ItemID=i.ItemID group by i.ItemID ";
+            DatabaseConnection db = new DatabaseConnection();
+            Connection conn = db.getConnection();
+            try (Statement stmt = conn.createStatement()) {
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    itemTable.add(new ItemRow(rs.getString("ItemID"), rs.getString("ItemMainGroup"), rs.getString("ItemSubGroup"), rs.getInt("TotalBought"), -rs.getInt("TotalReturned")));
+                }
+            } finally {
+                conn.close();
+            }
+        }
+        catch(IOException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
     private void createOrderTable() {
         try {
             String query = "SELECT p2.orders.OrderId," +
@@ -122,16 +186,17 @@ public class SalesModel {
     private void createCustomerTable(){
         try {
             String query = "SELECT " +
-                    "p2.accounts.AccountNum, " +
-                    "p2.accounts.MarketMainSector," +
-                    "p2.accounts.MarketSubSector, " +
-                    "sum(p2.orderitems.InvoiceQty) as TotalItemsBought from p2.accounts" +
-                    " join p2.orderitems on p2.orderitems.AccountNum = p2.accounts.AccountNum AND InvoiceQty >= 0 group by AccountNum";
+                    "a.AccountNum, " +
+                    "a.MarketMainSector," +
+                    "a.MarketSubSector, " +
+                    "sum(if (o.InvoiceQty >= 0, o.InvoiceQty,0)) as TotalItemsBought, " +
+                    "sum(if (o.InvoiceQty < 0, o.InvoiceQty,0)) as TotalItemsReturned from p2.accounts a" +
+                    " join p2.orderitems o on o.AccountNum = a.AccountNum group by a.AccountNum";
             Connection conn = DatabaseConnection.getConnection();
             try (Statement stmt = conn.createStatement()) {
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
-                    customerTable.add(new CustomerRow(rs.getString("AccountNum"), rs.getString("MarketMainSector"), rs.getString("MarketSubSector"), rs.getInt("TotalItemsBought"), 0 ));
+                    customerTable.add(new CustomerRow(rs.getString("AccountNum"), rs.getString("MarketMainSector"), rs.getString("MarketSubSector"), rs.getInt("TotalItemsBought"), -rs.getInt("TotalItemsReturned") ));
                 }
             } finally {
                 conn.close();
@@ -149,4 +214,10 @@ public class SalesModel {
     public ObservableList<OrderRow> getOrderTable() {
         return orderTable;
     }
+
+    public ObservableList<ItemRow> getItemTable() {
+        return itemTable;
+    }
+
+
 }
