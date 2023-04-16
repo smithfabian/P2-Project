@@ -2,6 +2,7 @@ package main.app.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -26,6 +27,8 @@ public class LoginController {
     PasswordField passwordField;
     @FXML
     Button loginButton;
+    @FXML
+    Label errorMessage;
 
     public LoginController() {
     }
@@ -38,7 +41,9 @@ public class LoginController {
         String password = passwordField.getText();
         String username = usernameField.getText();
 
-        if (loginModel.getUserFromDB(username) && PasswordManager.isCorrectPassword(password, loginModel.getPassword())){
+        if (password.isEmpty() || username.isEmpty()){
+            errorMessage.setText("Enter password and username");
+        } else if (loginModel.getUserFromDB(username) && PasswordManager.isCorrectPassword(password, loginModel.getPassword())){
             Session.setLoggedInUser(loginModel.getUserId());
 
             if (loginModel.getIsAdmin()) {
@@ -56,6 +61,9 @@ public class LoginController {
                 } catch (IOException ignored) {
                 }
             }
+        } else {
+            errorMessage.setText("Incorrect credentials!");
+            // TODO: insert log
         }
     }
 }
