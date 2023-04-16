@@ -6,6 +6,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.app.models.PasswordManager;
+import main.app.models.Session;
 import main.app.views.AdminView;
 import main.app.models.LoginModel;
 import main.app.views.EmployeeView;
@@ -32,22 +34,27 @@ public class LoginController {
         this.stage = stage;
     }
 
-    public void loginAttempt() throws IOException {
-        loginModel.setUsername(usernameField.getText());
-        loginModel.setPassword(passwordField.getText());
-        if (loginModel.getUsername().equals("admin") && loginModel.getPassword().equals("admin")) {
-            AdminView view = new AdminView();
-            try {
-                view.start(stage);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else if (loginModel.getUsername().equals("user") && loginModel.getPassword().equals("password")) {
-            EmployeeView view = new EmployeeView();
-            try {
-                view.start(stage);
-            } catch (IOException e) {
+    public void loginAttempt() {
+        String password = passwordField.getText();
+        String username = usernameField.getText();
 
+        if (loginModel.getUserFromDB(username) && PasswordManager.isCorrectPassword(password, loginModel.getPassword())){
+            Session.setLoggedInUser(loginModel.getUserId());
+
+            if (loginModel.getIsAdmin()) {
+                Session.setIsAdmin(true);
+                AdminView view = new AdminView();
+                try {
+                    view.start(stage);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                EmployeeView view = new EmployeeView();
+                try {
+                    view.start(stage);
+                } catch (IOException ignored) {
+                }
             }
         }
     }

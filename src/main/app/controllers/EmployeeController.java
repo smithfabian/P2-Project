@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.app.models.EmployeeModel;
+import main.app.models.Session;
 import main.app.views.LoginView;
 import main.app.views.SalesView;
 
@@ -73,6 +74,7 @@ public class EmployeeController {
     }
 
     public void SwitchToLoginPageScene(ActionEvent actionEvent) throws IOException {
+        Session.reset();
         LoginView view = new LoginView();
         view.start(stage);
     }

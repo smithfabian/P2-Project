@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import main.app.models.AdminModel;
+import main.app.models.Session;
 import main.app.views.AddDelUsersView;
 import main.app.views.LoginView;
 import main.app.views.PasswordView;
@@ -93,6 +94,7 @@ public class AdminController {
     }
 
     public void logoutButtonClicked(ActionEvent actionEvent) {
+        Session.reset();
         LoginView view = new LoginView();
         view.start(stage);
     }
