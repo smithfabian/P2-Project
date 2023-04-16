@@ -1,12 +1,12 @@
 package main.app.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.app.models.NewOrderModel;
-import main.app.models.PasswordModel;
+
+import java.sql.Date;
 
 public class NewOrderController {
     @FXML
@@ -16,23 +16,49 @@ public class NewOrderController {
     @FXML
     TextField IDField;
     @FXML
-    TextField qtyField;
+    DatePicker dateField;
     @FXML
-    TextField dateField;
+    ComboBox<String> customerIDField;
+    @FXML
+    TextField postalCodeField;
+    @FXML
+    Label addedLabel;
     Stage stage;
     NewOrderModel newOrderModel;
     public NewOrderController() {
         this.newOrderModel = new NewOrderModel();
+
     }
+    @FXML
+    public void initialize() {
+        fillCustomerField();
+    }
+    private void fillCustomerField() {
+        customerIDField.setItems(newOrderModel.getCustomers());
+    }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public void cancelButtonClicked(ActionEvent actionEvent) {
+    public void cancelButtonClicked() {
         stage.close();
     }
 
-    public void addButtonClicked(ActionEvent actionEvent) {
-        newOrderModel.addToDatabase();
+    public void addButtonClicked() {
+        if (!IDField.getText().isEmpty() && customerIDField.getValue() != null && dateField.getValue() != null ) {
+            newOrderModel.setDate(Date.valueOf(dateField.getValue()));
+            newOrderModel.setCustomerID(customerIDField.getValue());
+            newOrderModel.setPostalCode(postalCodeField.getText());
+            newOrderModel.setID(IDField.getText());
+            newOrderModel.addToDataBase();
+            addedLabel.setText(newOrderModel.getAddedLabel());
+            IDField.clear();
+
+        }
+        else {
+            addedLabel.setText("Please put information into required fields");
+        }
+
     }
 }

@@ -6,9 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.app.controllers.NewOrderController;
-import main.app.controllers.PasswordController;
-import main.app.models.NewOrderModel;
-import main.app.models.PasswordModel;
 
 import java.io.IOException;
 
