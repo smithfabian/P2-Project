@@ -13,18 +13,14 @@ public class DatabaseConnection {
     private DatabaseConnection (){
         // makes sure the class can not be initialized from the outside
     }
-
     private static final BasicDataSource dataSource = new BasicDataSource();
     private static final Properties secrets = loadSecrets();
-    private static final String url = secrets.getProperty("database.url");
-    private static final String userName = secrets.getProperty("database.admin.username");
-    private static final String password = secrets.getProperty("database.admin.password");
 
     // Static initializer block initialize static variables only once when the class first loaded
     static {
-        dataSource.setUrl(url);
-        dataSource.setPassword(password);
-        dataSource.setUsername(userName);
+        dataSource.setUrl(secrets.getProperty("database.url"));
+        dataSource.setPassword(secrets.getProperty("database.admin.password"));
+        dataSource.setUsername(secrets.getProperty("database.admin.username"));
         dataSource.setMinIdle(5);
         dataSource.setMaxIdle(10);
         dataSource.setMaxTotal(20);
