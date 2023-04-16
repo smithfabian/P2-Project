@@ -7,9 +7,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import main.app.models.SalesModel;
-import main.app.views.AddNewCustomerView;
-import main.app.views.AddNewItemView;
-import main.app.views.AddNewOrderView;
+import main.app.models.Session;
+import main.app.views.*;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -160,6 +159,20 @@ public class SalesPageController {
         }
     }
 
-    public void backButtonClicked(ActionEvent actionEvent) {
+    public void backButtonClicked() {
+        if (Session.getIsAdmin()) {
+            AdminView view = new AdminView();
+            try {
+                view.start(stage);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            EmployeeView view = new EmployeeView();
+            try {
+                view.start(stage);
+            } catch (IOException ignored) {
+            }
+        }
     }
 }
