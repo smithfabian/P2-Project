@@ -30,8 +30,7 @@ public class LoginModel {
         boolean result = false;
         try {
             String query = "SELECT p2.users.Id as id, p2.users.IsAdmin as isAdmin, p2.users.Password as password FROM p2.users WHERE p2.users.User = ?";
-            DatabaseConnection db = new DatabaseConnection();
-            Connection conn = db.getConnection();
+            Connection conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, username);
             try {
@@ -47,7 +46,7 @@ public class LoginModel {
                 conn.close();
             }
         }
-        catch(IOException | SQLException e) {
+        catch(SQLException e) {
             e.printStackTrace();
         }
         return result;

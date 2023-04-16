@@ -144,18 +144,14 @@ public class SalesModel {
                     " sum(if(o.InvoiceQty >= 0, o.InvoiceQty, 0)) as TotalBought," +
                     " sum(if(o.InvoiceQty < 0, o.InvoiceQty, 0)) AS TotalReturned" +
                     " from p2.items i join p2.orderitems o on o.ItemID=i.ItemID group by i.ItemID ";
-            DatabaseConnection db = new DatabaseConnection();
-            Connection conn = db.getConnection();
-            try (Statement stmt = conn.createStatement()) {
+            try (Connection conn = DatabaseConnection.getConnection(); Statement stmt = conn.createStatement()) {
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     itemTable.add(new ItemRow(rs.getString("ItemID"), rs.getString("ItemMainGroup"), rs.getString("ItemSubGroup"), rs.getInt("TotalBought"), -rs.getInt("TotalReturned")));
                 }
-            } finally {
-                conn.close();
             }
         }
-        catch(IOException | SQLException e) {
+        catch(SQLException e) {
             e.printStackTrace();
         }
     }

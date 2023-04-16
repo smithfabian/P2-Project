@@ -13,33 +13,27 @@ public class NewItemModel {
     private String addedLabel;
 
     public void addToDatabase() {
-        try {
-            DatabaseConnection db = new DatabaseConnection();
-            try (Connection conn = db.getConnection()) {
-                String checkQuery = "SELECT COUNT(*) FROM p2.items WHERE ItemID = ?";
-                String insertQuery = "INSERT INTO p2.items (ItemID,ItemMainGroup,ItemSubGroup) values (?,?,?)";
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String checkQuery = "SELECT COUNT(*) FROM p2.items WHERE ItemID = ?";
+            String insertQuery = "INSERT INTO p2.items (ItemID,ItemMainGroup,ItemSubGroup) values (?,?,?)";
 
-                try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
-                    checkStmt.setString(1, ID);
-                    try (ResultSet resultSet = checkStmt.executeQuery()) {
-                        if (resultSet.next() && resultSet.getInt(1) == 0) {
-                            try (PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
-                                insertStmt.setString(1, ID);
-                                insertStmt.setString(2, mainGroup);
-                                insertStmt.setString(3, subGroup);
-                                insertStmt.executeUpdate();
-                                addedLabel = "Item successfully added to database";
-                            }
-                        } else {
-                            addedLabel = "This Item ID already exists in the database";
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
+                checkStmt.setString(1, ID);
+                try (ResultSet resultSet = checkStmt.executeQuery()) {
+                    if (resultSet.next() && resultSet.getInt(1) == 0) {
+                        try (PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
+                            insertStmt.setString(1, ID);
+                            insertStmt.setString(2, mainGroup);
+                            insertStmt.setString(3, subGroup);
+                            insertStmt.executeUpdate();
+                            addedLabel = "Item successfully added to database";
                         }
+                    } else {
+                        addedLabel = "This Item ID already exists in the database";
                     }
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
-        }
-        catch (IOException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
