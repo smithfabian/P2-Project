@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="454.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.ChangeUserController">
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.ChangeUserController">
    <children>
       <TextField fx:id="Username_textfield" alignment="TOP_LEFT" layoutX="201.0" layoutY="167.0" prefHeight="28.0" prefWidth="194.0" />
       <TextField fx:id="Password_textfield" alignment="TOP_LEFT" layoutX="200.0" layoutY="228.0" prefHeight="26.0" prefWidth="196.0" />
@@ -14,5 +14,6 @@
       <Text id="password_text" layoutX="128.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
       <Text layoutX="33.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User ID:" />
       <TextField fx:id="UserID_textfield" layoutX="85.0" layoutY="22.0" prefHeight="8.0" prefWidth="85.0" />
+      <Button fx:id="back" layoutX="931.0" layoutY="459.0" mnemonicParsing="false" text="Back" />
    </children>
 </AnchorPane>
