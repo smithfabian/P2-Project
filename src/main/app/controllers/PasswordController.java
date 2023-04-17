@@ -42,6 +42,7 @@ public class PasswordController {
         }
         else if (newPassword.getText().equals(repeatPassword.getText())) {
             // TODO check password complexity
+            model.setPassword(newPassword.getText());
             model.updatePassword();
             adminController.setIsPasswordWindowOpen(false);
             stage.close();
