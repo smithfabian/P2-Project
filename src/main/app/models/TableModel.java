@@ -5,16 +5,16 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 
 public class TableModel {
-    String Id;
+    int Id;
     String User;
     CheckBox Select;
 
 
     // Getter and Setter methods for id, user and select.
-    public String getId() {
+    public int getId() {
         return Id;
     }
-    public void setID(String Id) {
+    public void setID(int Id) {
         this.Id = Id;
     }
 
@@ -35,19 +35,27 @@ public class TableModel {
     }
 
     // constructor for id and user
-    public TableModel(String Id, String User) {
+    public TableModel(int Id, String User) {
         this.Id = Id;
         this.User = User;
     }
 
-
     // constructor for checkbox, id and user
-    public TableModel(String user, String id, CheckBox Select) {
+    public TableModel(String user, int id, CheckBox Select) {
         this.Select = Select;
         this.Id = id;
         this.User = user;
 
     }
+
+
+
+
+
+
+
+
+
 
 
 }

@@ -47,7 +47,7 @@ public class AddDelController implements Initializable {
     private TableColumn<TableModel, String> User;
 
     @FXML
-    private TableColumn<TableModel, String> ID;
+    private TableColumn<TableModel, Integer> ID;
 
     @FXML
     private TableColumn<TableModel, CheckBox> Select;
@@ -69,7 +69,7 @@ public class AddDelController implements Initializable {
                 TableModel userTable;
 
                 while (result.next()) {
-                    userTable = new TableModel(result.getString("Id"), result.getString("User"));
+                    userTable = new TableModel(result.getInt("Id"), result.getString("User"));
 
 
                     list.add(userTable);
@@ -98,11 +98,17 @@ public class AddDelController implements Initializable {
             list.add(new TableModel(addUserList.get(i).getUser(), addUserList.get(i).getId(), Select));
         }
 
-        ID.setCellValueFactory(new PropertyValueFactory<TableModel, String>("Id"));
+        ID.setCellValueFactory(new PropertyValueFactory<TableModel, Integer>("Id"));
         User.setCellValueFactory(new PropertyValueFactory<TableModel, String>("User"));
         Select.setCellValueFactory(new PropertyValueFactory<TableModel, CheckBox>("Select"));
         tableView.setItems(addUserList);
     }
+
+    private CheckBox Select() {
+    // checkbox function (how it shall look and do)
+        return null;
+    }
+
 
     //search for a user in the table (name based) method
     @FXML
@@ -154,8 +160,6 @@ public class AddDelController implements Initializable {
 
 
     // back button or add user button usage:
-    //goes back to admin page
-    //TODO
     @FXML
     private void previousScene() {
         AdminView view = new AdminView();

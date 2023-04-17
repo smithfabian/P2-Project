@@ -8,6 +8,7 @@ import main.app.models.Session;
 import main.app.views.AddDelUsersView;
 import main.app.views.LoginView;
 import main.app.views.PasswordView;
+import main.app.views.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,6 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import main.app.views.SalesView;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -67,6 +67,12 @@ public class AdminController {
     }
 
     public void logButtonClicked(ActionEvent actionEvent) {
+        LogPageView view = new LogPageView();
+        try {
+            view.start(stage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void userButtonClicked(ActionEvent actionEvent) {
