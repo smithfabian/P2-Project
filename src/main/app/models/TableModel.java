@@ -14,6 +14,7 @@ public class TableModel {
     public int getId() {
         return Id;
     }
+
     public void setID(int Id) {
         this.Id = Id;
     }
@@ -30,9 +31,6 @@ public class TableModel {
         return User;
     }
 
-    public void setUser(String User) {
-        User = User;
-    }
 
     // constructor for id and user
     public TableModel(int Id, String User) {
@@ -47,15 +45,5 @@ public class TableModel {
         this.User = user;
 
     }
-
-
-
-
-
-
-
-
-
-
 
 }

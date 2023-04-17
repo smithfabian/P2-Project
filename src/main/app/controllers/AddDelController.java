@@ -55,14 +55,13 @@ public class AddDelController implements Initializable {
     @FXML
     private TableView<TableModel> tableView;
 
-
-
     // Connects to a database that has the table of users
     public ObservableList<TableModel> addUserListData(){
+
         ObservableList<TableModel> list = FXCollections.observableArrayList();
         try {
             String sql = "SELECT * FROM p2.users";
-             Connection connect = DatabaseConnection.getConnection();
+            Connection connect = DatabaseConnection.getConnection();
 
             try (Statement stmt = connect.createStatement()) {
                 ResultSet result = stmt.executeQuery(sql);
@@ -70,7 +69,6 @@ public class AddDelController implements Initializable {
 
                 while (result.next()) {
                     userTable = new TableModel(result.getInt("Id"), result.getString("User"));
-
 
                     list.add(userTable);
                 }
@@ -93,7 +91,7 @@ public class AddDelController implements Initializable {
         ObservableList<TableModel> list = FXCollections.observableArrayList();
 
         for(int i = 0; i < addUserList.size(); i++) {
-            CheckBox Select = new CheckBox(" " + i);
+            CheckBox Select = new CheckBox();
 
             list.add(new TableModel(addUserList.get(i).getUser(), addUserList.get(i).getId(), Select));
         }
@@ -101,12 +99,8 @@ public class AddDelController implements Initializable {
         ID.setCellValueFactory(new PropertyValueFactory<TableModel, Integer>("Id"));
         User.setCellValueFactory(new PropertyValueFactory<TableModel, String>("User"));
         Select.setCellValueFactory(new PropertyValueFactory<TableModel, CheckBox>("Select"));
-        tableView.setItems(addUserList);
-    }
 
-    private CheckBox Select() {
-    // checkbox function (how it shall look and do)
-        return null;
+        tableView.setItems(addUserList);
     }
 
 
@@ -138,8 +132,8 @@ public class AddDelController implements Initializable {
 
         tableView.setItems(filter);
 
-}
-    // delete button usage
+    }
+    // Delete button usage
     //select user through the checkbox and delete the selected users by pressing the delete button.
     // TODO
     @FXML
@@ -152,11 +146,11 @@ public class AddDelController implements Initializable {
                 // Also delete in database table
                 //TODO
 
-                }
-
             }
 
         }
+
+    }
 
 
     // back button or add user button usage:

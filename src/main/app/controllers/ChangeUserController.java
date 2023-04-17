@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import main.app.models.PasswordManager;
 
 import java.util.Optional;
 
@@ -54,13 +55,14 @@ public class ChangeUserController {
                     alert.showAndWait();
                         stage.close();
 
-                    //call changeusermodel - to update the table in the database with the user
                     //TODO
+                    // update the table in the database with the new user and password
+                   // String hash = PasswordManager.generateHash(//password)
+                    // Store hash in database in column P2.users.Password
+
 
                 }
 
-                //update the tableview with new username and id- call method addUserListData
-                //TODO
 
             }
 
@@ -69,6 +71,7 @@ public class ChangeUserController {
             e.printStackTrace();
         }
     }
+
 
     public void setStage(Stage stage) {
         this.stage = stage;
