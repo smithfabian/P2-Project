@@ -48,4 +48,4 @@ To access the application, use the following login credentials:
   - Username: `user`
   - Password: `password`
 
-For more information on how to use the P2 Project, see [Wiki](https://github.com/username/P2-Project/wiki).
+For more information on how to use the P2 Project, see [Wiki](https://github.com/smithfabian/P2-Project/wiki).
