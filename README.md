@@ -11,7 +11,7 @@ Welcome to the P2 Project, a second-semester student project at Cyber and Comput
 
 ## Introduction
 
-This project is a collaborative effort by students at Aalborg University, aiming to develop a practical understanding of Java and datamanagemnt concepts. The P2 Project focuses on applying and integrating various technologies and tools, fostering teamwork and problem-solving skills.
+This project is a collaborative effort by students in group 5 (CCT2 2023), aiming to develop a practical understanding of Java and data management concepts. The P2 Project focuses on applying and integrating various technologies and tools for example technologies as relational database and tools as SCRUM development, fostering teamwork and problem-solving skills.
 
 ## Dependencies
 
