@@ -15,7 +15,7 @@ This project is a collaborative effort by students at Aalborg University, aiming
 
 ## Dependencies
 
-The following libraries and tools are required to build and run the P2 Project:
+The project uses Java SE version 20, and the following libraries and tools are required to build and run the P2 Project:
 
 - JavaFX
 - Apache Commons DBCP (Database Connection Pooling)
@@ -28,7 +28,7 @@ The following libraries and tools are required to build and run the P2 Project:
    ```
    git clone https://github.com/username/P2-Project.git
    ```
-2. Add the secrets file to project root folder.
+2. Add the `secrets.properties` file to project root folder.
 
 3. Navigate to the project directory and install the required dependencies. You can use your preferred dependency management tool, such as Maven or Gradle.
 
