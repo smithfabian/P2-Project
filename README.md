@@ -1,6 +1,6 @@
-# P2 Project: Cyber and Computer Technology
+# P2 Project
 
-Welcome to the P2 Project, a second-semester student endeavor focused on Cyber and Computer Technology at Aalborg University (AAU).
+Welcome to the P2 Project, a second-semester student project at Cyber and Computer Technology at Aalborg University (AAU).
 
 ## Table of Contents
 
