@@ -1,33 +1,43 @@
-# P2-109: Faster Database Connection
-I had to switch from Mysql Connector-J to Apache Commons so that we could utilise connection pooling.
+# P2 Project: Cyber and Computer Technology
 
-## Add Apache Commons DPC and Commons Pool to classpath in IntelliJ IDEA
+Welcome to the P2 Project, a second-semester student endeavor focused on Cyber and Computer Technology at Aalborg University (AAU).
 
-1. In IntelliJ IDEA, right-click on the root folder of your project in the Project tool window and choose **Open Module Settings** or press `F4`.
-2. Go to the **Dependencies** tab.
-3. Click the **+** button and choose **JARs or directories..**.
-4. In P2-Project folder select both JAR files (`commons-dbcp2-2.9.0.jar`,  `commons-pool2-2.11.1.jar` and `commons-logging-1.2.jar`), and click **OK**.
-5. Click **Apply** and then **OK** to close the Module Settings window.
+## Table of Contents
 
-## Connect to database in code
+- [Introduction](#introduction)
+- [Dependencies](#dependencies)
+- [Installation](#installation)
+- [Usage](#usage)
 
-I have kept the class interface the same so you still connect via the same method **but(!)** the class is fully static now which mean you no longer initiate an object, instead you call the method directly.
+## Introduction
 
-New approach:
-```java
-import main.app.models.DatabaseConnection;
+This project is a collaborative effort by students at Aalborg University, aiming to develop a practical understanding of Java and datamanagemnt concepts. The P2 Project focuses on applying and integrating various technologies and tools, fostering teamwork and problem-solving skills.
 
-Connection conn = DatabaseConnection.getConnection();
-// query the databse
-conn.close();
+## Dependencies
 
-```
-Old approach:
-```java
-import main.app.models.DatabaseConnection;
+The following libraries and tools are required to build and run the P2 Project:
 
-DatabaseConnection db = new DatabaseConnection()
-Connection conn = db.getConnection();
-// query the databse
-conn.close();
-```
+- JavaFX
+- Apache Commons DBCP (Database Connection Pooling)
+- Apache Commons Pool
+- Apache Commons Logging
+
+## Installation
+
+1. Add the secrets file to project root folder.
+
+2. Clone the repository to your local machine:
+   ```
+   git clone https://github.com/username/P2-Project.git
+   ```
+
+3. Navigate to the project directory and install the required dependencies. You can use your preferred dependency management tool, such as Maven or Gradle.
+
+4. Build the project using your preferred build tool (e.g., Maven or Gradle).
+
+5. Run the application.
+
+## Usage
+
+To log in as an admin  use credentials username: admin, password: admin. 
+To log in as an user use credentials username: user, password: password. 
