@@ -24,12 +24,11 @@ The following libraries and tools are required to build and run the P2 Project:
 
 ## Installation
 
-1. Add the secrets file to project root folder.
-
-2. Clone the repository to your local machine:
+1. Clone the repository to your local machine:
    ```
    git clone https://github.com/username/P2-Project.git
    ```
+2. Add the secrets file to project root folder.
 
 3. Navigate to the project directory and install the required dependencies. You can use your preferred dependency management tool, such as Maven or Gradle.
 
@@ -39,5 +38,14 @@ The following libraries and tools are required to build and run the P2 Project:
 
 ## Usage
 
-To log in as an admin  use credentials username: admin, password: admin. 
-To log in as an user use credentials username: user, password: password. 
+To access the application, use the following login credentials:
+
+- **Admin**
+  - Username: `admin`
+  - Password: `admin`
+
+- **User**
+  - Username: `user`
+  - Password: `password`
+
+For more information on how to use the P2 Project, see [Wiki](https://github.com/username/P2-Project/wiki).
