@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import main.app.models.ChangeUserModel;
+import main.app.models.NewOrderModel;
 import main.app.models.PasswordManager;
 
 import java.util.Optional;
@@ -23,6 +25,13 @@ public class ChangeUserController {
     public TextField UserID_textfield;
     @FXML
     public Button save;
+    private AddDelController addDelController;
+
+    ChangeUserModel changeUserModel;
+    public ChangeUserController() {
+        this.changeUserModel = new ChangeUserModel();
+
+    }
 
     //save button clicked
     public void saveButtonClicked() {
@@ -53,12 +62,11 @@ public class ChangeUserController {
                     alert.setHeaderText(null);
                     alert.setContentText("User successfully added/changed!");
                     alert.showAndWait();
-                        stage.close();
-
-                    //TODO
-                    // update the table in the database with the new user and password
-                   // String hash = PasswordManager.generateHash(//password)
-                    // Store hash in database in column P2.users.Password
+                    stage.close();
+                    changeUserModel.setUsername_textfield(Username_textfield.getText());
+                    changeUserModel.setPassword_textfield(PasswordManager.generateHash(Password_textfield.getText()));
+                    changeUserModel.getUserIntoTable();
+                    addDelController.updateTable();
 
 
                 }
@@ -75,5 +83,9 @@ public class ChangeUserController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void setAddDelController(AddDelController addDelController) {
+        this.addDelController = addDelController;
     }
 }

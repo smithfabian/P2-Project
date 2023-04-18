@@ -13,7 +13,6 @@ public class SalesModel {
 
 
 
-
     public class CustomerRow {
         private String ID;
         private String mainSector;
