@@ -44,7 +44,7 @@ public class SalesPageController {
     @FXML
     private TableColumn<SalesModel.CustomerRow,Integer> cReturnColumn;
     @FXML
-    private TableColumn<SalesModel.OrderRow,String>  oOrderID;
+    private TableColumn<SalesModel.OrderRow,Integer>  oOrderID;
     @FXML
     private TableColumn<SalesModel.OrderRow, Date> oDate;
     @FXML

@@ -1,8 +1,7 @@
 package main.app.models;
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import java.io.IOException;
+
 import java.sql.*;
 
 public class SalesModel {
@@ -52,14 +51,14 @@ public class SalesModel {
     }
 
     public class OrderRow {
-        private String orderID;
+        private int orderID;
         private Date date;
         private int quantity;
         private String customerID;
         private String postalCode;
         private String city;
 
-        private OrderRow(String orderID, Date date, int quantity, String customerID, String postalCode, String city) {
+        private OrderRow(int orderID, Date date, int quantity, String customerID, String postalCode, String city) {
             this.orderID = orderID;
             this.date = date;
             this.quantity = quantity;
@@ -68,7 +67,7 @@ public class SalesModel {
             this.city = city;
         }
 
-        public String getOrderID() {
+        public int getOrderID() {
             return orderID;
         }
 
@@ -142,7 +141,7 @@ public class SalesModel {
                     " i.ItemSubGroup," +
                     " sum(if(o.InvoiceQty >= 0, o.InvoiceQty, 0)) as TotalBought," +
                     " sum(if(o.InvoiceQty < 0, o.InvoiceQty, 0)) AS TotalReturned" +
-                    " from p2.items i join p2.orderitems o on o.ItemID=i.ItemID group by i.ItemID ";
+                    " from p2.items i join p2.orderitems o on o.ItemID=i.ItemID group by i.ItemID limit 1000";
             try (Connection conn = DatabaseConnection.getConnection(); Statement stmt = conn.createStatement()) {
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
@@ -162,12 +161,12 @@ public class SalesModel {
                     "p2.orders.PostalCode," +
                     " p2.orders.City," +
                     " sum(p2.orderitems.InvoiceQty) as InvoiceQty" +
-                    " from p2.orders join p2.orderitems on p2.orderitems.OrderId=p2.orders.OrderId group by OrderId, InvoiceDate, AccountNum, PostalCode, City";
+                    " from p2.orders join p2.orderitems on p2.orderitems.OrderId=p2.orders.OrderId group by OrderId, InvoiceDate, AccountNum, PostalCode, City limit 1000";
             Connection conn = DatabaseConnection.getConnection();
             try (Statement stmt = conn.createStatement()) {
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
-                    orderTable.add(new OrderRow(rs.getString("OrderId"), rs.getDate("InvoiceDate"), rs.getInt("InvoiceQty"), rs.getString("AccountNum"), rs.getString("PostalCode"), rs.getString("City") ));
+                    orderTable.add(new OrderRow(Integer.parseInt(rs.getString("OrderId")), rs.getDate("InvoiceDate"), rs.getInt("InvoiceQty"), rs.getString("AccountNum"), rs.getString("PostalCode"), rs.getString("City") ));
                 }
             } finally {
                 conn.close();
@@ -186,7 +185,7 @@ public class SalesModel {
                     "a.MarketSubSector, " +
                     "sum(if (o.InvoiceQty >= 0, o.InvoiceQty,0)) as TotalItemsBought, " +
                     "sum(if (o.InvoiceQty < 0, o.InvoiceQty,0)) as TotalItemsReturned from p2.accounts a" +
-                    " join p2.orderitems o on o.AccountNum = a.AccountNum group by a.AccountNum";
+                    " join p2.orderitems o on o.AccountNum = a.AccountNum group by a.AccountNum limit 1000 offset 0";
             Connection conn = DatabaseConnection.getConnection();
             try (Statement stmt = conn.createStatement()) {
                 ResultSet rs = stmt.executeQuery(query);
