@@ -3,35 +3,60 @@ package main.app.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class EmployeeModel {
 
-    private ObservableList<Integer> barChartUpperY = FXCollections.observableArrayList();
-    private ObservableList<Integer> barChartUpperX = FXCollections.observableArrayList();
-    private ObservableList<Integer> barChartLowerY = FXCollections.observableArrayList();
-    private ObservableList<Integer> barChartLowerX = FXCollections.observableArrayList();
+    public class BarChartData{
+        private String xValue;
+        private int yValue;
 
-    public EmployeeModel() {
-        barChartUpperY.addAll(10,20,30,40,50,60,70);
-        barChartUpperX.addAll(10,20,30,40,50,60,70);
-        barChartLowerY.addAll(10,20,30,40,50,60,70);
-        barChartLowerX.addAll(10,20,30,40,50,60,70);
+        public BarChartData(String xValue, int yValue){
+            this.xValue = xValue;
+            this.yValue = yValue;
+        }
+
+        public String getXValue(){
+            return xValue;
+        }
+
+        public int getYValue(){
+            return yValue;
+        }
     }
 
-    public ObservableList<Integer> getBarChartLowerX() {
-        return barChartLowerX;
-    }
+    public List<EmployeeModel.BarChartData> getChartData(String someIdentifier) throws IOException, SQLException {
+        List<EmployeeModel.BarChartData> listOfData = new ArrayList<>();
+        String query = null;
 
-    public ObservableList<Integer> getBarChartLowerY() {
-        return barChartLowerY;
-    }
+        if (someIdentifier.equals("someIdentifier1")){
+            query = "SELECT AccountNum, sum(InvoiceQty) as BoughtMinusReturns from p2.orderitems group by AccountNum order by BoughtMinusReturns DESC limit 5";
+        } else if (someIdentifier.equals("someIdentifier2")) {
+            //THIS NEEDS TO BE SOMETHING ELSE
+            query = "SELECT AccountNum, sum(InvoiceQty) as BoughtMinusReturns from p2.orderitems group by AccountNum order by BoughtMinusReturns limit 5";
+        }
 
-    public ObservableList<Integer> getBarChartUpperY() {
-        return barChartUpperY;
-    }
-
-    public ObservableList<Integer> getBarChartUpperX() {
-        return barChartUpperX;
+        Connection conn = DatabaseConnection.getConnection();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                for (int i = 1; i <= 5; i++) {
+                    String accoutNum = rs.getString("AccountNum");
+                    int value = rs.getInt("BoughtMinusReturns");
+                    listOfData.add(new EmployeeModel.BarChartData(accoutNum, value));
+                }
+            }
+        }
+        finally {
+            conn.close();
+        }
+        return listOfData;
     }
 }

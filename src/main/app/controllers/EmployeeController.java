@@ -8,12 +8,15 @@ import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.app.models.AdminModel;
 import main.app.models.EmployeeModel;
 import main.app.models.Session;
 import main.app.views.LoginView;
 import main.app.views.SalesView;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class EmployeeController {
     private Stage stage;
@@ -28,9 +31,11 @@ public class EmployeeController {
     @FXML
     Button logoutButton;
     @FXML
-    LineChart<NumberAxis,NumberAxis> chartUpper;
+    private BarChart<String, Number> barChart1;
     @FXML
-    LineChart<NumberAxis,NumberAxis> chartLower;
+    private BarChart<String, Number> barChart2;
+    List<EmployeeModel.BarChartData> chartData1 = null;
+    List<EmployeeModel.BarChartData> chartData2 = null;
 
     public EmployeeController() {
     }
@@ -44,19 +49,31 @@ public class EmployeeController {
         createLineCharts();
     }
     public void createLineCharts() {
-        XYChart.Series upperSeries = new XYChart.Series();
-        XYChart.Series lowerSeries = new XYChart.Series();
-        NumberAxis xAxis = new NumberAxis();
-        NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("X Axis");
-        yAxis.setLabel("Y Axis");
-        for (int i = 0; i < employeeModel.getBarChartLowerX().size() ; i++) {
-            upperSeries.getData().add(new XYChart.Data<>(employeeModel.getBarChartUpperX().get(i), employeeModel.getBarChartUpperY().get(i)));
-            lowerSeries.getData().add(new XYChart.Data<>(employeeModel.getBarChartLowerX().get(i), employeeModel.getBarChartLowerY().get(i)));
-
+        try {
+            chartData1 = employeeModel.getChartData("someIdentifier1");
+            chartData2 = employeeModel.getChartData("someIdentifier2");
+        } catch (IOException | SQLException e) {
+            throw new RuntimeException(e);
         }
-        chartUpper.getData().add(upperSeries);
-        chartLower.getData().add(lowerSeries);
+        // Clear existing data
+        barChart1.getData().clear();
+        barChart2.getData().clear();
+
+        // Create new series
+        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
+
+        // Add data to series
+        for (EmployeeModel.BarChartData data : chartData1) {
+            series1.getData().add(new XYChart.Data<>(data.getXValue(), data.getYValue()));
+        }
+        for (EmployeeModel.BarChartData data : chartData2) {
+            series2.getData().add(new XYChart.Data<>(data.getXValue(), data.getYValue()));
+        }
+
+        // Add series to bar charts
+        barChart1.getData().add(series1);
+        barChart2.getData().add(series2);
 
     }
 
