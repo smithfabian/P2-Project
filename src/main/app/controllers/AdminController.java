@@ -109,9 +109,7 @@ public class AdminController {
         try {
             chartData1 = model.getChartData("someIdentifier1");
             chartData2 = model.getChartData("someIdentifier2");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
+        } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         }
         // Clear existing data
