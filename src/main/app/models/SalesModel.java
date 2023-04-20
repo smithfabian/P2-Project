@@ -127,33 +127,37 @@ public class SalesModel {
         }
     }
     public SalesModel() {
-        customerTable = FXCollections.observableArrayList();
-        orderTable = FXCollections.observableArrayList();
-        itemTable = FXCollections.observableArrayList();
-        createCustomerTable();
-        createOrderTable();
-        createItemTable();
+        createCustomerTable(0);
+        createOrderTable(0);
+        createItemTable(0);
     }
-    private void createItemTable() {
+    public void createItemTable(int offset) {
+        itemTable = FXCollections.observableArrayList();
         try {
             String query = "SELECT i.ItemID," +
                     " i.ItemMainGroup," +
                     " i.ItemSubGroup," +
                     " sum(if(o.InvoiceQty >= 0, o.InvoiceQty, 0)) as TotalBought," +
                     " sum(if(o.InvoiceQty < 0, o.InvoiceQty, 0)) AS TotalReturned" +
-                    " from p2.items i join p2.orderitems o on o.ItemID=i.ItemID group by i.ItemID limit 1000";
-            try (Connection conn = DatabaseConnection.getConnection(); Statement stmt = conn.createStatement()) {
-                ResultSet rs = stmt.executeQuery(query);
+                    " from p2.items i join p2.orderitems o on o.ItemID=i.ItemID group by i.ItemID limit 1000 offset ?";
+            Connection conn = DatabaseConnection.getConnection();
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, offset*1000);
+                ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                     itemTable.add(new ItemRow(rs.getString("ItemID"), rs.getString("ItemMainGroup"), rs.getString("ItemSubGroup"), rs.getInt("TotalBought"), -rs.getInt("TotalReturned")));
                 }
+            }
+            finally {
+                conn.close();
             }
         }
         catch(SQLException e) {
             e.printStackTrace();
         }
     }
-    private void createOrderTable() {
+    public void createOrderTable(int offset) {
+        orderTable = FXCollections.observableArrayList();
         try {
             String query = "SELECT p2.orders.OrderId," +
                     "p2.orders.InvoiceDate," +
@@ -161,10 +165,11 @@ public class SalesModel {
                     "p2.orders.PostalCode," +
                     " p2.orders.City," +
                     " sum(p2.orderitems.InvoiceQty) as InvoiceQty" +
-                    " from p2.orders join p2.orderitems on p2.orderitems.OrderId=p2.orders.OrderId group by OrderId, InvoiceDate, AccountNum, PostalCode, City limit 1000";
+                    " from p2.orders join p2.orderitems on p2.orderitems.OrderId=p2.orders.OrderId group by OrderId, InvoiceDate, AccountNum, PostalCode, City limit 1000 offset ?";
             Connection conn = DatabaseConnection.getConnection();
-            try (Statement stmt = conn.createStatement()) {
-                ResultSet rs = stmt.executeQuery(query);
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, offset*1000);
+                ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                     orderTable.add(new OrderRow(Integer.parseInt(rs.getString("OrderId")), rs.getDate("InvoiceDate"), rs.getInt("InvoiceQty"), rs.getString("AccountNum"), rs.getString("PostalCode"), rs.getString("City") ));
                 }
@@ -177,7 +182,8 @@ public class SalesModel {
         }
     }
 
-    private void createCustomerTable(){
+    public void createCustomerTable(int offset){
+        customerTable = FXCollections.observableArrayList();
         try {
             String query = "SELECT " +
                     "a.AccountNum, " +
@@ -185,10 +191,11 @@ public class SalesModel {
                     "a.MarketSubSector, " +
                     "sum(if (o.InvoiceQty >= 0, o.InvoiceQty,0)) as TotalItemsBought, " +
                     "sum(if (o.InvoiceQty < 0, o.InvoiceQty,0)) as TotalItemsReturned from p2.accounts a" +
-                    " join p2.orderitems o on o.AccountNum = a.AccountNum group by a.AccountNum limit 1000 offset 0";
+                    " join p2.orderitems o on o.AccountNum = a.AccountNum group by a.AccountNum limit 1000 offset ?";
             Connection conn = DatabaseConnection.getConnection();
-            try (Statement stmt = conn.createStatement()) {
-                ResultSet rs = stmt.executeQuery(query);
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, offset*1000);
+                ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                     customerTable.add(new CustomerRow(rs.getString("AccountNum"), rs.getString("MarketMainSector"), rs.getString("MarketSubSector"), rs.getInt("TotalItemsBought"), -rs.getInt("TotalItemsReturned") ));
                 }

@@ -14,11 +14,14 @@ import java.io.IOException;
 import java.sql.Date;
 
 public class SalesPageController {
+    private int customerOffset = 1;
+    private int itemOffset = 1;
+    private int orderOffset = 1;
 
     private SalesModel salesModel;
     private Stage stage;
     @FXML
-    StackPane stackPane;
+    Label pageNumber;
     @FXML
     private ToggleGroup toggleGroup;
     @FXML
@@ -119,14 +122,17 @@ public class SalesPageController {
 
     public void itemTableFront() {
         itemTable.toFront();
+        pageNumber.setText("Page " + itemOffset);
     }
 
     public void orderTableFront() {
         orderTable.toFront();
+        pageNumber.setText("Page " + orderOffset);
     }
 
     public void customerTableFront() {
         customerTable.toFront();
+        pageNumber.setText("Page " + customerOffset);
     }
 
     public void addButtonClicked() {
@@ -173,6 +179,51 @@ public class SalesPageController {
                 view.start(stage);
             } catch (IOException ignored) {
             }
+        }
+    }
+
+    public void nextPageButtonClicked() {
+        ToggleButton buttonToggled = (ToggleButton) toggleGroup.getSelectedToggle();
+        if (buttonToggled.equals(customersButton)) {
+            customerOffset += 1;
+            salesModel.createCustomerTable(customerOffset);
+            pageNumber.setText("Page " + customerOffset);
+            setCustomerTable();
+        }
+        else if (buttonToggled.equals(itemsButton)) {
+            itemOffset += 1;
+            salesModel.createItemTable(itemOffset);
+            pageNumber.setText("Page " + itemOffset);
+            setItemTable();
+        }
+        else if (buttonToggled.equals(ordersButton)) {
+            orderOffset += 1;
+            salesModel.createOrderTable(orderOffset);
+            pageNumber.setText("Page " + orderOffset+1);
+            setOrderTable();
+        }
+
+    }
+
+    public void prevPageButtonClicked() {
+        ToggleButton buttonToggled = (ToggleButton) toggleGroup.getSelectedToggle();
+        if (buttonToggled.equals(customersButton)) {
+            customerOffset -= 1;
+            salesModel.createCustomerTable(customerOffset);
+            pageNumber.setText("Page " + customerOffset);
+            setCustomerTable();
+        }
+        else if (buttonToggled.equals(itemsButton)) {
+            itemOffset -= 1;
+            salesModel.createItemTable(itemOffset);
+            pageNumber.setText("Page " + itemOffset);
+            setItemTable();
+        }
+        else if (buttonToggled.equals(ordersButton)) {
+            orderOffset -= 1;
+            salesModel.createOrderTable(orderOffset);
+            pageNumber.setText("Page " + orderOffset);
+            setOrderTable();
         }
     }
 }

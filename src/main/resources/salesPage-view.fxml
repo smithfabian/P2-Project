@@ -46,5 +46,8 @@
       </StackPane>
       <Button fx:id="addButton" layoutX="797.0" layoutY="25.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
       <Button fx:id="backButton" layoutX="14.0" layoutY="446.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="40.0" prefWidth="65.0" text="Back" />
+      <Button fx:id="nextPageButton" layoutX="713.0" layoutY="25.0" mnemonicParsing="false" onAction="#nextPageButtonClicked" text="Next page" />
+      <Button fx:id="prevPageButton" layoutX="629.0" layoutY="25.0" mnemonicParsing="false" onAction="#prevPageButtonClicked" text="Prev page" />
+      <Label fx:id="pageNumber" layoutX="580.0" layoutY="29.0" text="Page 1" />
    </children>
 </AnchorPane>
