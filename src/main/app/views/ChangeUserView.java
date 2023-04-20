@@ -11,7 +11,6 @@ import main.app.controllers.ChangeUserController;
 import java.io.IOException;
 import java.util.Objects;
 
-//DOES NOT WORK
 public class ChangeUserView extends Application {
     AddDelController addDelController;
     public ChangeUserView(AddDelController addDelController) {

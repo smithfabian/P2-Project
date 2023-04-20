@@ -2,15 +2,15 @@ package main.app.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import main.app.models.ChangeUserModel;
 import main.app.models.NewOrderModel;
 import main.app.models.PasswordManager;
+import main.app.views.AddDelUsersView;
+import main.app.views.AdminView;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public class ChangeUserController {
@@ -19,8 +19,9 @@ public class ChangeUserController {
     public TextField Username_textfield;
 
     @FXML
-    public TextField Password_textfield;
-
+    public PasswordField Repeat_password;
+    @FXML
+    public PasswordField Password_textfield;
     @FXML
     public TextField UserID_textfield;
     @FXML
@@ -30,6 +31,18 @@ public class ChangeUserController {
     ChangeUserModel changeUserModel;
     public ChangeUserController() {
         this.changeUserModel = new ChangeUserModel();
+    }
+
+    //back button clicked
+    @FXML
+    private void backButtonClicked() {
+        AddDelUsersView view = new AddDelUsersView();
+        try {
+            view.start(stage);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -38,7 +51,7 @@ public class ChangeUserController {
         try {
             Alert alert;
 
-            if (Username_textfield.getText().isEmpty() || Password_textfield.getText().isEmpty())  {
+            if (Username_textfield.getText().isEmpty() || Password_textfield.getText().isEmpty()|| Repeat_password.getText().isEmpty()) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
@@ -46,7 +59,7 @@ public class ChangeUserController {
                 alert.showAndWait();
                 Optional<ButtonType> option = alert.showAndWait();
 
-            } else {
+            } else if (Password_textfield.getText().equals(Repeat_password.getText())){
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Conformation Message");
                 alert.setHeaderText(null);
@@ -54,7 +67,6 @@ public class ChangeUserController {
                 Optional<ButtonType> option = alert.showAndWait();
                 if (option.get().equals(ButtonType.CANCEL)){
                     alert.showAndWait();
-
                 }
                 if (option.get().equals(ButtonType.OK)) {
                     alert = new Alert(Alert.AlertType.INFORMATION);
@@ -70,7 +82,13 @@ public class ChangeUserController {
 
 
                 }
-
+            else {
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("The passwords do not match");
+                    alert.showAndWait();
+                }
 
             }
 
