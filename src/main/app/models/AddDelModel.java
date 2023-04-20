@@ -1,10 +1,13 @@
 package main.app.models;
 
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
 
+import java.nio.channels.Selector;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,19 +17,18 @@ public class AddDelModel {
 
     private ObservableList<TableRow> addUserList;
 
-    public class TableRow {
-    int Id;
-    String User;
+    public static class TableRow {
+    SimpleIntegerProperty Id;
+    SimpleStringProperty User;
     CheckBox Select;
 
-
-    // Getter and Setter methods for id, user and select.
+        // Getter and Setter methods for id, user and select.
     public int getId() {
-        return Id;
+        return Id.get();
     }
 
-    public void setID(int Id) {
-        this.Id = Id;
+    public void setId(int UserId) {
+        Id.set(UserId);
     }
 
     public CheckBox getSelect() {
@@ -38,23 +40,18 @@ public class AddDelModel {
     }
 
     public String getUser() {
-        return User;
+        return User.get();
     }
 
+    public void setUser(String user) {this.User.set(user);}
 
-    // constructor for id and user
-    public TableRow(int Id, String User) {
-        this.Id = Id;
-        this.User = User;
+        // constructor for id, checkbox and user
+    public TableRow(int Id, String User, CheckBox Select) {
+        this.Id = new SimpleIntegerProperty(Id);
+        this.User = new SimpleStringProperty(User);
+        this.Select = new CheckBox();
     }
 
-    // constructor for checkbox, id and user
-    public TableRow(String user, int id, CheckBox Select) {
-        this.Select = Select;
-        this.Id = id;
-        this.User = user;
-
-    }
 
     }
 
@@ -62,7 +59,7 @@ public class AddDelModel {
         addUserList = FXCollections.observableArrayList();
         createNewTable();
 
-    }
+        }
 
     public void createNewTable() {
         try {
@@ -72,12 +69,16 @@ public class AddDelModel {
             try (Statement stmt = connect.createStatement()) {
                 ResultSet result = stmt.executeQuery(sql);
                 TableRow userTable;
+                CheckBox select = new CheckBox();
+
 
                 while (result.next()) {
-                    userTable = new TableRow(result.getInt("Id"), result.getString("User"));
 
+                    userTable = new TableRow(result.getInt("Id"), result.getString("User"), select);
 
                     addUserList.add(userTable);
+
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();

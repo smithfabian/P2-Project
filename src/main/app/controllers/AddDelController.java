@@ -44,15 +44,16 @@ public class AddDelController {
     private AddDelModel addDelModel;
 
 
-
-
     public void initialize() {
+
         ID.setCellValueFactory(new PropertyValueFactory<AddDelModel.TableRow, Integer>("Id"));
         User.setCellValueFactory(new PropertyValueFactory<AddDelModel.TableRow, String>("User"));
         Select.setCellValueFactory(new PropertyValueFactory<AddDelModel.TableRow, CheckBox>("Select"));
         updateTable();
 
     }
+
+
 
     public void updateTable() {
         addDelModel = new AddDelModel();
