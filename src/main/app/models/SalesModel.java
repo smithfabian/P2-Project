@@ -191,7 +191,7 @@ public class SalesModel {
                     "a.MarketSubSector, " +
                     "sum(if (o.InvoiceQty >= 0, o.InvoiceQty,0)) as TotalItemsBought, " +
                     "sum(if (o.InvoiceQty < 0, o.InvoiceQty,0)) as TotalItemsReturned from p2.accounts a" +
-                    " join p2.orderitems o on o.AccountNum = a.AccountNum group by a.AccountNum limit 1000 offset ?";
+                    " join p2.orderitems o on o.AccountNum = a.AccountNum group by a.AccountNum order by TotalItemsBought limit 1000 offset ?";
             Connection conn = DatabaseConnection.getConnection();
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setInt(1, offset*1000);
