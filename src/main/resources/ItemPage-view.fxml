@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
+<?import javafx.geometry.Insets?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.ItemPageController">
    <children>
       <BorderPane prefHeight="500.0" prefWidth="1000.0">
@@ -40,23 +40,29 @@
             </VBox>
          </left>
          <right>
-            <VBox prefHeight="460.0" prefWidth="651.0" BorderPane.alignment="CENTER">
+            <VBox spacing="10" prefHeight="460.0" prefWidth="651.0" BorderPane.alignment="CENTER">
                <children>
-                  <LineChart title="Bought over time">
+                  <LineChart fx:id="boughtChart" title="Bought over time">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
                     <yAxis>
                       <NumberAxis side="LEFT" />
                     </yAxis>
+                    <padding>
+                        <Insets right="50.0" top="50.0" />
+                    </padding>
                   </LineChart>
-                  <LineChart title="Returned over time">
+                  <LineChart fx:id="returnedChart" title="Returned over time">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
                     <yAxis>
                       <NumberAxis side="LEFT" />
                     </yAxis>
+                    <padding>
+                        <Insets bottom="50.0" right="50.0" />
+                    </padding>
                   </LineChart>
                </children>
             </VBox>
