@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import main.app.models.SalesModel;
@@ -224,6 +225,18 @@ public class SalesPageController {
             salesModel.createOrderTable(orderOffset);
             pageNumber.setText("Page " + orderOffset);
             setOrderTable();
+        }
+    }
+
+    public void itemRowClicked(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+            SalesModel.ItemRow row = (SalesModel.ItemRow) itemTable.getSelectionModel().getSelectedItem();
+            ItemPageView view = new ItemPageView(row);
+            try {
+                view.start(new Stage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

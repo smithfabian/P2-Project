@@ -139,7 +139,7 @@ public class SalesModel {
                     " i.ItemSubGroup," +
                     " sum(if(o.InvoiceQty >= 0, o.InvoiceQty, 0)) as TotalBought," +
                     " sum(if(o.InvoiceQty < 0, o.InvoiceQty, 0)) AS TotalReturned" +
-                    " from p2.items i join p2.orderitems o on o.ItemID=i.ItemID group by i.ItemID limit 1000 offset ?";
+                    " from p2.items i join p2.orderitems o on o.ItemID=i.ItemID group by i.ItemID order by TotalBought desc limit 1000 offset ?";
             Connection conn = DatabaseConnection.getConnection();
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setInt(1, offset*1000);
