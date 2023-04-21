@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.ItemPageController">
+   <children>
+      <BorderPane prefHeight="500.0" prefWidth="1000.0">
+         <top>
+            <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <items>
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Back" />
+                  <Region prefHeight="30.0" prefWidth="338.0" />
+                  <Label fx:id="itemID" text="Item ID:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+              </items>
+            </ToolBar>
+         </top>
+         <left>
+            <VBox alignment="CENTER" prefHeight="460.0" prefWidth="320.0" spacing="30.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="mainGroup" text="Item main group:" />
+                  <Label fx:id="subGroup" layoutX="124.0" layoutY="185.0" text="Item sub group:" />
+                  <Label fx:id="totalBought" text="Total bought:" />
+                  <Label fx:id="totalReturned" text="Total returned:" />
+               </children>
+            </VBox>
+         </left>
+         <right>
+            <VBox prefHeight="460.0" prefWidth="651.0" BorderPane.alignment="CENTER">
+               <children>
+                  <LineChart title="Bought over time">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <LineChart title="Returned over time">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+               </children>
+            </VBox>
+         </right>
+      </BorderPane>
+   </children>
+</AnchorPane>
