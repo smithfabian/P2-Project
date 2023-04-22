@@ -42,6 +42,7 @@ public class CustomerPageController {
         postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("PostalCode"));
         cityColumn.setCellValueFactory(new PropertyValueFactory<>("City"));
         table.setItems(customerPageModel.getTable());
+        customerIDLabel.setText("Customer ID: " + customerPageModel.getCustomerID());
         List<Integer> boughtAxis = customerPageModel.getBoughtAxis();
         List<String> dateAxis = customerPageModel.getDateAxis();
         // Clear existing data

@@ -93,4 +93,8 @@ public class CustomerPageModel {
     public ObservableList<customerPageRow> getTable() {
         return table;
     }
+
+    public String getCustomerID() {
+        return customerID;
+    }
 }
