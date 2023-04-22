@@ -14,7 +14,7 @@
          <top>
             <ToolBar fx:id="toolBar" prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
               <items>
-                <Button fx:id="back" minWidth="100.0" mnemonicParsing="false" text="Back" />
+                <Button fx:id="back" minWidth="100.0" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" />
                   <TextField fx:id="searchBar" />
                   <Button fx:id="searchButton" mnemonicParsing="false" text="Search" />
               </items>
@@ -24,7 +24,7 @@
             <TableView fx:id="logTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="logDate" prefWidth="75.0" text="Dato" />
-                <TableColumn fx:id="logKatagori" prefWidth="75.0" text="Katagori" />
+                <TableColumn fx:id="logKategori" prefWidth="75.0" text="Kategori" />
                   <TableColumn fx:id="logDetaljer" prefWidth="850.0" text="Detaljer" />
               </columns>
             </TableView>
