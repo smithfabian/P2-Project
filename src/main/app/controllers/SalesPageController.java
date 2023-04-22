@@ -54,7 +54,7 @@ public class SalesPageController {
     @FXML
     private TableColumn<SalesModel.OrderRow, String> oCustomerID;
     @FXML
-    private TableColumn<SalesModel.OrderRow, String> oPostalCode;
+    private TableColumn<SalesModel.OrderRow, Integer> oPostalCode;
     @FXML
     private TableColumn<SalesModel.OrderRow, String> oCity;
     @FXML
@@ -242,6 +242,18 @@ public class SalesPageController {
         if (mouseEvent.getClickCount() == 2) {
             SalesModel.CustomerRow row = (SalesModel.CustomerRow) customerTable.getSelectionModel().getSelectedItem();
             CustomerPageView view = new CustomerPageView(row.getID());
+            try {
+                view.start(new Stage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void orderRowClicked(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+            SalesModel.OrderRow row = (SalesModel.OrderRow) orderTable.getSelectionModel().getSelectedItem();
+            OrderPageView view = new OrderPageView(row);
             try {
                 view.start(new Stage());
             } catch (IOException e) {

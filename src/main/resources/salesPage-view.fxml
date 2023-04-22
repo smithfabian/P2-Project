@@ -23,7 +23,7 @@
                   <TableColumn fx:id="iTotalReturned" prefWidth="75.0" text="Total returned" />
               </columns>
             </TableView>
-            <TableView fx:id="orderTable" prefHeight="200.0" prefWidth="492.0">
+            <TableView fx:id="orderTable" onMouseClicked="#orderRowClicked" prefHeight="200.0" prefWidth="492.0">
               <columns>
                   <TableColumn fx:id="oOrderID" prefWidth="75.0" text="Order ID" />
                   <TableColumn fx:id="oDate" prefWidth="75.0" text="Date" />
