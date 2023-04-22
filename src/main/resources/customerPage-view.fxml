@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.CustomerPageController">
+   <children>
+      <BorderPane prefHeight="500.0" prefWidth="1000.0">
+         <top>
+            <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <items>
+                <Button fx:id="backButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Back" />
+                  <Region prefHeight="30.0" prefWidth="319.0" />
+                  <Label fx:id="customerIDLabel" text="Customer ID:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+              </items>
+            </ToolBar>
+         </top>
+         <left>
+            <TableView prefHeight="460.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="orderIDColumn" prefWidth="75.0" text="OrderID" />
+                <TableColumn fx:id="invoiceDateColumn" prefWidth="75.0" text="Invoice Date" />
+                  <TableColumn fx:id="invoiceQtyColumn" prefWidth="96.0" text="Invoice quantity" />
+                  <TableColumn fx:id="postalCodeColumn" prefWidth="70.0" text="Postal code" />
+                  <TableColumn fx:id="cityColumn" prefWidth="84.0" text="City" />
+              </columns>
+            </TableView>
+         </left>
+         <center>
+            <LineChart fx:id="lineChart" prefHeight="460.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+               <padding>
+                  <Insets right="50.0" top="30.0" />
+               </padding>
+            </LineChart>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
