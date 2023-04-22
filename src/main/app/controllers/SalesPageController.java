@@ -237,4 +237,16 @@ public class SalesPageController {
             }
         }
     }
+
+    public void customerRowClicked(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+            SalesModel.CustomerRow row = (SalesModel.CustomerRow) customerTable.getSelectionModel().getSelectedItem();
+            CustomerPageView view = new CustomerPageView(row.getID());
+            try {
+                view.start(new Stage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }

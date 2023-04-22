@@ -33,7 +33,7 @@
                   <TableColumn fx:id="oCity" prefWidth="75.0" text="City" />
               </columns>
             </TableView>
-            <TableView fx:id="customerTable" prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="customerTable" onMouseClicked="#customerRowClicked" prefHeight="200.0" prefWidth="200.0">
               <columns>
                   <TableColumn fx:id="cIDColumn" prefWidth="75.0" text="Customer ID" />
                   <TableColumn fx:id="cMainSectorColumn" prefWidth="75.0" text="Main sector" />
