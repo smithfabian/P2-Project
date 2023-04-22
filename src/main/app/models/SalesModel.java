@@ -55,10 +55,10 @@ public class SalesModel {
         private Date date;
         private int quantity;
         private String customerID;
-        private String postalCode;
+        private int postalCode;
         private String city;
 
-        private OrderRow(int orderID, Date date, int quantity, String customerID, String postalCode, String city) {
+        private OrderRow(int orderID, Date date, int quantity, String customerID, int postalCode, String city) {
             this.orderID = orderID;
             this.date = date;
             this.quantity = quantity;
@@ -83,7 +83,7 @@ public class SalesModel {
             return customerID;
         }
 
-        public String getPostalCode() {
+        public int getPostalCode() {
             return postalCode;
         }
 
@@ -171,7 +171,7 @@ public class SalesModel {
                 stmt.setInt(1, offset*1000);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    orderTable.add(new OrderRow(Integer.parseInt(rs.getString("OrderId")), rs.getDate("InvoiceDate"), rs.getInt("InvoiceQty"), rs.getString("AccountNum"), rs.getString("PostalCode"), rs.getString("City") ));
+                    orderTable.add(new OrderRow(Integer.parseInt(rs.getString("OrderId")), rs.getDate("InvoiceDate"), rs.getInt("InvoiceQty"), rs.getString("AccountNum"), rs.getInt("PostalCode"), rs.getString("City") ));
                 }
             } finally {
                 conn.close();
