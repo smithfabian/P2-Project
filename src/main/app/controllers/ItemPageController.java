@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import main.app.models.ItemPageModel;
 import main.app.models.SalesModel;
-import java.util.Date;
 import java.util.List;
 
 public class ItemPageController {

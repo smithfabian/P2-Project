@@ -6,9 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.app.controllers.NewCustomerController;
-import main.app.controllers.NewOrderController;
-import main.app.models.NewCustomerModel;
-import main.app.models.NewOrderModel;
 
 import java.io.IOException;
 

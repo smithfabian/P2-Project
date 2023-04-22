@@ -1,8 +1,5 @@
 package main.app.models;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

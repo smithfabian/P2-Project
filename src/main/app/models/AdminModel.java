@@ -1,6 +1,5 @@
 package main.app.models;
 
-import java.sql.ResultSetMetaData;
 
 import java.io.IOException;
 import java.sql.Connection;

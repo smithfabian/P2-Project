@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.app.controllers.AddDelController;
-import main.app.controllers.NewCustomerController;
 
 import java.io.IOException;
 

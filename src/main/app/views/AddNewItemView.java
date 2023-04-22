@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.app.controllers.NewItemController;
-import main.app.controllers.NewOrderController;
 
 import java.io.IOException;
 

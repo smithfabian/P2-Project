@@ -2,7 +2,6 @@ package main.app.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.app.models.NewOrderModel;
 

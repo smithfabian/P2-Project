@@ -1,10 +1,8 @@
 package main.app.models;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 
-import java.io.IOException;
 import java.sql.*;
 
 public class NewOrderModel {

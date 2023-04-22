@@ -1,6 +1,5 @@
 package main.app.models;
 
-import java.io.IOException;
 import java.sql.*;
 
 public class LoginModel {
@@ -9,10 +8,6 @@ public class LoginModel {
     private String password = "";
     private Boolean isAdmin;
     private Integer userId;
-
-    public String getUsername() {
-        return username;
-    }
 
     public Boolean getIsAdmin() {
         return isAdmin;

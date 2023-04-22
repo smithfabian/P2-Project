@@ -1,8 +1,6 @@
 package main.app.controllers;
 
-import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import main.app.models.AdminModel;
 import main.app.models.Session;
 import main.app.views.AddDelUsersView;
@@ -57,7 +55,7 @@ public class AdminController {
         this.isPasswordWindowOpen = value;
     }
 
-    public void salesButtonClicked(javafx.event.ActionEvent actionEvent) {
+    public void salesButtonClicked() {
         SalesView view = new SalesView();
         try {
             view.start(stage);
@@ -66,7 +64,7 @@ public class AdminController {
         }
     }
 
-    public void logButtonClicked(ActionEvent actionEvent) {
+    public void logButtonClicked() {
         LogPageView view = new LogPageView();
         try {
             view.start(stage);
@@ -75,7 +73,7 @@ public class AdminController {
         }
     }
 
-    public void userButtonClicked(ActionEvent actionEvent) {
+    public void userButtonClicked() {
         AddDelUsersView view = new AddDelUsersView();
         try {
             view.start(stage);
@@ -84,7 +82,7 @@ public class AdminController {
         }
     }
 
-    public void passwordButtonClicked(ActionEvent actionEvent) {
+    public void passwordButtonClicked() {
         if (!isPasswordWindowOpen) {
             PasswordView passwordview = new PasswordView(this);
             try {
@@ -99,7 +97,7 @@ public class AdminController {
         }
     }
 
-    public void logoutButtonClicked(ActionEvent actionEvent) {
+    public void logoutButtonClicked() {
         Session.reset();
         LoginView view = new LoginView();
         view.start(stage);

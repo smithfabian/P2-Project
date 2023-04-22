@@ -2,13 +2,10 @@ package main.app.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import main.app.models.AdminModel;
 import main.app.models.EmployeeModel;
 import main.app.models.Session;
 import main.app.views.LoginView;

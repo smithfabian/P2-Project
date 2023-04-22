@@ -5,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import main.app.models.AdminModel;
 import main.app.models.PasswordModel;
 
 public class PasswordController {
