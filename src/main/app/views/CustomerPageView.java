@@ -10,10 +10,10 @@ import main.app.controllers.CustomerPageController;
 import java.io.IOException;
 
 public class CustomerPageView extends Application {
-    String row;
+    String customerID;
 
-    public CustomerPageView(String row) {
-        this.row = row;
+    public CustomerPageView(String customerID) {
+        this.customerID = customerID;
     }
     @Override
     public void start(Stage stage) throws IOException {
@@ -21,7 +21,7 @@ public class CustomerPageView extends Application {
         Parent root = loader.load();
         CustomerPageController controller = loader.getController();
         controller.setStage(stage);
-        controller.setModelValues(row);
+        controller.setModelValues(customerID);
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
