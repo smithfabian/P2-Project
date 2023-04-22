@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.CustomerPageController">
    <children>
       <BorderPane prefHeight="500.0" prefWidth="1000.0">
@@ -32,7 +31,7 @@
             </ToolBar>
          </top>
          <left>
-            <TableView prefHeight="460.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="table" prefHeight="460.0" prefWidth="400.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="orderIDColumn" prefWidth="75.0" text="OrderID" />
                 <TableColumn fx:id="invoiceDateColumn" prefWidth="75.0" text="Invoice Date" />
@@ -43,7 +42,7 @@
             </TableView>
          </left>
          <center>
-            <LineChart fx:id="lineChart" prefHeight="460.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <LineChart fx:id="lineChart" legendVisible="false" prefHeight="460.0" prefWidth="600.0" BorderPane.alignment="CENTER">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>

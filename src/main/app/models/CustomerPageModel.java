@@ -4,17 +4,25 @@ package main.app.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerPageModel {
     ObservableList<customerPageRow> table;
     private String customerID;
+    private List<String> dateAxis;
+    private List<Integer> boughtAxis;
+
+    public List<Integer> getBoughtAxis() {
+        return boughtAxis;
+    }
+
+    public List<String> getDateAxis() {
+        return dateAxis;
+    }
 
     public class customerPageRow {
         private int orderID;
@@ -53,27 +61,36 @@ public class CustomerPageModel {
     }
     public CustomerPageModel(String customerID) {
         this.customerID = customerID;
-        fillTable();
+        fillTableAndGraph();
     }
-    public void fillTable() {
+    public void fillTableAndGraph() {
         table = FXCollections.observableArrayList();
+        dateAxis = new ArrayList<>();
+        boughtAxis = new ArrayList<>();
         try {
-            String query = "SELECT OrderID, InvoiceDate,sum(InvoiceQty) as TotalQty,PostalCode,City from p2.invoiceregisterwithorderid where AccountNum = ? group by OrderID order by TotalQty ";
+            String query = "SELECT OrderID, InvoiceDateNew,sum(InvoiceQty) as TotalQty,PostalCode,City from p2.invoiceregisterwithorderid where AccountNum = ? group by OrderID,InvoiceDateNew,PostalCode,City order by InvoiceDateNew asc";
             Connection conn = DatabaseConnection.getConnection();
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setString(1,customerID);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    table.add(new customerPageRow(rs.getInt("OrderId"),new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString("InvoiceDate")),rs.getInt("TotalQty"),rs.getInt("PostalCode"),rs.getString("City")));
+                    Date date = rs.getDate("InvoiceDateNew");
+                    int totalQty = rs.getInt("TotalQty");
+                    dateAxis.add(date.toString());
+                    boughtAxis.add(totalQty);
+                    table.add(new customerPageRow(rs.getInt("OrderId"),date,totalQty,rs.getInt("PostalCode"),rs.getString("City")));
                 }
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            } finally {
+            }
+            finally {
                 conn.close();
             }
         } catch (
                 SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ObservableList<customerPageRow> getTable() {
+        return table;
     }
 }
