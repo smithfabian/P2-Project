@@ -1,20 +1,17 @@
 package main.app.models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 
 public class OrderPageModel {
-    private int orderID;
-    private Date date;
-    private int quantity;
-    private String customerId;
-    private int postalCode;
-    private String city;
-    /*
-    private List<Integer> boughtAxis;
-    private List<Integer> returnedAxis;
-    private List<String> dateAxis;
-     */
-
+    int orderID;
+    Date date;
+    int quantity;
+    String customerId;
+    int postalCode;
+    String city;
 
     public OrderPageModel(SalesModel.OrderRow row) {
         this.orderID = row.getOrderID();
@@ -23,8 +20,6 @@ public class OrderPageModel {
         this.customerId = row.getCustomerID();
         this.postalCode = row.getPostalCode();
         this.city = row.getCity();
-        // createChartData();
-
     }
 
     public int getOrderID() {
@@ -51,43 +46,78 @@ public class OrderPageModel {
         return city;
     }
 
-    /*
-    public List<String> getDateAxis() {
-        return dateAxis;
-    }
-
-    public List<Integer> getBoughtAxis() {
-        return boughtAxis;
-    }
-
-    public List<Integer> getReturnedAxis() {
-        return returnedAxis;
-    }
-
-    public void createChartData() {
-        dateAxis = new ArrayList<>();
-        boughtAxis = new ArrayList<>();
-        returnedAxis = new ArrayList<>();
-        try {
-            String query = "SELECT InvoiceDate, sum(if(InvoiceQty >= 0, InvoiceQty, 0)) as boughtOnDay, sum(if(InvoiceQty < 0, InvoiceQty, 0)) AS returnedOnDay" +
-                    " from p2.invoiceregister where ItemID = ? group by InvoiceDate order by InvoiceDate";
-            Connection conn = DatabaseConnection.getConnection();
-            try (PreparedStatement stmt = conn.prepareStatement(query)) {
-                stmt.setString(1,itemID);
+    public ObservableList<orderItemRow> getTable() {
+        ObservableList<orderItemRow> table = FXCollections.observableArrayList();
+            String query = "SELECT * from p2.orderitems JOIN p2.items USING(ItemID) WHERE OrderId = ?";
+            try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, this.getOrderID());
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    dateAxis.add(rs.getString("InvoiceDate"));
-                    boughtAxis.add(rs.getInt("boughtOnDay"));
-                    returnedAxis.add(rs.getInt("returnedOnDay"));
+                    table.add(new orderItemRow(
+                                    rs.getString("ItemID"),
+                                    rs.getInt("InvoiceQty"),
+                                    rs.getString("ItemMainGroup"),
+                                    rs.getString("ItemSubGroup")
+                            )
+                    );
                 }
-            } finally {
-                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        }
-        catch(SQLException e) {
-            e.printStackTrace();
-        }
+        return table;
     }
 
-     */
+    public int updateOrder(Date InvoiceDate, String AccountNum, String City, int PostalCode) {
+        int updatedColumns = 0;
+        String query = "UPDATE p2.orders SET InvoiceDate = ?, AccountNum = ?, City = ?, PostalCode = ? WHERE OrderId = ?";
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setDate(1, InvoiceDate);
+            stmt.setString(2, AccountNum);
+            stmt.setString(3, City);
+            stmt.setInt(4, PostalCode);
+            stmt.setInt(5, this.getOrderID());
+            updatedColumns = stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } ;
+        return updatedColumns;
+    }
+
+    public int deleteOrder() {
+        int noDeletedRows = 0;
+        String query = "DELETE FROM p2.orders WHERE OrderId = ?";
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, this.getOrderID());
+            noDeletedRows = stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return noDeletedRows;
+    }
+
+    public class orderItemRow {
+        String itemId;
+        int itemQty;
+        String itemMainGroup;
+        String itemSubGroup;
+
+        public orderItemRow(String itemID, int invoiceQty, String itemMainGroup, String itemSubGroup) {
+            this.itemId = itemID;
+            this.itemQty = invoiceQty;
+            this.itemMainGroup = itemMainGroup;
+            this.itemSubGroup = itemSubGroup;
+        }
+        public String getItemId(){
+            return this.itemId;
+        }
+        public int getItemQty(){
+            return this.itemQty;
+        }
+        public String getItemMainGroup(){
+            return this.itemMainGroup;
+        }
+        public String getItemSubGroup(){
+            return this.itemSubGroup;
+        }
+    }
 }

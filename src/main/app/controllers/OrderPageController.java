@@ -1,29 +1,58 @@
 package main.app.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import main.app.models.CustomerPageModel;
 import main.app.models.OrderPageModel;
 import main.app.models.SalesModel;
+import main.app.views.ConfirmationPopUpView;
+
+import java.io.IOException;
+import java.util.Date;
 
 public class OrderPageController {
     Stage stage;
     OrderPageModel model;
     @FXML
+    Button backButton;
+    @FXML
+    Button applyButton;
+    @FXML
+    Button okButton;
+    @FXML
     Label pageHeadline;
     @FXML
     TextField orderId;
     @FXML
-    TextField date;
+    DatePicker date;
     @FXML
-    TextField quantity;
+    TextField totQuantity;
     @FXML
     TextField customerID;
     @FXML
     TextField postalCode;
     @FXML
     TextField city;
+
+    @FXML
+    TableView<OrderPageModel.orderItemRow> table;
+    @FXML
+    TableColumn<CustomerPageModel.customerPageRow, Date> orderLineQtyColumn;
+    @FXML
+    TableColumn<CustomerPageModel.customerPageRow, Date> itemIdColumn;
+    @FXML
+    TableColumn<CustomerPageModel.customerPageRow, Date> itemMainGroupColumn;
+    @FXML
+    TableColumn<CustomerPageModel.customerPageRow, Date> itemSubGroupColumn;
+
+    @FXML
+    BorderPane borderPane;
+    @FXML
+    HBox toolbarHbox;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -33,42 +62,51 @@ public class OrderPageController {
     public void setModelValues(SalesModel.OrderRow row) {
         model = new OrderPageModel(row);
         setLabelTexts();
-        // fillCharts();
 
+        orderLineQtyColumn.setCellValueFactory(new PropertyValueFactory<>("itemQty"));
+        itemIdColumn.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+        itemMainGroupColumn.setCellValueFactory(new PropertyValueFactory<>("itemMainGroup"));
+        itemSubGroupColumn.setCellValueFactory(new PropertyValueFactory<>("itemSubGroup"));
+        table.setItems(model.getTable());
     }
 
-
     public void setLabelTexts() {
+        toolbarHbox.prefWidthProperty().bind(borderPane.widthProperty().multiply(0.98));
         orderId.setText(String.valueOf(model.getOrderID()));
-        pageHeadline.setText("Order id " + model.getOrderID());
-        date.setText(String.valueOf(model.getDate()));
-        quantity.setText(String.valueOf(model.getQuantity()));
+        pageHeadline.setText("Order " + model.getOrderID());
+        date.setValue(model.getDate().toLocalDate());
+        totQuantity.setText(String.valueOf(model.getQuantity()));
         customerID.setText(model.getCustomerId());
         postalCode.setText(String.valueOf(model.getPostalCode()));
         city.setText(model.getCity());
     }
-    public void fillCharts() {
-        /*
-        List<Integer> boughtAxis = model.getBoughtAxis();
-        List<Integer> returnedAxis = model.getReturnedAxis();
-        List<String> dateAxis = model.getDateAxis();
-        // Clear existing data
-        boughtChart.getData().clear();
-        boughtChart.getData().clear();
 
-        // Create new series
-        XYChart.Series<String, Integer> boughtSeries = new XYChart.Series<>();
-        XYChart.Series<String, Integer> returnedSeries = new XYChart.Series<>();
+    public void backButtonClicked() {
+        stage.close();
+    }
 
-        // Add data to series
-        for (int i = 0; i < boughtAxis.size() ; i++) {
-            boughtSeries.getData().add(new XYChart.Data<>(dateAxis.get(i),boughtAxis.get((i))));
-            returnedSeries.getData().add(new XYChart.Data<>(dateAxis.get(i),returnedAxis.get((i))));
+    public void applyButtonClicked() {
+        // String InvoiceDate, String AccountNum, String City, String PostalCode
+        model.updateOrder(java.sql.Date.valueOf(date.getValue()), customerID.getText(), city.getText(), Integer.parseInt(postalCode.getText()));
+    }
+
+    public void okButtonClicked() {
+        model.updateOrder(java.sql.Date.valueOf(date.getValue()), customerID.getText(), city.getText(), Integer.parseInt(postalCode.getText()));
+        stage.close();
+    }
+
+    public void cancelOrderButtonClicked() {
+        Runnable[] methodsOnYes = new Runnable[2];
+        Runnable[] methodsOnNo = new Runnable[0];
+
+        methodsOnYes[0] = () -> model.deleteOrder();
+        methodsOnYes[1] = () -> stage.close();
+
+        ConfirmationPopUpView confirmationView = new ConfirmationPopUpView(methodsOnYes, methodsOnNo);
+        try {
+            confirmationView.start(new Stage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
-        // Add series to bar charts
-        boughtChart.getData().add(boughtSeries);
-        returnedChart.getData().add(returnedSeries);
-         */
     }
 }

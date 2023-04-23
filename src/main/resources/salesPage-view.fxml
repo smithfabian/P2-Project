@@ -1,53 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.SalesPageController">
-   <children>
-      <HBox prefHeight="100.0" prefWidth="341.0">
-         <children>
-            <ToggleButton fx:id="customersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#customerTableFront" text="Customers" />
-            <ToggleButton fx:id="ordersButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#orderTableFront" text="Orders" />
-            <ToggleButton fx:id="itemsButton" maxHeight="40.0" maxWidth="150.0" mnemonicParsing="false" onAction="#itemTableFront" text="Items" />
-         </children>
-      </HBox>
-      <StackPane fx:id="stackPane" layoutX="152.0" layoutY="60.0" prefHeight="381.0" prefWidth="683.0">
-         <children>
-            <TableView fx:id="itemTable" onMouseClicked="#itemRowClicked" prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                  <TableColumn fx:id="iItemID" prefWidth="75.0" text="Item ID" />
-                  <TableColumn fx:id="iMainGroup" prefWidth="75.0" text="Main group" />
-                  <TableColumn fx:id="iSubGroup" prefWidth="75.0" text="Sub group" />
-                  <TableColumn fx:id="iTotalBought" prefWidth="75.0" text="Total bought" />
-                  <TableColumn fx:id="iTotalReturned" prefWidth="75.0" text="Total returned" />
-              </columns>
-            </TableView>
-            <TableView fx:id="orderTable" onMouseClicked="#orderRowClicked" prefHeight="200.0" prefWidth="492.0">
-              <columns>
-                  <TableColumn fx:id="oOrderID" prefWidth="75.0" text="Order ID" />
-                  <TableColumn fx:id="oDate" prefWidth="75.0" text="Date" />
-                  <TableColumn fx:id="oQuantity" prefWidth="75.0" text="Quantity" />
-                  <TableColumn fx:id="oCustomerID" prefWidth="75.0" text="Customer ID" />
-                  <TableColumn fx:id="oPostalCode" prefWidth="75.0" text="Postal code" />
-                  <TableColumn fx:id="oCity" prefWidth="75.0" text="City" />
-              </columns>
-            </TableView>
-            <TableView fx:id="customerTable" onMouseClicked="#customerRowClicked" prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                  <TableColumn fx:id="cIDColumn" prefWidth="75.0" text="Customer ID" />
-                  <TableColumn fx:id="cMainSectorColumn" prefWidth="75.0" text="Main sector" />
-                  <TableColumn fx:id="cSubSectorColumn" prefWidth="75.0" text="Sub sector" />
-                  <TableColumn fx:id="cBoughtColumn" prefWidth="120.0" text="Total items bought" />
-                  <TableColumn fx:id="cReturnColumn" prefWidth="78.0" text="Total returns" />
-              </columns>
-            </TableView>
-         </children>
-      </StackPane>
-      <Button fx:id="addButton" layoutX="797.0" layoutY="25.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
-      <Button fx:id="backButton" layoutX="14.0" layoutY="446.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="40.0" prefWidth="65.0" text="Back" />
-      <Button fx:id="nextPageButton" layoutX="713.0" layoutY="25.0" mnemonicParsing="false" onAction="#nextPageButtonClicked" text="Next page" />
-      <Button fx:id="prevPageButton" layoutX="629.0" layoutY="25.0" mnemonicParsing="false" onAction="#prevPageButtonClicked" text="Prev page" />
-      <Label fx:id="pageNumber" layoutX="580.0" layoutY="29.0" text="Page 1" />
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.SalesPageController">
+    <children>
+        <BorderPane fx:id="borderPane" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <top>
+                <ToolBar prefHeight="40.0" BorderPane.alignment="CENTER">
+                    <items>
+                        <HBox fx:id="toolbarHbox" prefWidth="518.0">
+                            <children>
+                                <Button fx:id="backButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="33.0" text="Back">
+                           <HBox.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </HBox.margin></Button>
+                                <Pane fx:id="spacer2" HBox.hgrow="ALWAYS" />
+                                <HBox alignment="TOP_RIGHT">
+                                    <children>
+                                        <ToggleButton fx:id="customersButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" onAction="#customerTableFront" text="Customers">
+                                 <HBox.margin>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </HBox.margin></ToggleButton>
+                                        <ToggleButton fx:id="ordersButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" onAction="#orderTableFront" text="Orders">
+                                 <HBox.margin>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </HBox.margin></ToggleButton>
+                                        <ToggleButton fx:id="itemsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" onAction="#itemTableFront" text="Items">
+                                 <HBox.margin>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </HBox.margin></ToggleButton>
+                                    </children>
+                                </HBox>
+                        <Pane fx:id="spacer3" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="addButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add">
+                           <HBox.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </HBox.margin>
+                        </Button>
+                            </children>
+                        </HBox>
+                    </items>
+                </ToolBar>
+            </top>
+         <center>
+            <StackPane fx:id="stackPane" prefHeight="381.0" prefWidth="683.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TableView fx:id="itemTable" maxHeight="99999.0" maxWidth="99999.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#itemRowClicked" StackPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="iItemID" prefWidth="75.0" text="Item ID" />
+                        <TableColumn fx:id="iMainGroup" prefWidth="75.0" text="Main group" />
+                        <TableColumn fx:id="iSubGroup" prefWidth="75.0" text="Sub group" />
+                        <TableColumn fx:id="iTotalBought" prefWidth="75.0" text="Total bought" />
+                        <TableColumn fx:id="iTotalReturned" prefWidth="75.0" text="Total returned" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="customerTable" maxHeight="99999.0" maxWidth="99999.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#customerRowClicked" StackPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="cIDColumn" prefWidth="75.0" text="Customer ID" />
+                        <TableColumn fx:id="cMainSectorColumn" prefWidth="75.0" text="Main sector" />
+                        <TableColumn fx:id="cSubSectorColumn" prefWidth="75.0" text="Sub sector" />
+                        <TableColumn fx:id="cBoughtColumn" prefWidth="120.0" text="Total items bought" />
+                        <TableColumn fx:id="cReturnColumn" prefWidth="78.0" text="Total returns" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="orderTable" maxHeight="99999.0" maxWidth="99999.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#orderRowClicked" StackPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="oOrderID" prefWidth="75.0" text="Order ID" />
+                        <TableColumn fx:id="oDate" prefWidth="75.0" text="Date" />
+                        <TableColumn fx:id="oQuantity" prefWidth="75.0" text="Quantity" />
+                        <TableColumn fx:id="oCustomerID" prefWidth="75.0" text="Customer ID" />
+                        <TableColumn fx:id="oPostalCode" prefWidth="75.0" text="Postal code" />
+                        <TableColumn fx:id="oCity" prefWidth="75.0" text="City" />
+                    </columns>
+                  </TableView>
+               </children>
+            </StackPane>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="searchText" onKeyPressed="#searchEnterKey" promptText="Search..." />
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchButtonClicked" text="Search">
+                     <HBox.margin>
+                        <Insets left="2.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <Button fx:id="prevPageButton" maxWidth="80.0" mnemonicParsing="false" onAction="#prevPageButtonClicked" text="Prev page">
+                     <HBox.margin>
+                        <Insets right="2.0" />
+                     </HBox.margin></Button>
+                  <TextField fx:id="pageNumber" disable="true" maxWidth="40.0" promptText="999">
+                     <HBox.margin>
+                        <Insets right="2.0" />
+                     </HBox.margin></TextField>
+                  <Button fx:id="nextPageButton" maxWidth="80.0" mnemonicParsing="false" onAction="#nextPageButtonClicked" text="Next page" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </BorderPane.margin>
+               <padding>
+                  <Insets top="2.0" />
+               </padding>
+            </HBox>
+         </bottom>
+      </BorderPane>
    </children>
 </AnchorPane>

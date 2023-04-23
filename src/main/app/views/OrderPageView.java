@@ -25,8 +25,11 @@ public class OrderPageView extends Application {
         controller.setModelValues(row);
 
         Scene scene = new Scene(root);
+        stage.setTitle("Confirmation");
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setMinWidth(1000);
+        stage.setMinHeight(500);
+        stage.setResizable(true);
         stage.show();
     }
 }

@@ -131,18 +131,27 @@ public class SalesModel {
         createOrderTable(0);
         createItemTable(0);
     }
-    public void createItemTable(int offset) {
+
+    public void createItemTable(int offset){
+        createItemTable(offset, "");
+    }
+
+    public void createItemTable(int offset, String searchTerm) {
         itemTable = FXCollections.observableArrayList();
         try {
-            String query = "SELECT i.ItemID," +
-                    " i.ItemMainGroup," +
-                    " i.ItemSubGroup," +
+            String query =
+                    "SELECT i.ItemID, i.ItemMainGroup, i.ItemSubGroup," +
                     " sum(if(o.InvoiceQty >= 0, o.InvoiceQty, 0)) as TotalBought," +
                     " sum(if(o.InvoiceQty < 0, o.InvoiceQty, 0)) AS TotalReturned" +
-                    " from p2.items i join p2.orderitems o on o.ItemID=i.ItemID group by i.ItemID order by TotalBought desc limit 1000 offset ?";
+                    " from p2.items i LEFT JOIN p2.orderitems o USING (ItemID)" +
+                    " WHERE i.ItemID LIKE ? OR i.ItemMainGroup LIKE ? OR i.ItemSubGroup LIKE ? group by i.ItemID" +
+                    " order by TotalBought desc limit 1000 offset ?";
             Connection conn = DatabaseConnection.getConnection();
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
-                stmt.setInt(1, offset*1000);
+                stmt.setString(1, "%" + searchTerm + "%");
+                stmt.setString(2, "%" + searchTerm + "%");
+                stmt.setString(3, "%" + searchTerm + "%");
+                stmt.setInt(4, offset*1000);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                     itemTable.add(new ItemRow(rs.getString("ItemID"), rs.getString("ItemMainGroup"), rs.getString("ItemSubGroup"), rs.getInt("TotalBought"), -rs.getInt("TotalReturned")));
@@ -156,19 +165,33 @@ public class SalesModel {
             e.printStackTrace();
         }
     }
+
     public void createOrderTable(int offset) {
+        createOrderTable(offset, "");
+    }
+
+    public void createOrderTable(int offset, String searchTerm) {
         orderTable = FXCollections.observableArrayList();
         try {
-            String query = "SELECT p2.orders.OrderId," +
-                    "p2.orders.InvoiceDate," +
-                    " p2.orders.AccountNum," +
-                    "p2.orders.PostalCode," +
-                    " p2.orders.City," +
-                    " sum(p2.orderitems.InvoiceQty) as InvoiceQty" +
-                    " from p2.orders join p2.orderitems on p2.orderitems.OrderId=p2.orders.OrderId group by OrderId, InvoiceDate, AccountNum, PostalCode, City limit 1000 offset ?";
+            String query =
+                    "SELECT o.OrderId," +
+                    " o.InvoiceDate," +
+                    " o.AccountNum," +
+                    " o.PostalCode," +
+                    " o.City," +
+                    " sum(oi.InvoiceQty) as InvoiceQty" +
+                    " from p2.orders o LEFT JOIN p2.orderitems oi USING (OrderId)" +
+                    " WHERE o.OrderId LIKE ? OR o.InvoiceDate LIKE ? OR o.AccountNum LIKE ? OR o.PostalCode LIKE ? OR o.PostalCode LIKE ?" +
+                    " group by OrderId, InvoiceDate, AccountNum, PostalCode, City" +
+                    " limit 1000 offset ?";
             Connection conn = DatabaseConnection.getConnection();
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
-                stmt.setInt(1, offset*1000);
+                stmt.setString(1, "%" + searchTerm + "%");
+                stmt.setString(2, "%" + searchTerm + "%");
+                stmt.setString(3, "%" + searchTerm + "%");
+                stmt.setString(4, "%" + searchTerm + "%");
+                stmt.setString(5, "%" + searchTerm + "%");
+                stmt.setInt(6, offset*1000);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                     orderTable.add(new OrderRow(Integer.parseInt(rs.getString("OrderId")), rs.getDate("InvoiceDate"), rs.getInt("InvoiceQty"), rs.getString("AccountNum"), rs.getInt("PostalCode"), rs.getString("City") ));
@@ -183,6 +206,10 @@ public class SalesModel {
     }
 
     public void createCustomerTable(int offset){
+        createCustomerTable(offset, "");
+    }
+
+    public void createCustomerTable(int offset, String searchTerm){
         customerTable = FXCollections.observableArrayList();
         try {
             String query = "SELECT " +
@@ -191,10 +218,15 @@ public class SalesModel {
                     "a.MarketSubSector, " +
                     "sum(if (o.InvoiceQty >= 0, o.InvoiceQty,0)) as TotalItemsBought, " +
                     "sum(if (o.InvoiceQty < 0, o.InvoiceQty,0)) as TotalItemsReturned from p2.accounts a" +
-                    " join p2.orderitems o on o.AccountNum = a.AccountNum group by a.AccountNum order by TotalItemsBought desc limit 1000 offset ?";
+                    " LEFT JOIN p2.orderitems o on o.AccountNum = a.AccountNum " +
+                    " WHERE a.AccountNum LIKE ? OR MarketMainSector LIKE ? OR MarketSubSector LIKE ? group by a.AccountNum" +
+                    " order by TotalItemsBought desc limit 1000 offset ?";
             Connection conn = DatabaseConnection.getConnection();
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
-                stmt.setInt(1, offset*1000);
+                stmt.setString(1, "%" + searchTerm + "%");
+                stmt.setString(2, "%" + searchTerm + "%");
+                stmt.setString(3, "%" + searchTerm + "%");
+                stmt.setInt(4, offset*1000);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                     customerTable.add(new CustomerRow(rs.getString("AccountNum"), rs.getString("MarketMainSector"), rs.getString("MarketSubSector"), rs.getInt("TotalItemsBought"), -rs.getInt("TotalItemsReturned") ));
