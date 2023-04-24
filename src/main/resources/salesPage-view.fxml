@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -97,11 +99,22 @@
                      </HBox.margin>
                   </Button>
                   <Pane HBox.hgrow="ALWAYS" />
+                  <Label text="Items per page: " />
+                  <ComboBox fx:id="limitDropdownMenu" editable="true" onAction="#changedLimit" prefHeight="25.0" prefWidth="67.0" promptText="00">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </ComboBox>
                   <Button fx:id="prevPageButton" maxWidth="80.0" mnemonicParsing="false" onAction="#prevPageButtonClicked" text="Prev page">
                      <HBox.margin>
                         <Insets right="2.0" />
                      </HBox.margin></Button>
-                  <TextField fx:id="pageNumber" disable="true" maxWidth="40.0" promptText="999">
+                  <TextField fx:id="pageNumber" maxWidth="40.0" onKeyPressed="#pageNoEnterKey" promptText="1" />
+                  <Label text=" / " textFill="#6f6f6f" />
+                  <TextField fx:id="maxPages" disable="true" maxWidth="40.0" promptText="999">
                      <HBox.margin>
                         <Insets right="2.0" />
                      </HBox.margin></TextField>

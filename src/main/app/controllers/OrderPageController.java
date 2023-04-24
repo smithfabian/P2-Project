@@ -9,10 +9,10 @@ import javafx.stage.Stage;
 import main.app.models.CustomerPageModel;
 import main.app.models.OrderPageModel;
 import main.app.models.SalesModel;
-import main.app.views.ConfirmationPopUpView;
-
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Optional;
 
 public class OrderPageController {
     Stage stage;
@@ -96,17 +96,15 @@ public class OrderPageController {
     }
 
     public void cancelOrderButtonClicked() {
-        Runnable[] methodsOnYes = new Runnable[2];
-        Runnable[] methodsOnNo = new Runnable[0];
-
-        methodsOnYes[0] = () -> model.deleteOrder();
-        methodsOnYes[1] = () -> stage.close();
-
-        ConfirmationPopUpView confirmationView = new ConfirmationPopUpView(methodsOnYes, methodsOnNo);
-        try {
-            confirmationView.start(new Stage());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        Alert alert;
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm order cancelation");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure yiu want to delete order " + model.getOrderID());
+        Optional<ButtonType> option = alert.showAndWait();
+        if (option.get().equals(ButtonType.OK)){
+            model.deleteOrder();
+            stage.close();
         }
     }
 }

@@ -16,14 +16,19 @@ import java.io.IOException;
 import java.sql.Date;
 
 public class SalesPageController {
-    private int customerOffset = 1;
-    private int itemOffset = 1;
-    private int orderOffset = 1;
+    private int customerPageNo = 1;
+    private int itemPageNo = 1;
+    private int orderPageNo = 1;
+    private String customerMaxPageNo;
+    private String itemMaxPageNo;
+    private String orderMaxPageNo;
 
     private SalesModel salesModel;
     private Stage stage;
     @FXML
     TextField pageNumber;
+    @FXML
+    TextField maxPages;
     @FXML
     private ToggleGroup toggleGroup;
     @FXML
@@ -77,13 +82,16 @@ public class SalesPageController {
     @FXML
     TextField searchText;
     @FXML
-    Button searhButton;
+    Button searchButton;
+    @FXML
+    ComboBox<String> limitDropdownMenu;
 
     public SalesPageController() {
         this.salesModel = new SalesModel();
     }
     @FXML
     public void initialize() {
+        setLimitDropdownMenu(new String[]{"25", "50", "100"});
         setCustomerTable();
         setOrderTable();
         setItemTable();
@@ -161,17 +169,36 @@ public class SalesPageController {
 
     public void itemTableFront() {
         itemTable.toFront();
-        pageNumber.setText("" + itemOffset);
+        pageNumber.setText("" + itemPageNo);
+        if (itemMaxPageNo == null){
+            setItemMaxPageNo();
+        }
+        maxPages.setText(itemMaxPageNo);
     }
 
     public void orderTableFront() {
         orderTable.toFront();
-        pageNumber.setText("" + orderOffset);
+        pageNumber.setText("" + orderPageNo);
+        if (orderMaxPageNo == null){
+            setOrderMaxPageNo();
+        }
+        maxPages.setText(orderMaxPageNo);
     }
 
     public void customerTableFront() {
         customerTable.toFront();
-        pageNumber.setText("" + customerOffset);
+        pageNumber.setText("" + customerPageNo);
+        if (customerMaxPageNo == null){
+            setCustomerMaxPageNo();
+        }
+        maxPages.setText(customerMaxPageNo);
+    }
+
+    public void setLimitDropdownMenu(String[] list){
+        for (String item:list){
+            limitDropdownMenu.getItems().add(item);
+            limitDropdownMenu.setValue(list[0]);
+        }
     }
 
     public void addButtonClicked() {
@@ -224,21 +251,21 @@ public class SalesPageController {
     public void nextPageButtonClicked() {
         ToggleButton buttonToggled = (ToggleButton) toggleGroup.getSelectedToggle();
         if (buttonToggled.equals(customersButton)) {
-            customerOffset += 1;
-            salesModel.createCustomerTable(customerOffset);
-            pageNumber.setText("" + customerOffset);
+            customerPageNo += 1;
+            salesModel.createCustomerTable(customerPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
+            pageNumber.setText("" + customerPageNo);
             setCustomerTable();
         }
         else if (buttonToggled.equals(itemsButton)) {
-            itemOffset += 1;
-            salesModel.createItemTable(itemOffset, searchText.getText());
-            pageNumber.setText("" + itemOffset);
+            itemPageNo += 1;
+            salesModel.createItemTable(itemPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
+            pageNumber.setText("" + itemPageNo);
             setItemTable();
         }
         else if (buttonToggled.equals(ordersButton)) {
-            orderOffset += 1;
-            salesModel.createOrderTable(orderOffset);
-            pageNumber.setText("" + orderOffset+1);
+            orderPageNo += 1;
+            salesModel.createOrderTable(orderPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
+            pageNumber.setText("" + orderPageNo +1);
             setOrderTable();
         }
 
@@ -247,21 +274,21 @@ public class SalesPageController {
     public void prevPageButtonClicked() {
         ToggleButton buttonToggled = (ToggleButton) toggleGroup.getSelectedToggle();
         if (buttonToggled.equals(customersButton)) {
-            customerOffset -= 1;
-            salesModel.createCustomerTable(customerOffset);
-            pageNumber.setText("" + customerOffset);
+            customerPageNo -= 1;
+            salesModel.createCustomerTable(customerPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
+            pageNumber.setText("" + customerPageNo);
             setCustomerTable();
         }
         else if (buttonToggled.equals(itemsButton)) {
-            itemOffset -= 1;
-            salesModel.createItemTable(itemOffset, searchText.getText());
-            pageNumber.setText("" + itemOffset);
+            itemPageNo -= 1;
+            salesModel.createItemTable(itemPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
+            pageNumber.setText("" + itemPageNo);
             setItemTable();
         }
         else if (buttonToggled.equals(ordersButton)) {
-            orderOffset -= 1;
-            salesModel.createOrderTable(orderOffset);
-            pageNumber.setText("" + orderOffset);
+            orderPageNo -= 1;
+            salesModel.createOrderTable(orderPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
+            pageNumber.setText("" + orderPageNo);
             setOrderTable();
         }
     }
@@ -273,23 +300,24 @@ public class SalesPageController {
     }
 
     public void searchButtonClicked(){
+        maxPages.setText("" + salesModel.getMaxPagesCustomerTable(searchText.getText(), limitDropdownMenu.getValue()));
         ToggleButton buttonToggled = (ToggleButton) toggleGroup.getSelectedToggle();
         if (buttonToggled.equals(customersButton)) {
-            customerOffset = 0;
-            salesModel.createCustomerTable(customerOffset, searchText.getText());
-            pageNumber.setText("" + customerOffset);
+            customerPageNo = 1;
+            salesModel.createCustomerTable(customerPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
+            pageNumber.setText("" + customerPageNo);
             setCustomerTable();
         }
         else if (buttonToggled.equals(itemsButton)) {
-            itemOffset = 0;
-            salesModel.createItemTable(itemOffset, searchText.getText());
-            pageNumber.setText("" + itemOffset);
+            itemPageNo = 1;
+            salesModel.createItemTable(itemPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
+            pageNumber.setText("" + itemPageNo);
             setItemTable();
         }
         else if (buttonToggled.equals(ordersButton)) {
-            orderOffset = 0;
-            salesModel.createOrderTable(orderOffset, searchText.getText());
-            pageNumber.setText("" + orderOffset);
+            orderPageNo = 1;
+            salesModel.createOrderTable(orderPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
+            pageNumber.setText("" + orderPageNo);
             setOrderTable();
         }
     }
@@ -328,5 +356,50 @@ public class SalesPageController {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public void changedLimit(){
+        searchButtonClicked();
+    }
+
+    public void changedOffset(){
+        ToggleButton buttonToggled = (ToggleButton) toggleGroup.getSelectedToggle();
+        if (buttonToggled.equals(customersButton)) {
+            customerPageNo = Integer.parseInt(pageNumber.getText());;
+            salesModel.createCustomerTable(customerPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
+            pageNumber.setText("" + customerPageNo);
+            setCustomerTable();
+        }
+        else if (buttonToggled.equals(itemsButton)) {
+            itemPageNo = Integer.parseInt(pageNumber.getText());;
+            salesModel.createItemTable(itemPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
+            pageNumber.setText("" + itemPageNo);
+            setItemTable();
+        }
+        else if (buttonToggled.equals(ordersButton)) {
+            orderPageNo = Integer.parseInt(pageNumber.getText());;
+            salesModel.createOrderTable(orderPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
+            pageNumber.setText("" + orderPageNo);
+            setOrderTable();
+        }
+    }
+
+    public void pageNoEnterKey(KeyEvent event){
+        if (event.getCode().toString().equals("ENTER")) {
+            if (Integer.parseInt(pageNumber.getText()) < 1){
+                pageNumber.setText("1");
+            }
+            changedOffset();
+        }
+    }
+
+    public void setCustomerMaxPageNo(){
+        this.customerMaxPageNo = salesModel.getMaxPagesCustomerTable(searchText.getText(), limitDropdownMenu.getValue());
+    }
+    public void setItemMaxPageNo(){
+        this.itemMaxPageNo = salesModel.getMaxPagesItemTable(searchText.getText(), limitDropdownMenu.getValue());
+    }
+    public void setOrderMaxPageNo(){
+        this.orderMaxPageNo = salesModel.getMaxPagesOrderTable(searchText.getText(), limitDropdownMenu.getValue());
     }
 }
