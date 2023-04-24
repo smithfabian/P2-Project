@@ -92,8 +92,7 @@ public class AddDelController {
     // TODO
     @FXML
     private void deleteSelectedRow() {
-// add an array list of id
-// then call the method to remove from database.
+
         List<String> idArray = new ArrayList<>();
 
         for (AddDelModel.TableRow addUserList : tableView.getItems())

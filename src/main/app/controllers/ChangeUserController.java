@@ -33,13 +33,7 @@ public class ChangeUserController {
     //back button clicked
     @FXML
     private void backButtonClicked() {
-        AddDelUsersView view = new AddDelUsersView();
-        try {
-            view.start(stage);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+         stage.close();
 
     }
 
@@ -77,24 +71,31 @@ public class ChangeUserController {
                     changeUserModel.getUserIntoTable();
                     addDelController.updateTable();
 
-
-                }
-            else {
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("The passwords do not match");
-                    alert.showAndWait();
                 }
 
             }
-
+        else if (!Password_textfield.getText().equals(Repeat_password.getText())){
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("The passwords do not match");
+                alert.showAndWait();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
             }
     }
 
+// if admin checkbox is checked then store it as 1 in the database
+    //TODO
+    public void adminCheckBoxClicked() {
+        saveButtonClicked();
+
+
+
+
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;

@@ -37,6 +37,10 @@ public class ChangeUserModel {
         }
     }
 
+    public void setUserToAdmin() {
+        String insertQuery = "INSERT INTO p2.users (IsAdmin) values (?)";
+    }
+
     // setter methods
     public int getId() { return Id;}
 
