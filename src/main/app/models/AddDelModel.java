@@ -89,7 +89,7 @@ public class AddDelModel {
 
     public void deleteUserFromDatabase(List<String> id) {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String deleteQuery = "DELETE FROM p2.users WHERE Id in ?";
+            String deleteQuery = "DELETE FROM p2.users WHERE Id = ?";
 
             try (PreparedStatement selected = conn.prepareStatement(deleteQuery)) {
                 for (String ids : id) {
@@ -98,9 +98,8 @@ public class AddDelModel {
                 }
                 selected.executeBatch();
 
-
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }catch (SQLException e){
             e.printStackTrace();
