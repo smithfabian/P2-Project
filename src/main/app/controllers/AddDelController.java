@@ -22,7 +22,6 @@ import java.util.List;
 
 public class AddDelController {
 
-
     // define stage scene and root
     private Stage stage;
 
