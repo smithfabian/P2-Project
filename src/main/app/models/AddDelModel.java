@@ -7,49 +7,48 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddDelModel {
 
     private ObservableList<TableRow> addUserList;
 
     public static class TableRow {
-    SimpleIntegerProperty Id;
-    SimpleStringProperty User;
-    CheckBox Select;
+        SimpleIntegerProperty Id;
+        SimpleStringProperty User;
+        CheckBox Select;
 
         // Getter and Setter methods for id, user and select.
-    public int getId() {
-        return Id.get();
-    }
+        public int getId() {
+            return Id.get();
+        }
 
-    public void setId(int UserId) {
-        Id.set(UserId);
-    }
+        public void setId(int UserId) {
+            Id.set(UserId);
+        }
 
-    public CheckBox getSelect() {
-        return Select;
-    }
+        public CheckBox getSelect() {
+            return Select;
+        }
 
-    public void setSelect(CheckBox Select) {
-        this.Select = Select;
-    }
+        public void setSelect(CheckBox Select) {
+            this.Select = Select;
+        }
 
-    public String getUser() {
-        return User.get();
-    }
+        public String getUser() {
+            return User.get();
+        }
 
-    public void setUser(String user) {this.User.set(user);}
+        public void setUser(String user) {this.User.set(user);}
 
         // constructor for id, checkbox and user
-    public TableRow(int Id, String User, CheckBox Select) {
-        this.Id = new SimpleIntegerProperty(Id);
-        this.User = new SimpleStringProperty(User);
-        this.Select = new CheckBox();
-    }
+        public TableRow(int Id, String User, CheckBox Select) {
+            this.Id = new SimpleIntegerProperty(Id);
+            this.User = new SimpleStringProperty(User);
+            this.Select = new CheckBox();
+        }
 
 
     }
@@ -58,7 +57,7 @@ public class AddDelModel {
         addUserList = FXCollections.observableArrayList();
         createNewTable();
 
-        }
+    }
 
     public void createNewTable() {
         try {
@@ -72,7 +71,6 @@ public class AddDelModel {
 
 
                 while (result.next()) {
-
                     userTable = new TableRow(result.getInt("Id"), result.getString("User"), select);
 
                     addUserList.add(userTable);
@@ -89,10 +87,29 @@ public class AddDelModel {
 
     }
 
-    public ObservableList<TableRow> getAddUserList() {
+    public void deleteUserFromDatabase(List<String> id) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String deleteQuery = "DELETE FROM p2.users WHERE Id in ?";
+
+            try (PreparedStatement selected = conn.prepareStatement(deleteQuery)) {
+                for (String ids : id) {
+                    selected.setString(1, ids);
+                    selected.addBatch();
+                }
+                selected.executeBatch();
+
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+    }
+
+        public ObservableList<TableRow> getAddUserList() {
         return addUserList;
     }
 
 }
-
-

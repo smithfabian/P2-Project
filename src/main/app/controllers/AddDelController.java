@@ -16,6 +16,8 @@ import main.app.views.AdminView;
 import main.app.views.ChangeUserView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class AddDelController {
@@ -51,14 +53,11 @@ public class AddDelController {
 
     }
 
-
-
     public void updateTable() {
         addDelModel = new AddDelModel();
         tableView.setItems(addDelModel.getAddUserList());
 
     }
-
 
     //search for a user in the table (name based) method
     @FXML
@@ -94,18 +93,23 @@ public class AddDelController {
     // TODO
     @FXML
     private void deleteSelectedRow() {
+// add an array list of id
+// then call the method to remove from database.
+        List<String> idArray = new ArrayList<>();
+
         for (AddDelModel.TableRow addUserList : tableView.getItems())
         {
             if(addUserList.getSelect().isSelected()) {
+                idArray.add(String.valueOf(addUserList.getId()));
+
                 Platform.runLater(()-> tableView.getItems().remove(addUserList));
 
-                // Also delete in database table
-                //TODO
 
             }
 
-        }
 
+        }
+        addDelModel.deleteUserFromDatabase(idArray);
     }
 
 
