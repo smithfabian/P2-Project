@@ -112,9 +112,9 @@
                      <HBox.margin>
                         <Insets right="2.0" />
                      </HBox.margin></Button>
-                  <TextField fx:id="pageNumber" maxWidth="40.0" onKeyPressed="#pageNoEnterKey" promptText="1" />
+                  <TextField fx:id="pageNumber" maxWidth="48.0" onKeyPressed="#pageNoEnterKey" prefHeight="26.0" prefWidth="48.0" promptText="9999" />
                   <Label text=" / " textFill="#6f6f6f" />
-                  <TextField fx:id="maxPages" disable="true" maxWidth="40.0" promptText="999">
+                  <TextField fx:id="maxPages" disable="true" maxWidth="48.0" prefHeight="26.0" prefWidth="48.0" promptText="9999">
                      <HBox.margin>
                         <Insets right="2.0" />
                      </HBox.margin></TextField>
