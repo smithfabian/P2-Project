@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import main.app.models.AddDelModel;
 import main.app.views.AdminView;
 import main.app.views.ChangeUserView;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +21,10 @@ import java.util.List;
 
 public class AddDelController {
 
-    // define stage scene and root
+    // Define stage scene and root
     private Stage stage;
 
-    // the columns of the table
+    // The columns of the table
     @FXML
     private TextField searchUser;
     @FXML
@@ -58,7 +57,7 @@ public class AddDelController {
 
     }
 
-    //search for a user in the table (name based) method
+    //Search for a user in the table (name based) method
     @FXML
     public void UserListSearch() {
 
@@ -89,7 +88,6 @@ public class AddDelController {
     }
     // Delete button usage
     //select user through the checkbox and delete the selected users by pressing the delete button.
-    // TODO
     @FXML
     private void deleteSelectedRow() {
 
@@ -101,17 +99,13 @@ public class AddDelController {
                 idArray.add(String.valueOf(addUserList.getId()));
 
                 Platform.runLater(()-> tableView.getItems().remove(addUserList));
-
-
             }
-
 
         }
         addDelModel.deleteUserFromDatabase(idArray);
     }
 
-
-    // back button or add user button usage:
+    //Back button or add user button usage:
     @FXML
     private void previousScene() {
         AdminView view = new AdminView();
@@ -124,6 +118,7 @@ public class AddDelController {
 
     }
 
+    //Add user button will take you to the changeUser scene
     @FXML
     private void changeUserScene() {
         ChangeUserView view = new ChangeUserView(this);

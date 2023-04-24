@@ -19,6 +19,6 @@
       <PasswordField fx:id="Password_textfield" layoutX="201.0" layoutY="227.0" prefHeight="28.0" prefWidth="194.0" />
       <PasswordField fx:id="Repeat_password" layoutX="201.0" layoutY="292.0" prefHeight="28.0" prefWidth="194.0" />
       <Text layoutX="89.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repeat password:" wrappingWidth="99.34642028808594" />
-      <CheckBox fx:id="adminCheckBox" layoutX="36.0" layoutY="64.0" mnemonicParsing="false" onAction="#adminCheckBoxClicked" prefHeight="37.0" prefWidth="121.0" text="Admin user" />
+      <CheckBox fx:id="adminCheckBox" layoutX="36.0" layoutY="64.0" mnemonicParsing="false" onAction="#adminCheckBoxIsChecked" prefHeight="37.0" prefWidth="121.0" text="Admin user" />
    </children>
 </AnchorPane>
