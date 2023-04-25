@@ -211,7 +211,7 @@ public class SalesModel {
                     "FROM p2.accounts a " +
                     "LEFT JOIN p2.orderitems o ON a.AccountNum = o.AccountNum " +
                     "WHERE a.AccountNum LIKE ?OR a.MarketMainSector LIKE ? OR a.MarketSubSector LIKE ? " +
-                    "GROUP BY a.AccountNum, a.MarketMainSector, a.MarketSubSector " +
+                    "GROUP BY a.AccountNum " +
                     "ORDER BY TotalItemsBought DESC LIMIT ? OFFSET ?";
             Connection conn = DatabaseConnection.getConnection();
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
