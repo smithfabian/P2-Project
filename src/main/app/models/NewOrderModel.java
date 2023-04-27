@@ -7,7 +7,6 @@ import java.sql.*;
 
 public class NewOrderModel {
 
-    private String ID;
     private Date date;
     private String customerID;
     private String postalCode;
@@ -21,27 +20,16 @@ public class NewOrderModel {
 
     public void addToDataBase() {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String checkQuery = "SELECT COUNT(*) FROM p2.orders WHERE OrderId = ?";
-            String insertQuery = "INSERT INTO p2.orders (OrderID,InvoiceDate,AccountNum,postalCode) values (?,?,?,?)";
-
-            try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
-                checkStmt.setString(1, ID);
-                try (ResultSet resultSet = checkStmt.executeQuery()) {
-                    if (resultSet.next() && resultSet.getInt(1) == 0) {
-                        try (PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
-                            insertStmt.setString(1, ID);
-                            insertStmt.setDate(2, date);
-                            insertStmt.setString(3, customerID);
-                            insertStmt.setString(4, postalCode);
-                            insertStmt.executeUpdate();
-                            addedLabel = "Order successfully added to database";
-                        }
-                    } else {
-                        addedLabel = "This order ID already exists in the database";
-                    }
+            String insertQuery = "INSERT INTO p2.orders (InvoiceDate,AccountNum,postalCode) values (?,?,?)";
+                    try (PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
+                        insertStmt.setDate(1, date);
+                        insertStmt.setString(2, customerID);
+                        insertStmt.setString(3, postalCode);
+                        insertStmt.executeUpdate();
+                        addedLabel = "Order successfully added to database";
                 }
             }
-        } catch (SQLException e) {
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -74,9 +62,6 @@ public class NewOrderModel {
         this.date = date;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
-    }
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;

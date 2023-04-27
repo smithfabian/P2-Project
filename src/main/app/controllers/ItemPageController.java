@@ -14,8 +14,6 @@ public class ItemPageController {
     Stage stage;
     ItemPageModel itemPageModel;
     @FXML
-    Label itemID;
-    @FXML
     Label mainGroup;
     @FXML
     Label subGroup;
@@ -41,7 +39,6 @@ public class ItemPageController {
     }
 
     public void setLabelText() {
-        itemID.setText("Item ID: " + itemPageModel.getItemID());
         mainGroup.setText("Item main group: " + itemPageModel.getMainGroup());
         subGroup.setText("Item sub group: " + itemPageModel.getSubGroup());
         totalBought.setText("Total bought: " + itemPageModel.getTotalBought());

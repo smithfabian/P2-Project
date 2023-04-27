@@ -45,14 +45,12 @@ public class NewOrderController {
     }
 
     public void addButtonClicked() {
-        if (!IDField.getText().isEmpty() && customerIDField.getValue() != null && dateField.getValue() != null ) {
+        if (customerIDField.getValue() != null && dateField.getValue() != null ) {
             newOrderModel.setDate(Date.valueOf(dateField.getValue()));
             newOrderModel.setCustomerID(customerIDField.getValue());
             newOrderModel.setPostalCode(postalCodeField.getText());
-            newOrderModel.setID(IDField.getText());
             newOrderModel.addToDataBase();
             addedLabel.setText(newOrderModel.getAddedLabel());
-            IDField.clear();
 
         }
         else {
