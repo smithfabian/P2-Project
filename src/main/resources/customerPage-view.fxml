@@ -20,7 +20,7 @@
          <top>
             <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <items>
-                <Button fx:id="backButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Back" />
+                <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="25.0" prefWidth="80.0" text="Back" />
                   <Region prefHeight="30.0" prefWidth="319.0" />
                   <Label fx:id="customerIDLabel" text="Customer ID:">
                      <font>
