@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerPageModel {
-    ObservableList<customerPageRow> table;
+    ObservableList<OrderRow> table;
     private String customerID;
     private List<String> dateAxis;
     private List<Integer> boughtAxis;
@@ -24,41 +24,7 @@ public class CustomerPageModel {
         return dateAxis;
     }
 
-    public class customerPageRow {
-        private int orderID;
-        private Date invoiceDate;
-        private int invoiceQty;
-        private int postalCode;
-        private String city;
 
-        public int getOrderID() {
-            return orderID;
-        }
-
-        public Date getInvoiceDate() {
-            return invoiceDate;
-        }
-
-        public int getInvoiceQty() {
-            return invoiceQty;
-        }
-
-        public int getPostalCode() {
-            return postalCode;
-        }
-
-        public String getCity() {
-            return city;
-        }
-        public customerPageRow(int orderID, Date invoiceDate, int invoiceQty, int postalCode, String city) {
-            this.orderID = orderID;
-            this.invoiceDate = invoiceDate;
-            this.invoiceQty = invoiceQty;
-            this.postalCode = postalCode;
-            this.city = city;
-
-        }
-    }
     public CustomerPageModel(String customerID) {
         this.customerID = customerID;
         fillTableAndGraph();
@@ -78,7 +44,7 @@ public class CustomerPageModel {
                     int totalQty = rs.getInt("TotalQty");
                     dateAxis.add(date.toString());
                     boughtAxis.add(totalQty);
-                    table.add(new customerPageRow(rs.getInt("OrderId"),date,totalQty,rs.getInt("PostalCode"),rs.getString("City")));
+                    table.add(new OrderRow(rs.getInt("OrderId"),date,totalQty,null,rs.getInt("PostalCode"),rs.getString("City")));
                 }
             }
             finally {
@@ -90,7 +56,7 @@ public class CustomerPageModel {
         }
     }
 
-    public ObservableList<customerPageRow> getTable() {
+    public ObservableList<OrderRow> getTable() {
         return table;
     }
 

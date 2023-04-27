@@ -8,9 +8,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.app.models.CustomerPageModel;
+import main.app.models.OrderRow;
+import main.app.models.SalesModel;
+import main.app.views.OrderPageView;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -22,24 +27,24 @@ public class CustomerPageController {
     @FXML
     Label customerIDLabel;
     @FXML
-    TableView<CustomerPageModel.customerPageRow> table;
+    TableView<OrderRow> table;
     @FXML
-    TableColumn<CustomerPageModel.customerPageRow,String> orderIDColumn;
+    TableColumn<OrderRow,String> orderIDColumn;
     @FXML
-    TableColumn<CustomerPageModel.customerPageRow, Date> invoiceDateColumn;
+    TableColumn<OrderRow, Date> invoiceDateColumn;
     @FXML
-    TableColumn<CustomerPageModel.customerPageRow,Integer> invoiceQtyColumn;
+    TableColumn<OrderRow,Integer> invoiceQtyColumn;
     @FXML
-    TableColumn<CustomerPageModel.customerPageRow,Integer> postalCodeColumn;
+    TableColumn<OrderRow,Integer> postalCodeColumn;
     @FXML
-    TableColumn<CustomerPageModel.customerPageRow,String> cityColumn;
+    TableColumn<OrderRow,String> cityColumn;
 
 
     public void setModelValues(String customerID) {
         customerPageModel = new CustomerPageModel(customerID);
         orderIDColumn.setCellValueFactory(new PropertyValueFactory<>("OrderID"));
-        invoiceDateColumn.setCellValueFactory(new PropertyValueFactory<>("InvoiceDate"));
-        invoiceQtyColumn.setCellValueFactory(new PropertyValueFactory<>("InvoiceQty"));
+        invoiceDateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        invoiceQtyColumn.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
         postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("PostalCode"));
         cityColumn.setCellValueFactory(new PropertyValueFactory<>("City"));
         table.setItems(customerPageModel.getTable());
@@ -65,6 +70,18 @@ public class CustomerPageController {
     }
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+    public void orderRowClicked(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+            OrderRow row = table.getSelectionModel().getSelectedItem();
+            row.setCustomerID(customerPageModel.getCustomerID());
+            OrderPageView view = new OrderPageView(row);
+            try {
+                view.start(new Stage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     public void backButtonClicked() {
