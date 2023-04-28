@@ -6,9 +6,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableColumn;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddDelModel {
@@ -49,8 +49,6 @@ public class AddDelModel {
             this.User = new SimpleStringProperty(User);
             this.Select = new CheckBox();
         }
-
-
     }
 
     public AddDelModel(){
@@ -107,7 +105,7 @@ public class AddDelModel {
         }
     }
 
-        public ObservableList<TableRow> getAddUserList() {
+        public ObservableList<TableRow> getAddUserList(TableColumn<TableRow, Integer> ID) {
         return addUserList;
     }
 

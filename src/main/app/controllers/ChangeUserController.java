@@ -84,7 +84,7 @@ public class ChangeUserController {
             }
     }
 
-
+    // Will save the newly created user to the database table.
     public void SaveUserToDatabase() {
         changeUserModel.setUsername_textfield(Username_textfield.getText());
         changeUserModel.setPassword_textfield(PasswordManager.generateHash(Password_textfield.getText()));
@@ -101,6 +101,7 @@ public class ChangeUserController {
         changeUserModel.setUserToAdmin();
 
     }
+
 
     public void setStage(Stage stage) {
         this.stage = stage;

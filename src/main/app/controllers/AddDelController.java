@@ -10,10 +10,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.app.models.AddDelModel;
+import main.app.models.OrderRow;
 import main.app.views.AdminView;
 import main.app.views.ChangeUserView;
+import main.app.views.OrderPageView;
+
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +44,8 @@ public class AddDelController {
     @FXML
     private TableView<AddDelModel.TableRow> tableView;
 
+    @FXML
+    private TableView UserTable;
     private AddDelModel addDelModel;
 
 
@@ -53,7 +60,7 @@ public class AddDelController {
 
     public void updateTable() {
         addDelModel = new AddDelModel();
-        tableView.setItems(addDelModel.getAddUserList());
+        tableView.setItems(addDelModel.getAddUserList(ID));
 
     }
 
@@ -61,7 +68,7 @@ public class AddDelController {
     @FXML
     public void UserListSearch() {
 
-        FilteredList<AddDelModel.TableRow> filter = new FilteredList<>(addDelModel.getAddUserList(), e -> true);
+        FilteredList<AddDelModel.TableRow> filter = new FilteredList<>(addDelModel.getAddUserList(ID), e -> true);
         searchUser.textProperty().addListener((Observable, oldValue, newValue) -> {
             filter.setPredicate(predicateTableModel -> {
 
@@ -130,6 +137,25 @@ public class AddDelController {
         }
 
     }
+
+
+    //selected user - set userId to the user being selected
+    //write the newly changed user to database
+    //TODO
+    public void UserRowClicked(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+            for (AddDelModel.TableRow addUserList : tableView.getItems())
+            {
+                if(addUserList.getSelect().isSelected()) {
+
+                    changeUserScene();
+                }
+
+            }
+
+        }
+    }
+
 
     public void setStage(Stage stage) {
         this.stage = stage;

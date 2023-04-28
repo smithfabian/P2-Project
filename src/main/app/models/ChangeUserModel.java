@@ -11,6 +11,8 @@ public class ChangeUserModel {
     private String usernameTextfield;
     private String passwordTextfield;
 
+    private String UserID_textfield;
+
     private Boolean isAdmin;
 
     // Connect to database to write a new user to it
@@ -49,7 +51,7 @@ public class ChangeUserModel {
             try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
                 checkStmt.setString(1, usernameTextfield);
                 try (PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
-                    insertStmt.setBoolean(3,isAdmin = getIsAdmin(true));
+                    insertStmt.setBoolean(3, isAdmin = getIsAdmin(true));
                     insertStmt.executeUpdate();
                 }
 
