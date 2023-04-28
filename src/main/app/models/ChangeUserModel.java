@@ -41,18 +41,21 @@ public class ChangeUserModel {
     }
 
     public void setUserToAdmin() throws SQLException {
-        String insertQuery = "INSERT INTO p2.users (IsAdmin) values (?)";
 
-        Connection conn = DatabaseConnection.getConnection();
-        PreparedStatement insertStmt = conn.prepareStatement(insertQuery);
-        try {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String insertQuery = "INSERT INTO p2.users (IsAdmin) values (?)";
+            String checkQuery = "SELECT COUNT(*) FROM p2.users WHERE User = ?";
 
-        insertStmt.setBoolean(1, isAdmin == getIsAdmin(true));
-        insertStmt.executeUpdate();
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
+                checkStmt.setString(1, usernameTextfield);
+                try (PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
+                    insertStmt.setBoolean(3,isAdmin = getIsAdmin(true));
+                    insertStmt.executeUpdate();
+                }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+            }
+
+        } catch (SQLException e) {throw new RuntimeException(e);}
 
     }
 
