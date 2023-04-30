@@ -16,6 +16,7 @@ import main.app.models.AddDelModel;
 import main.app.models.OrderRow;
 import main.app.views.AdminView;
 import main.app.views.ChangeUserView;
+import main.app.views.CustomerPageView;
 import main.app.views.OrderPageView;
 
 import javax.swing.*;
@@ -144,18 +145,10 @@ public class AddDelController {
     //TODO
     public void UserRowClicked(MouseEvent mouseEvent) {
         if (mouseEvent.getClickCount() == 2) {
-            for (AddDelModel.TableRow addUserList : tableView.getItems())
-            {
-                if(addUserList.getSelect().isSelected()) {
 
-                    changeUserScene();
-                }
-
-            }
-
+           
         }
     }
-
 
     public void setStage(Stage stage) {
         this.stage = stage;
