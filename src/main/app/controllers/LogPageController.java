@@ -27,10 +27,12 @@ public class LogPageController {
     private TableColumn<?, ?> logDate;
 
     @FXML
-    private TableColumn<?, ?> logDetaljer;
+    private TableColumn<?, ?> logDetails;
 
     @FXML
-    private TableColumn<?, ?> logKategori;
+    private TableColumn<?, ?> logCategory;
+    @FXML
+    private TableColumn<?,?> logClassName;
 
     @FXML
     private TableView<?> logTable;

@@ -1,11 +1,15 @@
 package main.app.models;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 
 public class NewCustomerModel {
     private String ID;
     private String mainSector;
     private String subSector;
+    private static final Logger logger = LogManager.getLogger(LogTest.class.getName());
     public void addToDatabase() {
         String query = "INSERT INTO p2.accounts (AccountNum,MarketMainSector,MarketSubSector,MarketMainSectorID,MarketSubSectorID) values (?,?,?,null,null)";
 
@@ -15,8 +19,11 @@ public class NewCustomerModel {
             stmt.setString(2,mainSector);
             stmt.setString(3,subSector);
             stmt.executeUpdate();
+            logger.info("New customer added with ID " + ID);
+
         }
         catch (SQLException e) {
+            logger.error("Failed to add customer with ID " + ID);
             e.printStackTrace();
         }
     }

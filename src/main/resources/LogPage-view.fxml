@@ -23,9 +23,10 @@
          <center>
             <TableView fx:id="logTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="logDate" prefWidth="75.0" text="Dato" />
-                <TableColumn fx:id="logKategori" prefWidth="75.0" text="Kategori" />
-                  <TableColumn fx:id="logDetaljer" prefWidth="850.0" text="Detaljer" />
+                <TableColumn fx:id="logDate" prefWidth="134.0" text="Date" />
+                <TableColumn fx:id="logCategory" prefWidth="138.0" text="Category" />
+                  <TableColumn fx:id="logDetails" prefWidth="310.0" text="Details" />
+                  <TableColumn fx:id="logClassName" maxWidth="243.0" prefWidth="159.0" text="Class name" />
               </columns>
             </TableView>
          </center>
