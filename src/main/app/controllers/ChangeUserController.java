@@ -5,15 +5,15 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import main.app.models.ChangeUserModel;
 import main.app.models.PasswordManager;
-import main.app.views.AddDelUsersView;
 
-import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class ChangeUserController {
     Stage stage;
     @FXML
     public TextField Username_textfield;
+
 
     @FXML
     public PasswordField Repeat_password;
@@ -33,13 +33,7 @@ public class ChangeUserController {
     //back button clicked
     @FXML
     private void backButtonClicked() {
-        AddDelUsersView view = new AddDelUsersView();
-        try {
-            view.start(stage);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+         stage.close();
 
     }
 
@@ -72,27 +66,40 @@ public class ChangeUserController {
                     alert.setContentText("User successfully added/changed!");
                     alert.showAndWait();
                     stage.close();
-                    changeUserModel.setUsername_textfield(Username_textfield.getText());
-                    changeUserModel.setPassword_textfield(PasswordManager.generateHash(Password_textfield.getText()));
-                    changeUserModel.getUserIntoTable();
-                    addDelController.updateTable();
-
+                    SaveUserToDatabase();
+                    adminCheckBoxIsChecked();
 
                 }
-            else {
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("The passwords do not match");
-                    alert.showAndWait();
-                }
 
+            } else if (!Password_textfield.getText().equals(Repeat_password.getText())){
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("The passwords do not match");
+                alert.showAndWait();
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();
             }
+    }
+
+    // Will save the newly created user to the database table.
+    public void SaveUserToDatabase() {
+        changeUserModel.setUsername_textfield(Username_textfield.getText());
+        changeUserModel.setPassword_textfield(PasswordManager.generateHash(Password_textfield.getText()));
+        changeUserModel.getUserIntoTable();
+        addDelController.updateTable();
+
+    }
+
+
+    // if admin checkbox is checked then store it as 1 in the database
+    // TODO
+    public void adminCheckBoxIsChecked() throws SQLException {
+        changeUserModel.getIsAdmin(true);
+        changeUserModel.setUserToAdmin();
+
     }
 
 

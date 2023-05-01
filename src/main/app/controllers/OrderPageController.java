@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import main.app.models.CustomerPageModel;
 import main.app.models.OrderPageModel;
+import main.app.models.OrderRow;
 import main.app.models.SalesModel;
 import main.app.views.ItemPageView;
 
@@ -46,13 +47,13 @@ public class OrderPageController {
     @FXML
     TableView<OrderPageModel.orderItemRow> table;
     @FXML
-    TableColumn<CustomerPageModel.customerPageRow, Date> orderLineQtyColumn;
+    TableColumn<OrderPageModel.orderItemRow, Integer> orderLineQtyColumn;
     @FXML
-    TableColumn<CustomerPageModel.customerPageRow, Date> itemIdColumn;
+    TableColumn<OrderPageModel.orderItemRow, String> itemIdColumn;
     @FXML
-    TableColumn<CustomerPageModel.customerPageRow, Date> itemMainGroupColumn;
+    TableColumn<OrderPageModel.orderItemRow, String> itemMainGroupColumn;
     @FXML
-    TableColumn<CustomerPageModel.customerPageRow, Date> itemSubGroupColumn;
+    TableColumn<OrderPageModel.orderItemRow, String> itemSubGroupColumn;
 
     @FXML
     BorderPane borderPane;
@@ -64,7 +65,7 @@ public class OrderPageController {
     }
 
 
-    public void setModelValues(SalesModel.OrderRow row) {
+    public void setModelValues(OrderRow row) {
         model = new OrderPageModel(row);
         setLabelTexts();
 

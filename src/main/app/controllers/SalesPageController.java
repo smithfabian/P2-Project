@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import main.app.models.OrderRow;
 import main.app.models.SalesModel;
 import main.app.models.Session;
 import main.app.views.*;
@@ -54,17 +55,17 @@ public class SalesPageController {
     @FXML
     private TableColumn<SalesModel.CustomerRow,Integer> cReturnColumn;
     @FXML
-    private TableColumn<SalesModel.OrderRow,Integer>  oOrderID;
+    private TableColumn<OrderRow,Integer>  oOrderID;
     @FXML
-    private TableColumn<SalesModel.OrderRow, Date> oDate;
+    private TableColumn<OrderRow, Date> oDate;
     @FXML
-    private TableColumn<SalesModel.OrderRow, Integer> oQuantity;
+    private TableColumn<OrderRow, Integer> oQuantity;
     @FXML
-    private TableColumn<SalesModel.OrderRow, String> oCustomerID;
+    private TableColumn<OrderRow, String> oCustomerID;
     @FXML
-    private TableColumn<SalesModel.OrderRow, Integer> oPostalCode;
+    private TableColumn<OrderRow, Integer> oPostalCode;
     @FXML
-    private TableColumn<SalesModel.OrderRow, String> oCity;
+    private TableColumn<OrderRow, String> oCity;
     @FXML
     private TableColumn<SalesModel.ItemRow,String> iItemID;
     @FXML
@@ -361,7 +362,7 @@ public class SalesPageController {
 
     public void orderRowClicked(MouseEvent mouseEvent) {
         if (mouseEvent.getClickCount() == 2) {
-            SalesModel.OrderRow row = (SalesModel.OrderRow) orderTable.getSelectionModel().getSelectedItem();
+            OrderRow row = (OrderRow) orderTable.getSelectionModel().getSelectedItem();
             OrderPageView view = new OrderPageView(row);
             try {
                 view.start(new Stage());

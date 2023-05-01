@@ -1,5 +1,6 @@
 package main.app.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
@@ -12,8 +13,6 @@ import java.util.List;
 public class ItemPageController {
     Stage stage;
     ItemPageModel itemPageModel;
-    @FXML
-    Label itemID;
     @FXML
     Label mainGroup;
     @FXML
@@ -40,7 +39,6 @@ public class ItemPageController {
     }
 
     public void setLabelText() {
-        itemID.setText("Item ID: " + itemPageModel.getItemID());
         mainGroup.setText("Item main group: " + itemPageModel.getMainGroup());
         subGroup.setText("Item sub group: " + itemPageModel.getSubGroup());
         totalBought.setText("Total bought: " + itemPageModel.getTotalBought());
@@ -68,5 +66,9 @@ public class ItemPageController {
         // Add series to bar charts
         boughtChart.getData().add(boughtSeries);
         returnedChart.getData().add(returnedSeries);
+    }
+
+    public void backButtonClicked() {
+        stage.close();
     }
 }

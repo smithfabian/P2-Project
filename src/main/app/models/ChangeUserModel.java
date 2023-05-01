@@ -11,7 +11,11 @@ public class ChangeUserModel {
     private String usernameTextfield;
     private String passwordTextfield;
 
-    // CONNECT TO DATABASE TO WRITE TO IT
+    private String UserID_textfield;
+
+    private Boolean isAdmin;
+
+    // Connect to database to write a new user to it
     public void getUserIntoTable() {
 
         try (Connection conn = DatabaseConnection.getConnection()) {
@@ -32,12 +36,36 @@ public class ChangeUserModel {
                     }
                 }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    public void setUserToAdmin() throws SQLException {
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String insertQuery = "INSERT INTO p2.users (IsAdmin) values (?)";
+            String checkQuery = "SELECT COUNT(*) FROM p2.users WHERE User = ?";
+
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
+                checkStmt.setString(1, usernameTextfield);
+                try (PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
+                    insertStmt.setBoolean(3, isAdmin = getIsAdmin(true));
+                    insertStmt.executeUpdate();
+                }
+
+            }
+
+        } catch (SQLException e) {throw new RuntimeException(e);}
+
+    }
+
     // setter methods
+
+    public Boolean getIsAdmin(boolean b) {
+        return true;
+    }
     public int getId() { return Id;}
 
     public void setUsername_textfield(String usernameTextfield) {

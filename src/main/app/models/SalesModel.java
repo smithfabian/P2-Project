@@ -1,6 +1,7 @@
 package main.app.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 
 import java.sql.*;
 
@@ -229,9 +230,9 @@ public class SalesModel {
                     "SUM(CASE WHEN o.InvoiceQty < 0 THEN o.InvoiceQty ELSE 0 END) as TotalItemsReturned " +
                     "FROM p2.accounts a " +
                     "LEFT JOIN p2.orderitems o ON a.AccountNum = o.AccountNum " +
-                    "WHERE a.AccountNum LIKE ? OR a.MarketMainSector LIKE ? OR a.MarketSubSector LIKE ? " +
-                    "GROUP BY a.AccountNum, a.MarketMainSector, a.MarketSubSector " +
-                    "ORDER BY TotalItemsBought DESC  LIMIT ? OFFSET ?";
+                    "WHERE a.AccountNum LIKE ?OR a.MarketMainSector LIKE ? OR a.MarketSubSector LIKE ? " +
+                    "GROUP BY a.AccountNum " +
+                    "ORDER BY TotalItemsBought DESC LIMIT ? OFFSET ?";
             Connection conn = DatabaseConnection.getConnection();
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setString(1, "%" + searchTerm + "%");

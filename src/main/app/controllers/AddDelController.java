@@ -10,11 +10,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.app.models.AddDelModel;
+import main.app.models.OrderRow;
 import main.app.views.AdminView;
 import main.app.views.ChangeUserView;
+import main.app.views.CustomerPageView;
+import main.app.views.OrderPageView;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +27,10 @@ import java.util.List;
 
 public class AddDelController {
 
-    // define stage scene and root
+    // Define stage scene and root
     private Stage stage;
 
-    // the columns of the table
+    // The columns of the table
     @FXML
     private TextField searchUser;
     @FXML
@@ -40,6 +45,8 @@ public class AddDelController {
     @FXML
     private TableView<AddDelModel.TableRow> tableView;
 
+    @FXML
+    private TableView UserTable;
     private AddDelModel addDelModel;
 
 
@@ -54,15 +61,15 @@ public class AddDelController {
 
     public void updateTable() {
         addDelModel = new AddDelModel();
-        tableView.setItems(addDelModel.getAddUserList());
+        tableView.setItems(addDelModel.getAddUserList(ID));
 
     }
 
-    //search for a user in the table (name based) method
+    //Search for a user in the table (name based) method
     @FXML
     public void UserListSearch() {
 
-        FilteredList<AddDelModel.TableRow> filter = new FilteredList<>(addDelModel.getAddUserList(), e -> true);
+        FilteredList<AddDelModel.TableRow> filter = new FilteredList<>(addDelModel.getAddUserList(ID), e -> true);
         searchUser.textProperty().addListener((Observable, oldValue, newValue) -> {
             filter.setPredicate(predicateTableModel -> {
 
@@ -89,11 +96,9 @@ public class AddDelController {
     }
     // Delete button usage
     //select user through the checkbox and delete the selected users by pressing the delete button.
-    // TODO
     @FXML
     private void deleteSelectedRow() {
-// add an array list of id
-// then call the method to remove from database.
+
         List<String> idArray = new ArrayList<>();
 
         for (AddDelModel.TableRow addUserList : tableView.getItems())
@@ -102,17 +107,13 @@ public class AddDelController {
                 idArray.add(String.valueOf(addUserList.getId()));
 
                 Platform.runLater(()-> tableView.getItems().remove(addUserList));
-
-
             }
-
 
         }
         addDelModel.deleteUserFromDatabase(idArray);
     }
 
-
-    // back button or add user button usage:
+    //Back button or add user button usage:
     @FXML
     private void previousScene() {
         AdminView view = new AdminView();
@@ -125,6 +126,7 @@ public class AddDelController {
 
     }
 
+    //Add user button will take you to the changeUser scene
     @FXML
     private void changeUserScene() {
         ChangeUserView view = new ChangeUserView(this);
@@ -135,6 +137,17 @@ public class AddDelController {
             e.printStackTrace();
         }
 
+    }
+
+
+    //selected user - set userId to the user being selected
+    //write the newly changed user to database
+    //TODO
+    public void UserRowClicked(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+
+           
+        }
     }
 
     public void setStage(Stage stage) {
