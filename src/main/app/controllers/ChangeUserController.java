@@ -13,8 +13,6 @@ public class ChangeUserController {
     Stage stage;
     @FXML
     public TextField Username_textfield;
-
-
     @FXML
     public PasswordField Repeat_password;
     @FXML
@@ -23,6 +21,9 @@ public class ChangeUserController {
     public TextField UserID_textfield;
     @FXML
     public Button save;
+
+    @FXML
+    public CheckBox adminCheckBox;
     private AddDelController addDelController;
 
     ChangeUserModel changeUserModel;
@@ -95,11 +96,9 @@ public class ChangeUserController {
 
 
     // if admin checkbox is checked then store it as 1 in the database
-    // TODO
     public void adminCheckBoxIsChecked() throws SQLException {
-        changeUserModel.getIsAdmin(true);
-        changeUserModel.setUserToAdmin();
 
+        changeUserModel.setIsAdmin(adminCheckBox.isSelected());
     }
 
 

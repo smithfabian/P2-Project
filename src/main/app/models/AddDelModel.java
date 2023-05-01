@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
+import main.app.controllers.ChangeUserController;
 
 import java.sql.*;
 import java.util.List;
