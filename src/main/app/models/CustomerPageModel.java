@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerPageModel {
-    ObservableList<OrderRow> table;
+    ObservableList<SalesModel.OrderRow> table;
     private String customerID;
     private List<String> dateAxis;
     private List<Integer> boughtAxis;
@@ -30,6 +30,7 @@ public class CustomerPageModel {
         fillTableAndGraph();
     }
     public void fillTableAndGraph() {
+        SalesModel salesModel = new SalesModel();
         table = FXCollections.observableArrayList();
         dateAxis = new ArrayList<>();
         boughtAxis = new ArrayList<>();
@@ -44,7 +45,7 @@ public class CustomerPageModel {
                     int totalQty = rs.getInt("TotalQty");
                     dateAxis.add(date.toString());
                     boughtAxis.add(totalQty);
-                    table.add(new OrderRow(rs.getInt("OrderId"),date,totalQty,null,rs.getInt("PostalCode"),rs.getString("City")));
+                    table.add(salesModel.new OrderRow(rs.getInt("OrderId"),date,totalQty,null,rs.getInt("PostalCode"),rs.getString("City")));
                 }
             }
             finally {
@@ -56,7 +57,7 @@ public class CustomerPageModel {
         }
     }
 
-    public ObservableList<OrderRow> getTable() {
+    public ObservableList<SalesModel.OrderRow> getTable() {
         return table;
     }
 

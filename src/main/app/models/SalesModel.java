@@ -57,7 +57,7 @@ public class SalesModel {
         private int postalCode;
         private String city;
 
-        private OrderRow(int orderID, Date date, int quantity, String customerID, int postalCode, String city) {
+        public OrderRow(int orderID, Date date, int quantity, String customerID, int postalCode, String city) {
             this.orderID = orderID;
             this.date = date;
             this.quantity = quantity;
@@ -88,6 +88,10 @@ public class SalesModel {
 
         public String getCity() {
             return city;
+        }
+
+        public void setCustomerID(String customerID) {
+            this.customerID = customerID;
         }
     }
     public class ItemRow {

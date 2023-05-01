@@ -8,15 +8,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import main.app.models.CustomerPageModel;
 import main.app.models.OrderPageModel;
-import main.app.models.OrderRow;
 import main.app.models.SalesModel;
 import main.app.views.ItemPageView;
 
-import javax.swing.text.html.Option;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Optional;
 
 public class OrderPageController {
@@ -65,7 +61,7 @@ public class OrderPageController {
     }
 
 
-    public void setModelValues(OrderRow row) {
+    public void setModelValues(SalesModel.OrderRow row) {
         model = new OrderPageModel(row);
         setLabelTexts();
 

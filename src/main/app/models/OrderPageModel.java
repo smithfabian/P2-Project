@@ -16,7 +16,7 @@ public class OrderPageModel {
     int postalCode;
     String city;
 
-    public OrderPageModel(OrderRow row) {
+    public OrderPageModel(SalesModel.OrderRow row) {
         this.orderID = row.getOrderID();
         this.date = row.getDate();
         this.quantity = row.getQuantity();
@@ -167,6 +167,7 @@ public class OrderPageModel {
         public boolean getIsNewRow(){
             return this.isNewRow;
         }
+
 
         public SalesModel.ItemRow getSalesPageItemRow() {
             SalesModel salesModel = new SalesModel();
