@@ -274,7 +274,6 @@ public class SalesPageController {
                 setOrderTable();
             }
         }
-
     }
 
     public void prevPageButtonClicked() {

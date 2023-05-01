@@ -1,7 +1,6 @@
 package main.app.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableView;
 
 import java.sql.*;
 
@@ -97,7 +96,7 @@ public class SalesModel {
         private int totalBought;
         private int totalReturned;
 
-        private ItemRow(String itemID, String mainGroup, String subGroup, int totalBought, int totalReturned) {
+        public ItemRow(String itemID, String mainGroup, String subGroup, int totalBought, int totalReturned) {
             this.itemID = itemID;
             this.mainGroup = mainGroup;
             this.subGroup = subGroup;
@@ -123,6 +122,26 @@ public class SalesModel {
 
         public int getTotalReturned() {
             return totalReturned;
+        }
+
+        public void setItemID(String value) {
+            itemID = value;
+        }
+
+        public void setMainGroup(String value) {
+            mainGroup = value;
+        }
+
+        public void setSubGroup(String value) {
+            subGroup = value;
+        }
+
+        public void setTotalBought(int value) {
+            totalBought = value;
+        }
+
+        public void setTotalReturned(int value) {
+            totalReturned = value;
         }
     }
     public SalesModel() {
@@ -175,7 +194,7 @@ public class SalesModel {
                     "SUM(oi.InvoiceQty) as InvoiceQty " +
                     "FROM p2.orders o " +
                     "LEFT JOIN p2.orderitems oi ON o.OrderId = oi.OrderId " +
-                    "WHERE o.OrderId LIKE ? OR o.InvoiceDate LIKE ? OR o.AccountNum LIKE ? OR o.PostalCode LIKE ? OR o.city LIKE ?" +
+                    "WHERE o.OrderId LIKE ? OR o.InvoiceDate LIKE ? OR o.AccountNum LIKE ? OR o.PostalCode LIKE ? OR o.city LIKE ? " +
                     "GROUP BY o.OrderId, o.InvoiceDate, o.AccountNum, o.PostalCode, o.City " +
                     "LIMIT ? OFFSET ?";
             Connection conn = DatabaseConnection.getConnection();
@@ -210,9 +229,9 @@ public class SalesModel {
                     "SUM(CASE WHEN o.InvoiceQty < 0 THEN o.InvoiceQty ELSE 0 END) as TotalItemsReturned " +
                     "FROM p2.accounts a " +
                     "LEFT JOIN p2.orderitems o ON a.AccountNum = o.AccountNum " +
-                    "WHERE a.AccountNum LIKE ?OR a.MarketMainSector LIKE ? OR a.MarketSubSector LIKE ? " +
+                    "WHERE a.AccountNum LIKE ? OR a.MarketMainSector LIKE ? OR a.MarketSubSector LIKE ? " +
                     "GROUP BY a.AccountNum, a.MarketMainSector, a.MarketSubSector " +
-                    "ORDER BY TotalItemsBought DESC LIMIT ? OFFSET ?";
+                    "ORDER BY TotalItemsBought DESC  LIMIT ? OFFSET ?";
             Connection conn = DatabaseConnection.getConnection();
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setString(1, "%" + searchTerm + "%");
