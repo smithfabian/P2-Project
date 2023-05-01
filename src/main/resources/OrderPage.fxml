@@ -37,143 +37,6 @@
                </items>
             </ToolBar>
          </top>
-         <left>
-            <VBox alignment="CENTER" prefHeight="460.0" prefWidth="320.0" spacing="30.0" BorderPane.alignment="CENTER">
-            <children>
-                  <HBox prefHeight="26.0" prefWidth="320.0">
-                     <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                        <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="Order Id: ">
-                           <padding>
-                              <Insets right="5.0" />
-                           </padding>
-                        </Label>
-                        <TextField fx:id="orderId" disable="true" minWidth="200.0" prefHeight="98.0" prefWidth="161.0" text="orderId" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-                  <HBox prefHeight="26.0" prefWidth="320.0">
-                     <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                        <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="Order Date: ">
-                           <padding>
-                              <Insets right="5.0" />
-                           </padding>
-                        </Label>
-                        <DatePicker fx:id="date" minWidth="200.0" prefWidth="161.0" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-                  <HBox prefHeight="26.0" prefWidth="320.0">
-                     <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                        <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="Customer Id: ">
-                           <padding>
-                              <Insets right="5.0" />
-                           </padding>
-                        </Label>
-                        <TextField fx:id="customerID" minWidth="200.0" prefHeight="98.0" prefWidth="161.0" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-                  <HBox prefHeight="26.0" prefWidth="320.0">
-                     <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                        <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="Items: ">
-                           <padding>
-                              <Insets right="5.0" />
-                           </padding>
-                        </Label>
-                        <TextField fx:id="totQuantity" disable="true" minWidth="200.0" prefHeight="98.0" prefWidth="161.0" text="1" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-                  <HBox prefHeight="26.0" prefWidth="320.0">
-                     <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                        <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="City: ">
-                           <padding>
-                              <Insets right="5.0" />
-                           </padding>
-                        </Label>
-                        <TextField fx:id="city" minWidth="200.0" prefHeight="98.0" prefWidth="161.0" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-                  <HBox prefHeight="26.0" prefWidth="320.0">
-                     <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                        <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="Postal Code:">
-                           <padding>
-                              <Insets right="5.0" />
-                           </padding>
-                        </Label>
-                        <TextField fx:id="postalCode" minWidth="200.0" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-                  <HBox prefHeight="26.0" prefWidth="320.0">
-                     <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                        <Button fx:id="cancelButton" minWidth="300.0" mnemonicParsing="false" onAction="#cancelOrderButtonClicked" text="Cancel Order" textFill="#cd0000" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-               </children>
-               <BorderPane.margin>
-                  <Insets top="40.0" />
-               </BorderPane.margin>
-            </VBox>
-         </left>
-         <right>
-            <VBox prefHeight="460.0" prefWidth="651.0" spacing="10" BorderPane.alignment="CENTER">
-               <children>
-                  <Label text="Order Items">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TableView fx:id="table" maxHeight="999999" maxWidth="999999" VBox.vgrow="ALWAYS">
-                    <columns>
-                      <TableColumn fx:id="orderLineQtyColumn" prefWidth="75.0" text="Quantity" />
-                      <TableColumn fx:id="itemIdColumn" prefWidth="100.0" text="Item ID" />
-                        <TableColumn fx:id="itemMainGroupColumn" prefWidth="245.0" text="Item Main Group" />
-                        <TableColumn fx:id="itemSubGroupColumn" prefWidth="210.0" text="Item Sub Group" />
-                    </columns>
-                     <VBox.margin>
-                        <Insets right="20.0" />
-                     </VBox.margin>
-                  </TableView>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <BorderPane.margin>
-                  <Insets top="20.0" />
-               </BorderPane.margin>
-            </VBox>
-         </right>
          <bottom>
             <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <buttons>
@@ -185,6 +48,147 @@
                </padding>
             </ButtonBar>
          </bottom>
+         <center>
+            <HBox BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <VBox alignment="CENTER" prefHeight="460.0" prefWidth="320.0" spacing="30.0">
+                  <children>
+                        <HBox prefHeight="26.0" prefWidth="320.0">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="Order Id: ">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="orderId" disable="true" minWidth="200.0" prefHeight="98.0" prefWidth="161.0" text="orderId" />
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <HBox prefHeight="26.0" prefWidth="320.0">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="Order Date: ">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
+                              <DatePicker fx:id="date" minWidth="200.0" prefWidth="161.0" />
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <HBox prefHeight="26.0" prefWidth="320.0">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="Customer Id: ">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="customerID" minWidth="200.0" prefHeight="98.0" prefWidth="161.0" />
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <HBox prefHeight="26.0" prefWidth="320.0">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="Items: ">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="totQuantity" disable="true" minWidth="200.0" prefHeight="98.0" prefWidth="161.0" text="1" />
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <HBox prefHeight="26.0" prefWidth="320.0">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="City: ">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="city" minWidth="200.0" prefHeight="98.0" prefWidth="161.0" />
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <HBox prefHeight="26.0" prefWidth="320.0">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="Postal Code:">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="postalCode" minWidth="200.0" />
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <HBox prefHeight="26.0" prefWidth="320.0">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Button fx:id="cancelButton" minWidth="300.0" mnemonicParsing="false" onAction="#cancelOrderButtonClicked" text="Cancel Order" textFill="#cd0000" />
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <VBox prefHeight="460.0" prefWidth="661.0" spacing="10">
+                     <children>
+                        <HBox>
+                           <children>
+                              <Label alignment="BOTTOM_CENTER" prefHeight="30.0" prefWidth="65.0" text="Order Items" />
+                              <Pane HBox.hgrow="ALWAYS" />
+                              <Button mnemonicParsing="false" onAction="#addItem" text="Add item">
+                                 <HBox.margin>
+                                    <Insets right="20.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <TableView fx:id="table"  onMouseClicked="#itemRowClicked" maxHeight="999999" maxWidth="999999" VBox.vgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="orderLineQtyColumn" minWidth="60.0" prefWidth="-1.0" text="Quantity" />
+                            <TableColumn fx:id="itemIdColumn" minWidth="100.0" prefWidth="-1.0" text="Item ID" />
+                              <TableColumn fx:id="itemMainGroupColumn" minWidth="150.0" prefWidth="-1.0" text="Item Main Group" />
+                              <TableColumn fx:id="itemSubGroupColumn" minWidth="150.0" prefWidth="-1.0" text="Item Sub Group" />
+                          </columns>
+                           <VBox.margin>
+                              <Insets right="20.0" />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>

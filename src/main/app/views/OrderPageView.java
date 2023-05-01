@@ -6,16 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.app.controllers.OrderPageController;
-import main.app.models.CustomerPageModel;
-import main.app.models.OrderRow;
 import main.app.models.SalesModel;
 
 import java.io.IOException;
 
 public class OrderPageView extends Application {
-    OrderRow row;
+    SalesModel.OrderRow row;
 
-    public OrderPageView(OrderRow row) {
+    public OrderPageView(SalesModel.OrderRow row) {
         this.row = row;
     }
     @Override

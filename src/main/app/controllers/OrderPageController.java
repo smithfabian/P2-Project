@@ -1,23 +1,24 @@
 package main.app.controllers;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import main.app.models.CustomerPageModel;
 import main.app.models.OrderPageModel;
-import main.app.models.OrderRow;
 import main.app.models.SalesModel;
-import javax.swing.text.html.Option;
+import main.app.views.ItemPageView;
+
 import java.io.IOException;
-import java.util.Date;
 import java.util.Optional;
 
 public class OrderPageController {
     Stage stage;
     OrderPageModel model;
+    ObservableList<OrderPageModel.orderItemRow> orderItems;
     @FXML
     Button backButton;
     @FXML
@@ -60,7 +61,7 @@ public class OrderPageController {
     }
 
 
-    public void setModelValues(OrderRow row) {
+    public void setModelValues(SalesModel.OrderRow row) {
         model = new OrderPageModel(row);
         setLabelTexts();
 
@@ -68,7 +69,9 @@ public class OrderPageController {
         itemIdColumn.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         itemMainGroupColumn.setCellValueFactory(new PropertyValueFactory<>("itemMainGroup"));
         itemSubGroupColumn.setCellValueFactory(new PropertyValueFactory<>("itemSubGroup"));
-        table.setItems(model.getTable());
+        orderItems = model.getTable();
+        table.setItems(orderItems);
+
     }
 
     public void setLabelTexts() {
@@ -82,17 +85,35 @@ public class OrderPageController {
         city.setText(model.getCity());
     }
 
+    public void addItem(){
+        OrderPageModel.orderItemRow row = new OrderPageModel.orderItemRow("", 0, "", "");
+        row.setItemIdDisable(false);
+        row.setIsNewRow(true);
+        orderItems.add(row);
+    }
+
     public void backButtonClicked() {
         stage.close();
     }
 
     public void applyButtonClicked() {
-        // String InvoiceDate, String AccountNum, String City, String PostalCode
         model.updateOrder(java.sql.Date.valueOf(date.getValue()), customerID.getText(), city.getText(), Integer.parseInt(postalCode.getText()));
+
+        for(OrderPageModel.orderItemRow row : table.getItems()){
+            String quantity = row.getItemQty().getText();
+            String originalQty = String.valueOf(row.getOriginalQty());
+            if (!quantity.equals(originalQty)){
+                model.updateOrderItems(Integer.parseInt(quantity), model.getOrderID(), row.getItemId().getText());
+                if(row.getIsNewRow() && !row.getItemQty().getText().equals("0")){
+                    model.insertOrderItems(Integer.parseInt(quantity), row.getItemId().getText());
+                }
+            }
+        }
+        orderItems = model.getTable();
     }
 
     public void okButtonClicked() {
-        model.updateOrder(java.sql.Date.valueOf(date.getValue()), customerID.getText(), city.getText(), Integer.parseInt(postalCode.getText()));
+        applyButtonClicked();
         stage.close();
     }
 
@@ -106,6 +127,19 @@ public class OrderPageController {
         if (option.get().equals(ButtonType.OK)){
             model.deleteOrder();
             stage.close();
+        }
+    }
+
+    public void itemRowClicked(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+            OrderPageModel.orderItemRow orderItemRow = table.getSelectionModel().getSelectedItem();
+            SalesModel.ItemRow SalesItemRow = orderItemRow.getSalesPageItemRow();
+            ItemPageView view = new ItemPageView(SalesItemRow);
+            try {
+                view.start(new Stage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

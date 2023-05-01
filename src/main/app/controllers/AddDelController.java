@@ -13,12 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.app.models.AddDelModel;
-import main.app.models.OrderRow;
 import main.app.views.AdminView;
 import main.app.views.ChangeUserView;
-import main.app.views.OrderPageView;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -144,18 +141,10 @@ public class AddDelController {
     //TODO
     public void UserRowClicked(MouseEvent mouseEvent) {
         if (mouseEvent.getClickCount() == 2) {
-            for (AddDelModel.TableRow addUserList : tableView.getItems())
-            {
-                if(addUserList.getSelect().isSelected()) {
 
-                    changeUserScene();
-                }
-
-            }
-
+           
         }
     }
-
 
     public void setStage(Stage stage) {
         this.stage = stage;

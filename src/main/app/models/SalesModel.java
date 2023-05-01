@@ -49,6 +49,51 @@ public class SalesModel {
         }
     }
 
+    public class OrderRow {
+        private int orderID;
+        private Date date;
+        private int quantity;
+        private String customerID;
+        private int postalCode;
+        private String city;
+
+        public OrderRow(int orderID, Date date, int quantity, String customerID, int postalCode, String city) {
+            this.orderID = orderID;
+            this.date = date;
+            this.quantity = quantity;
+            this.customerID = customerID;
+            this.postalCode = postalCode;
+            this.city = city;
+        }
+
+        public int getOrderID() {
+            return orderID;
+        }
+
+        public Date getDate() {
+            return date;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public String getCustomerID() {
+            return customerID;
+        }
+
+        public int getPostalCode() {
+            return postalCode;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCustomerID(String customerID) {
+            this.customerID = customerID;
+        }
+    }
     public class ItemRow {
         private String itemID;
         private String mainGroup;
@@ -56,7 +101,7 @@ public class SalesModel {
         private int totalBought;
         private int totalReturned;
 
-        private ItemRow(String itemID, String mainGroup, String subGroup, int totalBought, int totalReturned) {
+        public ItemRow(String itemID, String mainGroup, String subGroup, int totalBought, int totalReturned) {
             this.itemID = itemID;
             this.mainGroup = mainGroup;
             this.subGroup = subGroup;
@@ -82,6 +127,26 @@ public class SalesModel {
 
         public int getTotalReturned() {
             return totalReturned;
+        }
+
+        public void setItemID(String value) {
+            itemID = value;
+        }
+
+        public void setMainGroup(String value) {
+            mainGroup = value;
+        }
+
+        public void setSubGroup(String value) {
+            subGroup = value;
+        }
+
+        public void setTotalBought(int value) {
+            totalBought = value;
+        }
+
+        public void setTotalReturned(int value) {
+            totalReturned = value;
         }
     }
     public SalesModel() {
@@ -134,7 +199,7 @@ public class SalesModel {
                     "SUM(oi.InvoiceQty) as InvoiceQty " +
                     "FROM p2.orders o " +
                     "LEFT JOIN p2.orderitems oi ON o.OrderId = oi.OrderId " +
-                    "WHERE o.OrderId LIKE ? OR o.InvoiceDate LIKE ? OR o.AccountNum LIKE ? OR o.PostalCode LIKE ? OR o.city LIKE ?" +
+                    "WHERE o.OrderId LIKE ? OR o.InvoiceDate LIKE ? OR o.AccountNum LIKE ? OR o.PostalCode LIKE ? OR o.city LIKE ? " +
                     "GROUP BY o.OrderId, o.InvoiceDate, o.AccountNum, o.PostalCode, o.City " +
                     "LIMIT ? OFFSET ?";
             Connection conn = DatabaseConnection.getConnection();

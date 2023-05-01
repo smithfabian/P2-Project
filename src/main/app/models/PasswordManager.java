@@ -12,7 +12,7 @@ import java.util.Base64;
 public class PasswordManager {
     static final String ALPHANUMERIC = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     static final Integer SALT_LENGTH = 64;
-    static final Integer ITERATIONS = 1000;
+    static final Integer ITERATIONS = 10000;
     static final Integer KEY_LENGTH = 256;
 
     public static void main(String[] args) {

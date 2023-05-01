@@ -20,7 +20,7 @@
             </ToolBar>
          </top>
          <center>
-              <TableView fx:id="tableView" prefHeight="249.0" prefWidth="353.0" BorderPane.alignment="CENTER">
+              <TableView fx:id="tableView" onMouseEntered="#UserRowClicked" prefHeight="249.0" prefWidth="353.0" BorderPane.alignment="CENTER">
                   <columns>
                       <TableColumn fx:id="User" prefWidth="300.0" text="User" />
                       <TableColumn fx:id="ID" prefWidth="300.0" text="ID" />

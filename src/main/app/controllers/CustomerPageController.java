@@ -1,6 +1,5 @@
 package main.app.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
@@ -11,7 +10,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.app.models.CustomerPageModel;
-import main.app.models.OrderRow;
 import main.app.models.SalesModel;
 import main.app.views.OrderPageView;
 
@@ -27,17 +25,17 @@ public class CustomerPageController {
     @FXML
     Label customerIDLabel;
     @FXML
-    TableView<OrderRow> table;
+    TableView<SalesModel.OrderRow> table;
     @FXML
-    TableColumn<OrderRow,String> orderIDColumn;
+    TableColumn<SalesModel.OrderRow,String> orderIDColumn;
     @FXML
-    TableColumn<OrderRow, Date> invoiceDateColumn;
+    TableColumn<SalesModel.OrderRow, Date> invoiceDateColumn;
     @FXML
-    TableColumn<OrderRow,Integer> invoiceQtyColumn;
+    TableColumn<SalesModel.OrderRow,Integer> invoiceQtyColumn;
     @FXML
-    TableColumn<OrderRow,Integer> postalCodeColumn;
+    TableColumn<SalesModel.OrderRow,Integer> postalCodeColumn;
     @FXML
-    TableColumn<OrderRow,String> cityColumn;
+    TableColumn<SalesModel.OrderRow,String> cityColumn;
 
 
     public void setModelValues(String customerID) {
@@ -73,7 +71,7 @@ public class CustomerPageController {
     }
     public void orderRowClicked(MouseEvent mouseEvent) {
         if (mouseEvent.getClickCount() == 2) {
-            OrderRow row = table.getSelectionModel().getSelectedItem();
+            SalesModel.OrderRow row = table.getSelectionModel().getSelectedItem();
             row.setCustomerID(customerPageModel.getCustomerID());
             OrderPageView view = new OrderPageView(row);
             try {
