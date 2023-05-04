@@ -7,16 +7,20 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.app.models.LogTest;
 import main.app.models.PasswordManager;
 import main.app.models.Session;
 import main.app.views.AdminView;
 import main.app.models.LoginModel;
 import main.app.views.EmployeeView;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
 public class LoginController {
     private LoginModel loginModel = new LoginModel();
+    private static final Logger logger = LogManager.getLogger(LoginController.class.getName());
     Stage stage;
     @FXML
     AnchorPane anchorPane;
@@ -60,7 +64,9 @@ public class LoginController {
                 } catch (IOException ignored) {
                 }
             }
+            logger.info("Login successfull with username " + username);
         } else {
+            logger.warn("Login unsuccessfull with usersame " + username);
             errorMessage.setText("Incorrect credentials!");
             // TODO: insert log
         }
