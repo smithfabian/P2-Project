@@ -3,6 +3,8 @@ package main.app.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class OrderPageModel {
     String customerId;
     int postalCode;
     String city;
+    private static final Logger logger = LogManager.getLogger(OrderPageModel.class.getName());
 
     public OrderPageModel(SalesModel.OrderRow row) {
         this.orderID = row.getOrderID();
@@ -106,7 +109,10 @@ public class OrderPageModel {
         try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, this.getOrderID());
             noDeletedRows = stmt.executeUpdate();
+            logger.warn("User " + Session.getLoggedInUser() + ": Successfully deleted order with order ID + " + this.getOrderID());
+
         } catch (SQLException e) {
+            logger.warn("User " + Session.getLoggedInUser() + ": Failed to delete order with order ID + " + this.getOrderID());
             e.printStackTrace();
         }
         return noDeletedRows;
