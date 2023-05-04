@@ -1,5 +1,8 @@
 package main.app.models;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +15,7 @@ public class ChangeUserModel {
     private String passwordTextfield;
 
     private String UserID_textfield;
+    private static final Logger logger = LogManager.getLogger(ChangeUserModel.class.getName());
 
     private Boolean isAdmin;
 
@@ -31,6 +35,7 @@ public class ChangeUserModel {
                             insertStmt.setString(2,passwordTextfield);
                             insertStmt.setBoolean(3,isAdmin);
                             insertStmt.executeUpdate();
+                            logger.warn("User " + Session.getLoggedInUser() + ": User with username " + usernameTextfield + "changed" );
 
                         }
 
@@ -39,6 +44,7 @@ public class ChangeUserModel {
             }
 
         } catch (SQLException e) {
+            logger.warn("User " + Session.getLoggedInUser() + ": could not change user with username " + usernameTextfield);
             e.printStackTrace();
         }
     }

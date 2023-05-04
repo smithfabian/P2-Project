@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import main.app.controllers.ChangeUserController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 public class AddDelModel {
 
     private ObservableList<TableRow> addUserList;
+    private static final Logger logger = LogManager.getLogger(AddDelModel.class.getName());
 
     public static class TableRow {
         SimpleIntegerProperty Id;
@@ -94,10 +97,12 @@ public class AddDelModel {
                 for (String ids : id) {
                     selected.setString(1, ids);
                     selected.addBatch();
+                    logger.warn("User " + Session.getLoggedInUser() + ": User with username " + ids + " deleted from database");
                 }
                 selected.executeBatch();
 
             } catch (SQLException e) {
+                logger.warn("User " + Session.getLoggedInUser() + ": Could not delete users from database");
                 e.printStackTrace();
             }
         }catch (SQLException e){
