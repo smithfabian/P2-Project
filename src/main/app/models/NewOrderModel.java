@@ -2,6 +2,8 @@ package main.app.models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 
@@ -12,6 +14,7 @@ public class NewOrderModel {
     private String postalCode;
     private String addedLabel;
     private ObservableList<String> customers;
+    private static final Logger logger = LogManager.getLogger(NewItemModel.class.getName());
 
     public NewOrderModel() {
         customers = FXCollections.observableArrayList();
@@ -27,9 +30,12 @@ public class NewOrderModel {
                         insertStmt.setString(3, postalCode);
                         insertStmt.executeUpdate();
                         addedLabel = "Order successfully added to database";
+                        logger.info("User " + Session.getLoggedInUser() + ": New order successfully added to database " );
+
                 }
             }
         catch (SQLException e) {
+            logger.warn("User " + Session.getLoggedInUser() + ": Could not add order to database");
             e.printStackTrace();
         }
     }

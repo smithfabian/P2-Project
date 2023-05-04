@@ -9,7 +9,7 @@ public class NewCustomerModel {
     private String ID;
     private String mainSector;
     private String subSector;
-    private static final Logger logger = LogManager.getLogger(LogTest.class.getName());
+    private static final Logger logger = LogManager.getLogger(NewCustomerModel.class.getName());
     public void addToDatabase() {
         String query = "INSERT INTO p2.accounts (AccountNum,MarketMainSector,MarketSubSector,MarketMainSectorID,MarketSubSectorID) values (?,?,?,null,null)";
 
@@ -19,11 +19,11 @@ public class NewCustomerModel {
             stmt.setString(2,mainSector);
             stmt.setString(3,subSector);
             stmt.executeUpdate();
-            logger.info("New customer added with ID " + ID);
+            logger.info("User " + Session.getLoggedInUser() +  ": New customer added with ID " + ID);
 
         }
         catch (SQLException e) {
-            logger.error("Failed to add customer with ID " + ID);
+            logger.error("User " + Session.getLoggedInUser() +  ": Failed to add customer with ID " + ID);
             e.printStackTrace();
         }
     }

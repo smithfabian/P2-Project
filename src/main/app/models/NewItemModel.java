@@ -1,5 +1,8 @@
 package main.app.models;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +13,7 @@ public class NewItemModel {
     private String mainGroup;
     private String subGroup;
     private String addedLabel;
+    private static final Logger logger = LogManager.getLogger(NewItemModel.class.getName());
 
     public void addToDatabase() {
         try (Connection conn = DatabaseConnection.getConnection()) {
@@ -26,8 +30,10 @@ public class NewItemModel {
                             insertStmt.setString(3, subGroup);
                             insertStmt.executeUpdate();
                             addedLabel = "Item successfully added to database";
+                            logger.info("User " + Session.getLoggedInUser() + ": New item added with ID " + ID);
                         }
                     } else {
+                        logger.warn("User " + Session.getLoggedInUser() +  ": Item with " + ID + "already exists in database");
                         addedLabel = "This Item ID already exists in the database";
                     }
                 }
