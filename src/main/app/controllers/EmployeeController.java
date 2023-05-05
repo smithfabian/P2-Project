@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import main.app.models.EmployeeModel;
 import main.app.models.Session;
 import main.app.views.LoginView;
+import main.app.views.PasswordView;
 import main.app.views.SalesView;
 
 import java.io.IOException;
@@ -83,13 +84,18 @@ public class EmployeeController {
         }
     }
 
-    public void switchToChangePassWordScene(ActionEvent actionEvent) {
-        //TODO
-    }
-
     public void SwitchToLoginPageScene(ActionEvent actionEvent) throws IOException {
-        Session.reset();
+        Session.logout();
         LoginView view = new LoginView();
         view.start(stage);
+    }
+
+    public void passwordButtonClicked() {
+        PasswordView passwordview = new PasswordView();
+        try {
+            passwordview.start(new Stage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -9,7 +9,6 @@ import main.app.models.PasswordModel;
 
 public class PasswordController {
     Stage stage;
-    AdminController adminController;
     PasswordModel model;
     @FXML
     TextField newPassword;
@@ -31,9 +30,6 @@ public class PasswordController {
         this.model = model;
     }
 
-    public void setAdminController(AdminController adminController){
-        this.adminController = adminController;
-    }
 
     public void okButtonClicked(){
         if (newPassword.getText().equals("")) {
@@ -43,7 +39,6 @@ public class PasswordController {
             // TODO check password complexity
             model.setPassword(newPassword.getText());
             model.updatePassword();
-            adminController.setIsPasswordWindowOpen(false);
             stage.close();
         }
         else {
@@ -52,7 +47,6 @@ public class PasswordController {
     }
 
     public void cancelButtonClicked(){
-        adminController.setIsPasswordWindowOpen(false);
         stage.close();
     }
 

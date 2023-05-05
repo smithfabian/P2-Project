@@ -22,8 +22,6 @@ import java.util.List;
 public class AdminController {
     private AdminModel model;
     private Stage stage;
-    private Stage passwordStage;
-    private boolean isPasswordWindowOpen;
 
     @FXML
     private AnchorPane AnchorPane;
@@ -51,9 +49,6 @@ public class AdminController {
         this.stage = stage;
     }
 
-    public void setIsPasswordWindowOpen(boolean value){
-        this.isPasswordWindowOpen = value;
-    }
 
     public void salesButtonClicked() {
         SalesView view = new SalesView();
@@ -83,22 +78,16 @@ public class AdminController {
     }
 
     public void passwordButtonClicked() {
-        if (!isPasswordWindowOpen) {
-            PasswordView passwordview = new PasswordView(this);
-            try {
-                isPasswordWindowOpen = true;
-                this.passwordStage = new Stage();
-                passwordview.start(passwordStage);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            this.passwordStage.toFront();
+        PasswordView passwordview = new PasswordView();
+        try {
+            passwordview.start(new Stage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
     public void logoutButtonClicked() {
-        Session.reset();
+        Session.logout();
         LoginView view = new LoginView();
         view.start(stage);
     }
