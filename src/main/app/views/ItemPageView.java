@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.app.controllers.ItemPageController;
 import main.app.models.SalesModel;
+import main.app.models.Session;
 
 import java.io.IOException;
 
@@ -27,7 +28,7 @@ public class ItemPageView extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.show();
+        Session.showStage("ItemPage" + row.getItemID(), stage);
     }
 }
 

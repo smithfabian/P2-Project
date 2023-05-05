@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.app.controllers.CustomerPageController;
+import main.app.models.Session;
 
 import java.io.IOException;
 
@@ -26,7 +27,7 @@ public class CustomerPageView extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.show();
+        Session.showStage("CustomerPage" + customerID, stage);
     }
 }
 

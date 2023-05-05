@@ -30,9 +30,9 @@ public class Session {
     public static void logout() {
         loggedInUser = null;
         isAdmin = false;
-        for (Stage stage : openStages.values()) {
-            stage.close();
-        }
+
+        Map<String, Stage> copyOfOpenStages = new HashMap<>(openStages);
+        copyOfOpenStages.forEach((identifier, stage) -> stage.close());
         openStages.clear();
     }
 

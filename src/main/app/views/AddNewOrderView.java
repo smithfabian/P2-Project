@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.app.controllers.NewOrderController;
+import main.app.models.Session;
 
 import java.io.IOException;
 
@@ -20,6 +21,6 @@ public class AddNewOrderView extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.show();
+        Session.showStage("AddNewOrder", stage);
     }
 }

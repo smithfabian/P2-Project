@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.app.controllers.OrderPageController;
 import main.app.models.SalesModel;
+import main.app.models.Session;
 
 import java.io.IOException;
 
@@ -24,13 +25,14 @@ public class OrderPageView extends Application {
         controller.setStage(stage);
         controller.setModelValues(row);
 
+
         Scene scene = new Scene(root);
         stage.setTitle("Confirmation");
         stage.setScene(scene);
         stage.setMinWidth(1000);
         stage.setMinHeight(500);
         stage.setResizable(true);
-        stage.show();
+        Session.showStage("OrderPage" + row.getOrderID(), stage);
     }
 }
 

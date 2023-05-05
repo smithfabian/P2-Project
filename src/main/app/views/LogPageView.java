@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.app.controllers.LogPageController;
+import main.app.models.Session;
 
 import java.io.IOException;
 
@@ -22,6 +23,6 @@ public class LogPageView extends Application {
         stage.setScene(scene);
         stage.setMinWidth(1000);
         stage.setMinHeight(500);
-        stage.show();
+        Session.showStage("LogPage", stage);
     }
 }
