@@ -16,7 +16,7 @@
               <items>
                 <Button fx:id="back" minWidth="100.0" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" />
                   <TextField fx:id="searchBar" />
-                  <Button fx:id="searchButton" mnemonicParsing="false" text="Search" />
+                  <Button fx:id="searchButton" onAction="#searchTable" mnemonicParsing="false" text="Search" />
               </items>
             </ToolBar>
          </top>
