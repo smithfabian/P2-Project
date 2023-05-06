@@ -1,5 +1,8 @@
 package main.app.models;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,7 @@ public class ItemPageModel {
     private List<Integer> boughtAxis;
     private List<Integer> returnedAxis;
     private List<String> dateAxis;
+    private static final Logger logger = LogManager.getLogger(OrderPageModel.class.getName());
 
 
     public ItemPageModel(SalesModel.ItemRow row) {
@@ -55,6 +59,31 @@ public class ItemPageModel {
 
     public List<Integer> getReturnedAxis() {
         return returnedAxis;
+    }
+
+    public void updateItem(String newItemMainGroup, String newItemSubGroup){
+        String query = "UPDATE p2.items SET ItemMainGroup = ?, ItemSubGroup = ? WHERE ItemID = ?";
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, newItemMainGroup);
+            stmt.setString(2, newItemSubGroup);
+            stmt.setString(3, itemID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteItem(){
+        String query = "DELETE FROM p2.items WHERE ItemID = ?";
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, this.getItemID());
+            stmt.executeUpdate();
+            logger.warn("User " + Session.getLoggedInUser() + ": Successfully deleted item with item ID + " + this.getItemID());
+
+        } catch (SQLException e) {
+            logger.warn("User " + Session.getLoggedInUser() + ": Failed to delete item with item ID + " + this.getItemID());
+            e.printStackTrace();
+        }
     }
 
     public void createChartData() {

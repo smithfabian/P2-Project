@@ -27,7 +27,7 @@ public class ItemPageView extends Application {
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         Session.showStage("ItemPage" + row.getItemID(), stage);
     }
 }
