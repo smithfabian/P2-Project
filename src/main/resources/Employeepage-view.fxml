@@ -40,7 +40,7 @@
             <VBox alignment="CENTER" prefHeight="430.0" prefWidth="500.0" spacing="50.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="salesButton" mnemonicParsing="false" onAction="#switchToSalesScene" prefHeight="50.0" prefWidth="400.0" text="Sales" />
-                  <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#passwordButtonClicked" prefHeight="50.0" prefWidth="400.0" text=" Change Password" />
+                  <Button fx:id="passwordButton" mnemonicParsing="false" onAction="#passwordButtonClicked" prefHeight="50.0" prefWidth="400.0" text=" Change Password" />
                </children>
             </VBox>
          </left>
