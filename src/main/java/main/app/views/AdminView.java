@@ -13,7 +13,7 @@ public class AdminView extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(AdminView.class.getResource("/main/resources/adminPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(AdminView.class.getResource("/adminPage.fxml"));
         Parent root = loader.load();
 
         AdminController controller = loader.getController();

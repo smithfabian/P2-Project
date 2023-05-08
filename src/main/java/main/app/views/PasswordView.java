@@ -17,7 +17,7 @@ public class PasswordView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(PasswordView.class.getResource("/main/resources/passwordPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(PasswordView.class.getResource("/passwordPage.fxml"));
         Parent root = loader.load();
         PasswordController controller = loader.getController();
         controller.setStage(stage);

@@ -5,21 +5,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.app.controllers.AddDelController;
+import main.app.controllers.NewItemController;
+import main.app.models.Session;
 
 import java.io.IOException;
 
-public class AddDelUsersView extends Application {
-
+public class AddNewItemView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(AddDelUsersView.class.getResource("/main/resources/AddDel-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(AddNewItemView.class.getResource("/AddNewItem-view.fxml"));
         Parent root = loader.load();
-        AddDelController controller = loader.getController();
+        NewItemController controller = loader.getController();
         controller.setStage(stage);
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
+        stage.setResizable(false);
+        Session.showStage("AddNewItem", stage);
     }
 }

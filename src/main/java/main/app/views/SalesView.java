@@ -5,17 +5,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.app.controllers.EmployeeController;
+import main.app.controllers.SalesPageController;
 
 import java.io.IOException;
 
-public class EmployeeView extends Application {
+public class SalesView extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(AdminView.class.getResource("/main/resources/Employeepage-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(SalesView.class.getResource("/salesPage-view.fxml"));
         Parent root = loader.load();
 
-        EmployeeController controller = loader.getController();
+        SalesPageController controller = loader.getController();
         controller.setStage(stage);
 
         Scene scene = new Scene(root);
@@ -25,7 +26,6 @@ public class EmployeeView extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
     public static void main(String[] args) {
         launch();
     }

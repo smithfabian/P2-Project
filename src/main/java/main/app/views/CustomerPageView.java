@@ -18,7 +18,7 @@ public class CustomerPageView extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(CustomerPageView.class.getResource("/main/resources/customerPage-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(CustomerPageView.class.getResource("/customerPage-view.fxml"));
         Parent root = loader.load();
         CustomerPageController controller = loader.getController();
         controller.setStage(stage);

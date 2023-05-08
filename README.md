@@ -15,12 +15,23 @@ This project is a collaborative effort by students in group 5 (CCT2 2023), aimin
 
 ## Dependencies
 
-The project uses Java SE version 20, and the following libraries and tools are required to build and run the P2 Project:
+The project uses Java version 17, and the following libraries and tools are required to build and run the P2 Project:
 
-- JavaFX
-- Apache Commons DBCP (Database Connection Pooling)
-- Apache Commons Pool
-- Apache Commons Logging
+
+- commons-dbcp2:2.9.0
+- commons-logging:1.2
+- commons-pool2:2.11.1
+- javafx.controls:17.0.1
+- javafx.fxml:17.0.1
+- log4j:2.20.0
+- log4j-api:2.20.0
+- log4j-core:2.20.0
+- log4j-jdbc-dbcp2:2.20.0
+- log4j-slf4j-impl:2.20.0
+- logback-classic:1.3.7
+- mysql-connector-java:8.0.33
+- slf4j-api:2.0.7
+- slf4j-jdk14:2.0.7
 
 ## Installation
 
@@ -28,9 +39,9 @@ The project uses Java SE version 20, and the following libraries and tools are r
    ```
    git clone https://github.com/username/P2-Project.git
    ```
-2. Add the `secrets.properties` file to project root folder.
+2. Add the `secrets.properties` and `log4j2.properties` files to project root folder.
 
-3. Navigate to the project directory and install the required dependencies. You can use your preferred dependency management tool, such as Maven or Gradle.
+3. Navigate to the project directory and install the required dependencies using dependency management tool Gradle.
 
 4. Build the project using your preferred build tool (e.g., Maven or Gradle).
 

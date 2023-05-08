@@ -19,7 +19,7 @@ public class ItemPageView extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(ItemPageView.class.getResource("/main/resources/ItemPage-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(ItemPageView.class.getResource("/ItemPage-view.fxml"));
         Parent root = loader.load();
         ItemPageController controller = loader.getController();
         controller.setStage(stage);

@@ -19,7 +19,7 @@ public class OrderPageView extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(OrderPageView.class.getResource("/main/resources/orderPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(OrderPageView.class.getResource("/orderPage.fxml"));
         Parent root = loader.load();
         OrderPageController controller = loader.getController();
         controller.setStage(stage);

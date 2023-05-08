@@ -17,7 +17,7 @@ public class ChangeUserView extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(ChangeUserView.class.getResource("/main/resources/ChangeUser-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(ChangeUserView.class.getResource("/ChangeUser-view.fxml"));
         Parent root = loader.load();
 
         ChangeUserController controller = loader.getController();
