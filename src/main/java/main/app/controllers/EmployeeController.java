@@ -71,6 +71,7 @@ public class EmployeeController {
 
         // Add series to bar charts
         barChart1.getData().add(series1);
+        barChart1.getYAxis().setLabel("Units sold");
         barChart2.getData().add(series2);
 
     }

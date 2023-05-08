@@ -17,7 +17,7 @@ public class ChangeUserModel {
     private String UserID_textfield;
     private static final Logger logger = LogManager.getLogger(ChangeUserModel.class.getName());
 
-    private Boolean isAdmin;
+    private Boolean isAdmin = false;
 
     // Connect to database to write a new user to it
     public void getUserIntoTable() {
