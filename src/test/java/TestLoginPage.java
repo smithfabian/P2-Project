@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
 @ExtendWith(ApplicationExtension.class)
-class LoginPageTest {
+class TestLoginPage {
     private static final Properties secrets = loadSecrets();
 
     @Start
@@ -37,6 +37,10 @@ class LoginPageTest {
         stage.show();
     }
 
+    /**
+     * Helper function that returns secrets from a secrets file
+     * @return Properties loaded secrets
+     */
     private static Properties loadSecrets(){
         Properties secrets = new Properties();
         InputStream input = null;
