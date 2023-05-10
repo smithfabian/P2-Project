@@ -112,7 +112,7 @@ public class OrderPageModel {
             logger.warn("User " + Session.getLoggedInUser() + ": Successfully deleted order with order ID + " + this.getOrderID());
 
         } catch (SQLException e) {
-            logger.warn("User " + Session.getLoggedInUser() + ": Failed to delete order with order ID + " + this.getOrderID());
+            logger.error("User " + Session.getLoggedInUser() + ": Failed to delete order with order ID + " + this.getOrderID());
             e.printStackTrace();
         }
         return noDeletedRows;
