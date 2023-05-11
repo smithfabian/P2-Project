@@ -35,13 +35,13 @@ public class CustomerPageModel {
         dateAxis = new ArrayList<>();
         boughtAxis = new ArrayList<>();
         try {
-            String query = "SELECT OrderID, InvoiceDateNew,sum(InvoiceQty) as TotalQty,PostalCode,City from p2.invoiceregisterwithorderid where AccountNum = ? group by OrderID,InvoiceDateNew,PostalCode,City order by InvoiceDateNew asc";
+            String query = "SELECT o.OrderID, o.InvoiceDate,sum(i.InvoiceQty) as TotalQty,o.PostalCode,o.City from p2.orders o join p2.orderitems i on o.OrderId=i.OrderId where o.AccountNum = ? group by o.OrderID, o.InvoiceDate order by o.InvoiceDate asc";
             Connection conn = DatabaseConnection.getConnection();
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setString(1,customerID);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    Date date = rs.getDate("InvoiceDateNew");
+                    Date date = rs.getDate("InvoiceDate");
                     int totalQty = rs.getInt("TotalQty");
                     dateAxis.add(date.toString());
                     boughtAxis.add(totalQty);

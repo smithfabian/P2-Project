@@ -91,14 +91,14 @@ public class ItemPageModel {
         boughtAxis = new ArrayList<>();
         returnedAxis = new ArrayList<>();
         try {
-            String query = "SELECT InvoiceDateNew, sum(if(InvoiceQty >= 0, InvoiceQty, 0)) as boughtOnDay, sum(if(InvoiceQty < 0, InvoiceQty, 0)) AS returnedOnDay" +
-                    " from p2.invoiceregisterwithorderid where ItemID = ? group by InvoiceDateNew order by InvoiceDateNew";
+            String query = "SELECT o.InvoiceDate, sum(if(i.InvoiceQty >= 0, i.InvoiceQty, 0)) as boughtOnDay, sum(if(i.InvoiceQty < 0, i.InvoiceQty, 0)) AS returnedOnDay" +
+                    " from p2.orders o join p2.orderitems i on o.OrderId = i.OrderId where ItemID = ? group by o.InvoiceDate order by o.InvoiceDate";
             Connection conn = DatabaseConnection.getConnection();
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setString(1,itemID);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    dateAxis.add(rs.getDate("InvoiceDateNew").toString());
+                    dateAxis.add(rs.getDate("InvoiceDate").toString());
                     boughtAxis.add(rs.getInt("boughtOnDay"));
                     returnedAxis.add(rs.getInt("returnedOnDay"));
                 }
