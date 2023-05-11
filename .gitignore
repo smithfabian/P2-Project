@@ -57,4 +57,4 @@ hs_err_pid*
 P2-Project.iml
 out/
 secrets.properties
-log4j2.properties
+src/log4j2.properties

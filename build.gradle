@@ -1,7 +1,11 @@
+
 plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.13'
+}
+run{
+    jvmArgs = ['-Dlog4j2.configurationFile=src/log4j2.properties']
 }
 
 group 'com.example'
