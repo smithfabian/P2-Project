@@ -62,6 +62,7 @@ public class CustomerPageController {
         }
 
         // Add series to bar charts
+        lineChart.getYAxis().setLabel("Units sold");
         lineChart.getData().add(series);
 
 

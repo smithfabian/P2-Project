@@ -79,7 +79,9 @@ public class ItemPageController {
 
         // Add series to bar charts
         boughtChart.getData().add(boughtSeries);
+        boughtChart.getYAxis().setLabel("Units sold");
         returnedChart.getData().add(returnedSeries);
+        returnedChart.getYAxis().setLabel("Units returned");
     }
 
     public void backButtonClicked() {
