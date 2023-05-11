@@ -11,11 +11,11 @@ import java.util.List;
 
 public class AdminModel {
 
-    public class BarChartData{
+    public class ChartData {
         private String xValue;
         private int yValue;
 
-        public BarChartData(String xValue, int yValue){
+        public ChartData(String xValue, int yValue){
             this.xValue = xValue;
             this.yValue = yValue;
         }
@@ -29,16 +29,11 @@ public class AdminModel {
         }
     }
 
-    public List<BarChartData> getChartData(String someIdentifier) throws IOException, SQLException {
-        List<BarChartData> listOfData = new ArrayList<>();
-        String query = null;
+    public List<AdminModel.ChartData> getBarChartData() throws IOException, SQLException {
+        List<AdminModel.ChartData> listOfData = new ArrayList<>();
+        String query = "SELECT AccountNum, sum(InvoiceQty) as BoughtMinusReturns from p2.orderitems group by AccountNum order by BoughtMinusReturns DESC limit 5";;
+        //THIS NEEDS TO BE SOMETHING ELSE
 
-        if (someIdentifier.equals("someIdentifier1")){
-            query = "SELECT AccountNum, sum(InvoiceQty) as BoughtMinusReturns from p2.orderitems group by AccountNum order by BoughtMinusReturns DESC limit 5";
-        } else if (someIdentifier.equals("someIdentifier2")) {
-            //THIS NEEDS TO BE SOMETHING ELSE
-            query = "SELECT AccountNum, sum(InvoiceQty) as BoughtMinusReturns from p2.orderitems group by AccountNum order by BoughtMinusReturns limit 5";
-        }
 
         Connection conn = DatabaseConnection.getConnection();
         try (Statement stmt = conn.createStatement()) {
@@ -47,7 +42,28 @@ public class AdminModel {
                 for (int i = 1; i <= 5; i++) {
                     String accoutNum = rs.getString("AccountNum");
                     int value = rs.getInt("BoughtMinusReturns");
-                    listOfData.add(new BarChartData(accoutNum, value));
+                    listOfData.add(new AdminModel.ChartData(accoutNum, value));
+                }
+            }
+        }
+        finally {
+            conn.close();
+        }
+        return listOfData;
+    }
+    public List<AdminModel.ChartData> getLineChartData()  throws IOException, SQLException {
+        List<AdminModel.ChartData> listOfData = new ArrayList<>();
+        String query = "SELECT o.InvoiceDate, sum(i.InvoiceQty) as ItemsSold from p2.orders o LEFT JOIN p2.orderitems i on o.OrderID = i.OrderID group by o.InvoiceDate order by o.InvoiceDate";;
+
+
+        Connection conn = DatabaseConnection.getConnection();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                for (int i = 1; i <= 5; i++) {
+                    String invoiceDate = rs.getDate("InvoiceDate").toString();
+                    int value = rs.getInt("ItemsSold");
+                    listOfData.add(new AdminModel.ChartData(invoiceDate, value));
                 }
             }
         }

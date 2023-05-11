@@ -1,5 +1,6 @@
 package main.app.controllers;
 
+import javafx.scene.chart.LineChart;
 import javafx.stage.Stage;
 import main.app.models.AdminModel;
 import main.app.models.Session;
@@ -36,10 +37,10 @@ public class AdminController {
     @FXML
     private BarChart<String, Number> barChart1;
     @FXML
-    private BarChart<String, Number> barChart2;
+    private LineChart<String, Number> lineChart;
 
-    List<AdminModel.BarChartData> chartData1 = null;
-    List<AdminModel.BarChartData> chartData2 = null;
+    List<AdminModel.ChartData> chartData1 = null;
+    List<AdminModel.ChartData> chartData2 = null;
 
     public AdminController(){
         this.model = new AdminModel();
@@ -94,30 +95,30 @@ public class AdminController {
 
     public void updateBarCharts() {
         try {
-            chartData1 = model.getChartData("someIdentifier1");
-            chartData2 = model.getChartData("someIdentifier2");
+            chartData1 = model.getBarChartData();
+            chartData2 = model.getLineChartData();
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         }
         // Clear existing data
         barChart1.getData().clear();
-        barChart2.getData().clear();
+        lineChart.getData().clear();
 
         // Create new series
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
         XYChart.Series<String, Number> series2 = new XYChart.Series<>();
 
         // Add data to series
-        for (AdminModel.BarChartData data : chartData1) {
+        for (AdminModel.ChartData data : chartData1) {
             series1.getData().add(new XYChart.Data<>(data.getXValue(), data.getYValue()));
         }
-        for (AdminModel.BarChartData data : chartData2) {
+        for (AdminModel.ChartData data : chartData2) {
             series2.getData().add(new XYChart.Data<>(data.getXValue(), data.getYValue()));
         }
 
         // Add series to bar charts
         barChart1.getData().add(series1);
         barChart1.getYAxis().setLabel("Units sold");
-        barChart2.getData().add(series2);
+        lineChart.getData().add(series2);
     }
 }

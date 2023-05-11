@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.EmployeeController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.EmployeeController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <right>
@@ -22,22 +22,22 @@
                         <Insets right="50.0" top="50.0" />
                      </padding>
                   </BarChart>
-                  <BarChart fx:id="barChart2" title="Worst Customers" VBox.vgrow="ALWAYS">
-                     <xAxis>
-                        <CategoryAxis />
-                     </xAxis>
-                     <yAxis>
-                        <NumberAxis />
-                     </yAxis>
+                  <LineChart fx:id="lineChart" prefWidth="579.0" title="Items sold" VBox.vgrow="ALWAYS">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
                      <padding>
-                        <Insets bottom="50.0" right="50.0" />
+                        <Insets right="50.0" top="50.0" />
                      </padding>
-                  </BarChart>
+                  </LineChart>
                </children>
             </VBox>
          </right>
          <left>
-            <VBox alignment="CENTER" prefHeight="430.0" prefWidth="500.0" spacing="50.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="460.0" prefWidth="460.0" spacing="50.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="salesButton" mnemonicParsing="false" onAction="#switchToSalesScene" prefHeight="50.0" prefWidth="400.0" text="Sales" />
                   <Button fx:id="passwordButton" mnemonicParsing="false" onAction="#passwordButtonClicked" prefHeight="50.0" prefWidth="400.0" text=" Change Password" />
