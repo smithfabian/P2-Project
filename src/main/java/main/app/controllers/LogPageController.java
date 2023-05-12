@@ -1,16 +1,13 @@
 package main.app.controllers;
 
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import main.app.models.AddDelModel;
 import main.app.models.LogModel;
-import main.app.views.AdminView;
+import main.app.views.MainPageView;
 
 import java.io.IOException;
 
@@ -55,7 +52,7 @@ public class LogPageController {
     }
 
     public void backButtonPressed() {
-        AdminView view = new AdminView();
+        MainPageView view = new MainPageView();
         try {
             view.start(stage);
         }

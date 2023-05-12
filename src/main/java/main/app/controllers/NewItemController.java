@@ -6,9 +6,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.app.models.NewItemModel;
+import main.app.models.Session;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class NewItemController {
+    private static final Logger logger = LogManager.getLogger(NewItemController.class.getName());
     @FXML
     Button addButton;
     @FXML
@@ -36,6 +40,9 @@ public class NewItemController {
 
     public void addButtonClicked() {
         if (!IDField.getText().isEmpty()) {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test new item added");
+            }
             newItemModel.setID(IDField.getText());
             newItemModel.setMainGroup(mainGroupField.getText());
             newItemModel.setSubGroup(subGroupField.getText());
@@ -47,6 +54,9 @@ public class NewItemController {
             subGroupField.clear();
         }
         else {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test new item added FAILED");
+            }
             addedLabel.setText("Please put information into required fields");
         }
     }

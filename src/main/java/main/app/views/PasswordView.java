@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.app.controllers.AdminController;
 import main.app.controllers.PasswordController;
 import main.app.models.PasswordModel;
 import main.app.models.Session;

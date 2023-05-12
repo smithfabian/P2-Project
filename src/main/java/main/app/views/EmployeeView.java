@@ -12,7 +12,7 @@ import java.io.IOException;
 public class EmployeeView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(AdminView.class.getResource("/Employeepage-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainPageView.class.getResource("/Employeepage-view.fxml"));
         Parent root = loader.load();
 
         EmployeeController controller = loader.getController();

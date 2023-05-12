@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminModel {
+public class MainPageModel {
 
     public class ChartData {
         private String xValue;
@@ -29,8 +29,8 @@ public class AdminModel {
         }
     }
 
-    public List<AdminModel.ChartData> getBarChartData() throws IOException, SQLException {
-        List<AdminModel.ChartData> listOfData = new ArrayList<>();
+    public List<MainPageModel.ChartData> getBarChartData() throws IOException, SQLException {
+        List<MainPageModel.ChartData> listOfData = new ArrayList<>();
         String query = "SELECT AccountNum, sum(InvoiceQty) as BoughtMinusReturns from p2.orderitems group by AccountNum order by BoughtMinusReturns DESC limit 5";;
         //THIS NEEDS TO BE SOMETHING ELSE
 
@@ -42,7 +42,7 @@ public class AdminModel {
                 for (int i = 1; i <= 5; i++) {
                     String accoutNum = rs.getString("AccountNum");
                     int value = rs.getInt("BoughtMinusReturns");
-                    listOfData.add(new AdminModel.ChartData(accoutNum, value));
+                    listOfData.add(new MainPageModel.ChartData(accoutNum, value));
                 }
             }
         }
@@ -51,8 +51,8 @@ public class AdminModel {
         }
         return listOfData;
     }
-    public List<AdminModel.ChartData> getLineChartData()  throws IOException, SQLException {
-        List<AdminModel.ChartData> listOfData = new ArrayList<>();
+    public List<MainPageModel.ChartData> getLineChartData()  throws IOException, SQLException {
+        List<MainPageModel.ChartData> listOfData = new ArrayList<>();
         String query = "SELECT o.InvoiceDate, sum(i.InvoiceQty) as ItemsSold from p2.orders o LEFT JOIN p2.orderitems i on o.OrderID = i.OrderID group by o.InvoiceDate order by o.InvoiceDate";;
 
 
@@ -63,7 +63,7 @@ public class AdminModel {
                 for (int i = 1; i <= 5; i++) {
                     String invoiceDate = rs.getDate("InvoiceDate").toString();
                     int value = rs.getInt("ItemsSold");
-                    listOfData.add(new AdminModel.ChartData(invoiceDate, value));
+                    listOfData.add(new MainPageModel.ChartData(invoiceDate, value));
                 }
             }
         }

@@ -13,10 +13,15 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import main.app.models.ItemPageModel;
 import main.app.models.SalesModel;
+import main.app.models.Session;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.List;
 import java.util.Optional;
 
 public class ItemPageController {
+    private static final Logger logger = LogManager.getLogger(ItemPageController.class.getName());
     Stage stage;
     ItemPageModel itemPageModel;
     @FXML
@@ -102,11 +107,14 @@ public class ItemPageController {
     };
 
     public void deleteButtonClicked(){
+        if (Session.getLoggedInUser() == 30) {
+            logger.info("Usability test item deleted clicked");
+        }
         Alert alert;
         alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm deleting item");
         alert.setHeaderText(null);
-        alert.setContentText("Are you sure yiu want to delete item " + itemPageModel.getItemID() + "?");
+        alert.setContentText("Are you sure you want to delete item " + itemPageModel.getItemID() + "?");
         Optional<ButtonType> option = alert.showAndWait();
         if (option.get().equals(ButtonType.OK)){
             itemPageModel.deleteItem();

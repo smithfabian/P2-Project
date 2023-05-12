@@ -4,8 +4,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import main.app.controllers.AdminController;
-import main.app.views.AdminView;
+import main.app.controllers.MainPageController;
+import main.app.views.MainPageView;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -22,12 +22,11 @@ public class TestAdminPage extends BaseTestMenuPage {
 
     @Start
     private void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(AdminView.class.getResource("/adminPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainPageView.class.getResource("/MainPage-view.fxml"));
         Parent root = loader.load();
 
-        AdminController controller = loader.getController();
+        MainPageController controller = loader.getController();
         controller.setStage(stage);
-        controller.updateBarCharts();
 
         Scene scene = new Scene(root);
         stage.setTitle("Sales data management system");

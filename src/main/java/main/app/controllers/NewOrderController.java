@@ -4,10 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import main.app.models.NewOrderModel;
+import main.app.models.Session;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
 
 public class NewOrderController {
+    private static final Logger logger = LogManager.getLogger(NewOrderController.class.getName());
     @FXML
     Button addButton;
     @FXML
@@ -45,6 +49,9 @@ public class NewOrderController {
     }
 
     public void addButtonClicked() {
+        if (Session.getLoggedInUser() == 30) {
+            logger.info("Usability test new order added");
+        }
         if (customerIDField.getValue() != null && dateField.getValue() != null ) {
             newOrderModel.setDate(Date.valueOf(dateField.getValue()));
             newOrderModel.setCustomerID(customerIDField.getValue());
@@ -54,6 +61,9 @@ public class NewOrderController {
 
         }
         else {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test new order added FAILED");
+            }
             addedLabel.setText("Please put information into required fields");
         }
 

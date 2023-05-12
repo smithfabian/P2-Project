@@ -6,8 +6,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.app.models.PasswordModel;
+import main.app.models.Session;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PasswordController {
+    private static final Logger logger = LogManager.getLogger(PasswordController.class.getName());
     Stage stage;
     PasswordModel model;
     @FXML
@@ -36,12 +40,18 @@ public class PasswordController {
             validationText.setText("Enter a new password");
         }
         else if (newPassword.getText().equals(repeatPassword.getText())) {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test changed password");
+            }
             // TODO check password complexity
             model.setPassword(newPassword.getText());
             model.updatePassword();
             stage.close();
         }
         else {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test changed password FAILED");
+            }
             validationText.setText("Passwords do not match");
         }
     }

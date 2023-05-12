@@ -10,12 +10,16 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import main.app.models.OrderPageModel;
 import main.app.models.SalesModel;
+import main.app.models.Session;
 import main.app.views.ItemPageView;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Optional;
 
 public class OrderPageController {
+    private static final Logger logger = LogManager.getLogger(OrderPageController.class.getName());
     Stage stage;
     OrderPageModel model;
     ObservableList<OrderPageModel.orderItemRow> orderItems;
@@ -86,6 +90,9 @@ public class OrderPageController {
     }
 
     public void addItem(){
+        if (Session.getLoggedInUser() == 30) {
+            logger.info("Usability test item added to order");
+        }
         OrderPageModel.orderItemRow row = new OrderPageModel.orderItemRow("", 0, "", "");
         row.setItemIdDisable(false);
         row.setIsNewRow(true);
@@ -118,6 +125,9 @@ public class OrderPageController {
     }
 
     public void cancelOrderButtonClicked() {
+        if (Session.getLoggedInUser() == 30) {
+            logger.info("Usability test order deleted clicked");
+        }
         Alert alert;
         alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm order cancelation");

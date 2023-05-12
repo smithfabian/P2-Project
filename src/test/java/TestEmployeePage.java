@@ -3,7 +3,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.app.controllers.EmployeeController;
-import main.app.views.AdminView;
+import main.app.views.MainPageView;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -19,7 +19,7 @@ public class TestEmployeePage extends BaseTestMenuPage{
 
     @Start
     private void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(AdminView.class.getResource("/Employeepage-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainPageView.class.getResource("/Employeepage-view.fxml"));
         Parent root = loader.load();
         EmployeeController controller = loader.getController();
         controller.setStage(stage);

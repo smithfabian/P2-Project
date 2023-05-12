@@ -13,8 +13,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.app.models.AddDelModel;
-import main.app.views.AdminView;
+import main.app.models.Session;
+import main.app.views.MainPageView;
 import main.app.views.ChangeUserView;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ import java.util.List;
 
 
 public class AddDelController {
+    private static final Logger logger = LogManager.getLogger(AddDelController.class.getName());
 
     // Define stage scene and root
     private Stage stage;
@@ -106,13 +110,16 @@ public class AddDelController {
             }
 
         }
+        if (Session.getLoggedInUser() == 30) {
+            logger.info("Usability test deleted user");
+        }
         addDelModel.deleteUserFromDatabase(idArray);
     }
 
     //Back button or add user button usage:
     @FXML
     private void previousScene() {
-        AdminView view = new AdminView();
+        MainPageView view = new MainPageView();
         try {
             view.start(stage);
         }
@@ -125,6 +132,9 @@ public class AddDelController {
     //Add user button will take you to the changeUser scene
     @FXML
     private void changeUserScene() {
+        if (Session.getLoggedInUser() == 30) {
+            logger.info("Usability test clicked on add user button");
+        }
         ChangeUserView view = new ChangeUserView(this);
         try {
             view.start(new Stage());

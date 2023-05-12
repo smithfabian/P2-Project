@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 import main.app.models.SalesModel;
 import main.app.models.Session;
 import main.app.views.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -85,6 +87,7 @@ public class SalesPageController {
     Button searchButton;
     @FXML
     ComboBox<String> limitDropdownMenu;
+    private static final Logger logger = LogManager.getLogger(SalesPageController.class.getName());
 
     public SalesPageController() {
         this.salesModel = new SalesModel();
@@ -204,6 +207,9 @@ public class SalesPageController {
     public void addButtonClicked() {
         ToggleButton buttonToggled = (ToggleButton) toggleGroup.getSelectedToggle();
         if (buttonToggled.equals(customersButton)) {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test click on add customer button");
+            }
             AddNewCustomerView view = new AddNewCustomerView();
             try {
                 view.start(new Stage());
@@ -212,6 +218,9 @@ public class SalesPageController {
             }
         }
         else if (buttonToggled.equals(itemsButton)) {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test click on add item button");
+            }
             AddNewItemView view = new AddNewItemView();
             try {
                 view.start(new Stage());
@@ -221,6 +230,9 @@ public class SalesPageController {
 
         }
         else if (buttonToggled.equals(ordersButton)) {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test click on add order button");
+            }
             AddNewOrderView view = new AddNewOrderView();
             try {
                 view.start(new Stage());
@@ -232,8 +244,11 @@ public class SalesPageController {
     }
 
     public void backButtonClicked() {
+        if (Session.getLoggedInUser() == 30) {
+            logger.info("Usability test click on back button in sales page");
+        }
         if (Session.getIsAdmin()) {
-            AdminView view = new AdminView();
+            MainPageView view = new MainPageView();
             try {
                 view.start(stage);
             } catch (IOException e) {
@@ -311,8 +326,12 @@ public class SalesPageController {
     }
 
     public void searchButtonClicked(){
+
         ToggleButton buttonToggled = (ToggleButton) toggleGroup.getSelectedToggle();
         if (buttonToggled.equals(customersButton)) {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test searched for customer");
+            }
             maxPages.setText("" + salesModel.getMaxPagesCustomerTable(searchText.getText(), limitDropdownMenu.getValue()));
             customerPageNo = 1;
             salesModel.createCustomerTable(customerPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
@@ -320,6 +339,9 @@ public class SalesPageController {
             setCustomerTable();
         }
         else if (buttonToggled.equals(itemsButton)) {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test searched for item");
+            }
             maxPages.setText("" + salesModel.getMaxPagesItemTable(searchText.getText(), limitDropdownMenu.getValue()));
             itemPageNo = 1;
             salesModel.createItemTable(itemPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
@@ -327,6 +349,9 @@ public class SalesPageController {
             setItemTable();
         }
         else if (buttonToggled.equals(ordersButton)) {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test searched for order");
+            }
             maxPages.setText("" + salesModel.getMaxPagesOrderTable(searchText.getText(), limitDropdownMenu.getValue()));
             orderPageNo = 1;
             salesModel.createOrderTable(orderPageNo - 1, limitDropdownMenu.getValue(), searchText.getText());
@@ -337,6 +362,9 @@ public class SalesPageController {
 
     public void itemRowClicked(MouseEvent mouseEvent) {
         if (mouseEvent.getClickCount() == 2) {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test clicked on customer");
+            }
             SalesModel.ItemRow row = (SalesModel.ItemRow) itemTable.getSelectionModel().getSelectedItem();
             ItemPageView view = new ItemPageView(row);
             try {
@@ -349,6 +377,9 @@ public class SalesPageController {
 
     public void customerRowClicked(MouseEvent mouseEvent) {
         if (mouseEvent.getClickCount() == 2) {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test clicked on row");
+            }
             SalesModel.CustomerRow row = (SalesModel.CustomerRow) customerTable.getSelectionModel().getSelectedItem();
             CustomerPageView view = new CustomerPageView(row.getID());
             try {
@@ -361,6 +392,9 @@ public class SalesPageController {
 
     public void orderRowClicked(MouseEvent mouseEvent) {
         if (mouseEvent.getClickCount() == 2) {
+            if (Session.getLoggedInUser() == 30) {
+                logger.info("Usability test clicked on order");
+            }
             SalesModel.OrderRow row = (SalesModel.OrderRow) orderTable.getSelectionModel().getSelectedItem();
             OrderPageView view = new OrderPageView(row);
             try {

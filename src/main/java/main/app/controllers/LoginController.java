@@ -7,10 +7,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import main.app.models.LogTest;
 import main.app.models.PasswordManager;
 import main.app.models.Session;
-import main.app.views.AdminView;
+import main.app.views.MainPageView;
 import main.app.models.LoginModel;
 import main.app.views.EmployeeView;
 import org.apache.logging.log4j.LogManager;
@@ -51,14 +50,14 @@ public class LoginController {
 
             if (loginModel.getIsAdmin()) {
                 Session.setIsAdmin(true);
-                AdminView view = new AdminView();
+                MainPageView view = new MainPageView();
                 try {
                     view.start(stage);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             } else {
-                EmployeeView view = new EmployeeView();
+                MainPageView view = new MainPageView();
                 try {
                     view.start(stage);
                 } catch (IOException ignored) {
@@ -68,7 +67,6 @@ public class LoginController {
         } else {
             logger.warn("Login unsuccessfull with usersame " + username);
             errorMessage.setText("Incorrect credentials!");
-            // TODO: insert log
         }
     }
 }
