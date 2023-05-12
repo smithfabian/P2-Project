@@ -247,19 +247,11 @@ public class SalesPageController {
         if (Session.getLoggedInUser() == 30) {
             logger.info("Usability test click on back button in sales page");
         }
-        if (Session.getIsAdmin()) {
-            MainPageView view = new MainPageView();
-            try {
-                view.start(stage);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            EmployeeView view = new EmployeeView();
-            try {
-                view.start(stage);
-            } catch (IOException ignored) {
-            }
+        MainPageView view = new MainPageView();
+        try {
+            view.start(stage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

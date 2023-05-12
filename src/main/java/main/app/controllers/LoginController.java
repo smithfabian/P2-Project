@@ -11,7 +11,6 @@ import main.app.models.PasswordManager;
 import main.app.models.Session;
 import main.app.views.MainPageView;
 import main.app.models.LoginModel;
-import main.app.views.EmployeeView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
