@@ -7,8 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class OrderPageModel {
     int orderID;
@@ -103,19 +101,17 @@ public class OrderPageModel {
         return updatedColumns;
     }
 
-    public int deleteOrder() {
-        int noDeletedRows = 0;
+    public void deleteOrder() {
         String query = "DELETE FROM p2.orders WHERE OrderId = ?";
         try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, this.getOrderID());
-            noDeletedRows = stmt.executeUpdate();
+            stmt.executeUpdate();
             logger.warn("User " + Session.getLoggedInUser() + ": Successfully deleted order with order ID + " + this.getOrderID());
 
         } catch (SQLException e) {
             logger.error("User " + Session.getLoggedInUser() + ": Failed to delete order with order ID + " + this.getOrderID());
             e.printStackTrace();
         }
-        return noDeletedRows;
     }
 
     public int insertOrderItems(Integer quantity, String itemId) {
