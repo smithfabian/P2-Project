@@ -100,7 +100,7 @@ public class ItemPageModel {
                 while (rs.next()) {
                     dateAxis.add(rs.getDate("InvoiceDate").toString());
                     boughtAxis.add(rs.getInt("boughtOnDay"));
-                    returnedAxis.add(rs.getInt("returnedOnDay"));
+                    returnedAxis.add(-rs.getInt("returnedOnDay"));
                 }
             } finally {
                 conn.close();

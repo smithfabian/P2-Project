@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.ItemPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.app.controllers.ItemPageController">
    <children>
       <BorderPane fx:id="borderPane" prefHeight="500.0" prefWidth="1000.0">
          <top>
@@ -120,7 +120,7 @@
                   <VBox prefHeight="460.0" prefWidth="651.0" spacing="10">
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                        <LineChart fx:id="boughtChart" maxHeight="999999.0" maxWidth="999999.0" minHeight="180.0" title="Bought over time" VBox.vgrow="ALWAYS">
+                        <LineChart fx:id="boughtChart" maxHeight="999999.0" maxWidth="999999.0" minHeight="180.0" title="Sold over time" VBox.vgrow="ALWAYS">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
