@@ -77,7 +77,7 @@
                         <HBox prefHeight="26.0" prefWidth="320.0">
                            <children>
                               <Pane prefHeight="200.0" prefWidth="200.0" />
-                              <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="Total bought:">
+                              <Label alignment="CENTER_RIGHT" minWidth="100.0" prefHeight="26.0" prefWidth="7.0" text="Total sold:">
                                  <padding>
                                     <Insets right="5.0" />
                                  </padding>
